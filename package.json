@@ -1,0 +1,51 @@
+{
+  "author": {
+    "name": "Zachary Forrest",
+    "email": "zforrest@gmail.com"
+  },
+  "name": "drive",
+  "description": "A Webdriverio helper library for data-driven selenium tests.",
+  "keywords": [
+    "test",
+    "assertion",
+    "assert",
+    "testing",
+    "chai",
+    "selenium",
+    "saucelabs",
+    "browserstack",
+    "webdriver"
+  ],
+  "license": "MIT",
+  "contributors": [
+    {
+      "name": "Zachary Forrest",
+      "email": "zforrest@gmail.com"
+    },
+    {
+      "name": "Matt Yanchek",
+      "email": "matt.yanchek@gmail.com"
+    }
+  ],
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zdfs/drive"
+  },
+  "bugs": {
+    "url": "https://github.com/zdfs/drive/issues"
+  },
+  "main": "./index",
+  "engines": {
+    "node": ">= 0.12.0"
+  },
+  "dependencies": {
+    "chai": "3.2.0",
+    "chai-as-promised": "5.1.0",
+    "minimist": "1.1.2"
+  },
+  "readmeFilename": "README.md",
+  "_id": "drive@0.0.1",
+  "_from": "drive@~0.0.1",
+  "private": true
+}
