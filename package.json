@@ -1,4 +1,5 @@
 {
+  "version": "0.0.1",
   "author": {
     "name": "Zachary Forrest",
     "email": "zforrest@gmail.com"
@@ -27,7 +28,9 @@
       "email": "matt.yanchek@gmail.com"
     }
   ],
-  "version": "0.0.1",
+  "scripts": {
+    "test": "mocha test/driver.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/zdfs/drive"
@@ -48,6 +51,8 @@
     "compression": "1.5.2",
     "dir-to-json": "0.0.3",
     "express": "4.13.3",
+    "grunt": "0.4.5",
+    "grunt-webdriver": "^0.5.2",
     "jade": "1.11.0"
   },
   "readmeFilename": "README.md",
