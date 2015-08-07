@@ -11,7 +11,7 @@ drive.go({
 			{
 				"description": "Verify lone paragraph",
 				"tests": ["alone"],
-				"viewports": { "large": true }
+				"viewports": { "small": true }
 			}
 		]
 	},

@@ -22,7 +22,15 @@ var gruntConfig = {
 			desiredCapabilities: {
 				browserName: 'chrome',
 				browserKey: 'chrome', // Let's see if we can remove this.
-				name: 'Documentation Tests'
+				name: 'Documentation Tests',
+				mobile: false,
+				viewports: {
+					small: true,
+					medium: true,
+					large: true,
+					xlarge: false,
+					xxlarge: false
+				}
 			}
 
 		},
