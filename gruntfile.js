@@ -15,17 +15,22 @@ var gruntConfig = {
 				updateSauceJob: true
 			},
 
+			desiredCapabilities: {
+				browserName: 'chrome',
+				browserKey: 'chrome'
+			},
+
 			name: "Documentation Tests"
 
 		},
 
-		tests: ['test/driver.js']
+		home: {
+			tests: ['test/home/*.js']
+		}
 
 	}
 
 };
-
-require('./lib/drive').setupGrunt(gruntConfig);
 
 module.exports = function(grunt) {
 

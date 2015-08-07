@@ -1,6 +1,8 @@
 'use strict';
 
-module.exports = {
+var drive = require('../../lib/drive');
+
+drive.go({
 
 	"config": {
 		"description": "Home page tests",
@@ -34,4 +36,4 @@ module.exports = {
 
 	}
 
-};
+});
