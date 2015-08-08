@@ -84,6 +84,18 @@ var gruntConfig = {
 
 	},
 
+	jade: {
+
+		deploy: {
+			expand: true,
+			cwd: 'views',
+			src: ['**/*.jade', '!**/layouts/**', '!**/mixins/**', '!**/common/**'],
+			dest: 'public',
+			ext: '.html'
+		}
+
+	},
+
 	sass: {
 
 		options: {
@@ -275,6 +287,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
+	grunt.loadNpmTasks('grunt-contrib-jade');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-express-server');
@@ -290,6 +303,11 @@ module.exports = function(grunt) {
 		'concat:dev',
 		'cssmin:dev',
 		'uglify:dev'
+	]);
+
+	grunt.registerTask('html', [
+		'build',
+		'jade'
 	]);
 
 	grunt.registerTask('default', ['concurrent:dev']);
