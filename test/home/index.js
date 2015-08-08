@@ -5,7 +5,7 @@ var drive = require('../../lib/drive');
 drive.go({
 
 	"config": {
-		"description": "Home page tests",
+		"tes": "Home page tests",
 		"url": "",
 		"suites": [
 			{

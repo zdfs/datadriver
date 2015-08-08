@@ -195,7 +195,7 @@ var gruntConfig = {
 						height: 1000
 					},
 					weird: {
-						width: 100,
+						width: 400,
 						height: 100
 					}
 				}
@@ -286,6 +286,7 @@ module.exports = function(grunt) {
 		'clean:dev',
 		'sass:dev',
 		'grunticon:icons',
+		'copy:images',
 		'concat:dev',
 		'cssmin:dev',
 		'uglify:dev'

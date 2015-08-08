@@ -4,7 +4,7 @@ $large-screen: em(860) !default;
 $base-font-color: $dark-gray !default;
 $centered-navigation-padding: 1em;
 $centered-navigation-logo-height: 2em;
-$centered-navigation-background: #E7F1EC;
+$centered-navigation-background: #F9F9F9;
 $centered-navigation-color: transparentize($base-font-color, 0.3);
 $centered-navigation-color-hover: $base-font-color;
 $centered-navigation-height: 60px;
@@ -16,18 +16,21 @@ $horizontal-bar-mode: $large-screen;
 
 @mixin logo() {
 
-	.icon-logo {
+	.icon-speed {
 		cursor: pointer;
 		display: inline-block;
-		height: 3rem;
-		opacity: 0.8;
-		width: 3rem;
+		opacity: 0.75;
 		vertical-align: middle;
 		@include transition (all 250ms ease-in-out);
+
+		> svg {
+			height: 3rem;
+			width: 3rem;
+		}
 	}
 
 	&:hover {
-		.icon-logo {
+		.icon-speed {
 			opacity: 1;
 		}
 	}
@@ -59,6 +62,7 @@ $horizontal-bar-mode: $large-screen;
 
 	.centered-navigation-mobile-menu {
 		color: $centered-navigation-color;
+		cursor: pointer;
 		display: block;
 		float: right;
 		line-height: $centered-navigation-height;
@@ -126,6 +130,7 @@ $horizontal-bar-mode: $large-screen;
 
 		a {
 			color: $centered-navigation-color;
+			cursor: pointer;
 			display: inline-block;
 			outline: none;
 			text-decoration: none;

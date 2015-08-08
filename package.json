@@ -64,8 +64,7 @@
     "grunt-sass": "1.0.0",
     "grunt-webdriver": "0.5.2",
     "jade": "1.11.0",
-    "jquery": "2.1.4",
-    "modernizr": "3.0.0-alpha.4"
+    "jquery": "2.1.4"
   },
   "readmeFilename": "README.md",
   "_id": "drive@0.0.1",
