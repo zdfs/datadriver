@@ -90,7 +90,7 @@ var gruntConfig = {
 			expand: true,
 			cwd: 'views',
 			src: ['**/*.jade', '!**/layouts/**', '!**/mixins/**', '!**/common/**'],
-			dest: 'public',
+			dest: '',
 			ext: '.html'
 		}
 
