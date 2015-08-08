@@ -22,7 +22,11 @@ button {
   user-select: none;
   vertical-align: middle;
   white-space: nowrap; }
-  button:hover, button:focus, input[type="button"]:hover, input[type="button"]:focus, input[type="reset"]:hover, input[type="reset"]:focus, input[type="submit"]:hover, input[type="submit"]:focus,
+  button:hover,
+  button:focus, input[type="button"]:hover,
+  input[type="button"]:focus, input[type="reset"]:hover,
+  input[type="reset"]:focus, input[type="submit"]:hover,
+  input[type="submit"]:focus,
   button:hover,
   button:focus {
     background-color: #2c5999;
@@ -107,6 +111,7 @@ ol {
   list-style-type: none;
   margin: 0;
   padding: 0; }
+
 dl {
   margin-bottom: 0.75em; }
   dl dt {
@@ -169,9 +174,12 @@ a {
   color: #477dca;
   text-decoration: none;
   transition: color 0.1s linear; }
-  a:active, a:focus, a:hover {
+  a:active,
+  a:focus,
+  a:hover {
     color: #2c5999; }
-  a:active, a:focus {
+  a:active,
+  a:focus {
     outline: none; }
 
 hr {
@@ -189,8 +197,14 @@ picture {
 html {
   box-sizing: border-box; }
 
-*, *::after, *::before {
+*,
+*::after,
+*::before {
   box-sizing: inherit; }
+
+body {
+  box-sizing: border-box;
+  margin: 0; }
 
 .centered-navigation {
   background-color: #E7F1EC;
@@ -199,14 +213,21 @@ html {
   width: 100%;
   z-index: 9999; }
   .centered-navigation .mobile-logo {
-    display: inline;
     float: left;
-    max-height: 60px;
+    margin-top: .35rem;
     padding-left: 1em; }
-    .centered-navigation .mobile-logo img {
-      max-height: 60px;
-      opacity: .6;
-      padding: .8em 0; }
+    .centered-navigation .mobile-logo .icon-logo {
+      cursor: pointer;
+      display: inline-block;
+      height: 3rem;
+      opacity: 0.8;
+      width: 3rem;
+      vertical-align: middle;
+      -webkit-transition: all 250ms ease-in-out;
+      -moz-transition: all 250ms ease-in-out;
+      transition: all 250ms ease-in-out; }
+    .centered-navigation .mobile-logo:hover .icon-logo {
+      opacity: 1; }
     @media screen and (min-width: 53.75em) {
       .centered-navigation .mobile-logo {
         display: none; } }
@@ -222,7 +243,8 @@ html {
     @media screen and (min-width: 53.75em) {
       .centered-navigation .centered-navigation-mobile-menu {
         display: none; } }
-    .centered-navigation .centered-navigation-mobile-menu:focus, .centered-navigation .centered-navigation-mobile-menu:hover {
+    .centered-navigation .centered-navigation-mobile-menu:focus,
+    .centered-navigation .centered-navigation-mobile-menu:hover {
       color: #333; }
   .centered-navigation .centered-navigation-wrapper {
     max-width: 68em;
@@ -270,7 +292,8 @@ html {
       display: inline-block;
       outline: none;
       text-decoration: none; }
-      .centered-navigation ul li.nav-link a:focus, .centered-navigation ul li.nav-link a:hover {
+      .centered-navigation ul li.nav-link a:focus,
+      .centered-navigation ul li.nav-link a:hover {
         color: #333; }
     @media screen and (min-width: 53.75em) {
       .centered-navigation ul li.nav-link {
@@ -285,10 +308,18 @@ html {
     @media screen and (min-width: 53.75em) {
       .centered-navigation li.logo.nav-link {
         display: inline; } }
-  .centered-navigation .logo img {
-    margin-bottom: -0.66667em;
-    max-height: 2em;
-    opacity: 0.6; }
+  .centered-navigation .logo .icon-logo {
+    cursor: pointer;
+    display: inline-block;
+    height: 3rem;
+    opacity: 0.8;
+    width: 3rem;
+    vertical-align: middle;
+    -webkit-transition: all 250ms ease-in-out;
+    -moz-transition: all 250ms ease-in-out;
+    transition: all 250ms ease-in-out; }
+  .centered-navigation .logo:hover .icon-logo {
+    opacity: 1; }
   .centered-navigation li.more.nav-link {
     padding-right: 0; }
     @media screen and (min-width: 53.75em) {
@@ -324,7 +355,8 @@ html {
         font-size: 1.2em;
         position: absolute;
         right: 0.5em; }
-    .centered-navigation li.more:focus > .submenu, .centered-navigation li.more:hover > .submenu {
+    .centered-navigation li.more:focus > .submenu,
+    .centered-navigation li.more:hover > .submenu {
       display: block; }
     @media screen and (min-width: 53.75em) {
       .centered-navigation li.more {
@@ -347,7 +379,7 @@ html {
       padding-right: 0; }
       @media screen and (min-width: 53.75em) {
         .centered-navigation ul.submenu li {
-          line-height: 46.15385px; }
+          line-height: 46.1538461538px; }
           .centered-navigation ul.submenu li:first-child > a {
             border-top-left-radius: 3px;
             border-top-right-radius: 3px; }
@@ -367,5 +399,3 @@ html {
             padding-left: 1em;
             text-align: left;
             width: 12em; } }
-
-/*# sourceMappingURL=home.css.map */
