@@ -1,51 +1,20 @@
 {
-  "version": "0.0.1",
+  "version": "1.0.0",
   "author": {
     "name": "Zachary Forrest",
     "email": "zforrest@gmail.com"
   },
-  "name": "drive",
-  "description": "A Webdriverio helper library for data-driven selenium tests.",
-  "keywords": [
-    "test",
-    "assertion",
-    "assert",
-    "testing",
-    "chai",
-    "selenium",
-    "saucelabs",
-    "browserstack",
-    "webdriver"
-  ],
-  "license": "MIT",
-  "contributors": [
-    {
-      "name": "Zachary Forrest",
-      "email": "zforrest@gmail.com"
-    },
-    {
-      "name": "Matt Yanchek",
-      "email": "matt.yanchek@gmail.com"
-    }
-  ],
-  "scripts": {
-    "test": "mocha test/driver.js"
-  },
+  "name": "datadriver.io",
+  "description": "The website for the data driver helper library.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/zdfs/drive"
+    "url": "https://github.com/zdfs/datadriver"
   },
   "bugs": {
-    "url": "https://github.com/zdfs/drive/issues"
+    "url": "https://github.com/zdfs/datadriver/issues"
   },
-  "main": "./index",
   "engines": {
     "node": ">= 0.12.0"
-  },
-  "dependencies": {
-    "chai": "3.2.0",
-    "chai-as-promised": "5.1.0",
-    "minimist": "1.1.2"
   },
   "devDependencies": {
     "compression": "1.5.2",
@@ -66,8 +35,5 @@
     "jade": "1.11.0",
     "jquery": "2.1.4"
   },
-  "readmeFilename": "README.md",
-  "_id": "drive@0.0.1",
-  "_from": "drive@~0.0.1",
-  "private": true
+  "readmeFilename": "README.md"
 }
