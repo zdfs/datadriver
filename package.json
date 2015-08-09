@@ -1,9 +1,10 @@
 {
+  "version": "0.0.1",
   "author": {
     "name": "Zachary Forrest",
     "email": "zforrest@gmail.com"
   },
-  "name": "drive",
+  "name": "datadriver",
   "description": "A Webdriverio helper library for data-driven selenium tests.",
   "keywords": [
     "test",
@@ -27,13 +28,12 @@
       "email": "matt.yanchek@gmail.com"
     }
   ],
-  "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/zdfs/drive"
+    "url": "https://github.com/zdfs/datadriver"
   },
   "bugs": {
-    "url": "https://github.com/zdfs/drive/issues"
+    "url": "https://github.com/zdfs/datadriver/issues"
   },
   "main": "./index",
   "engines": {
@@ -45,7 +45,7 @@
     "minimist": "1.1.2"
   },
   "readmeFilename": "README.md",
-  "_id": "drive@0.0.1",
-  "_from": "drive@~0.0.1",
+  "_id": "datadriver@0.0.1",
+  "_from": "datadriver@~0.0.1",
   "private": true
 }
