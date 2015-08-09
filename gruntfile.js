@@ -86,6 +86,13 @@ var gruntConfig = {
 
 	jade: {
 
+		options: {
+			pretty: true,
+			data: {
+				path: 'public/'
+			}
+		},
+
 		deploy: {
 			expand: true,
 			cwd: 'views',

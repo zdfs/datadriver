@@ -10,7 +10,7 @@ app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'jade');
 app.locals.basedir = app.get('views');
 app.locals.pretty = true;
-app.locals.linkPath = '';
+app.locals.path = '';
 
 dirToJson('views')
 	.then(function(tree) {

@@ -1,11 +1,11 @@
 'use strict';
 
-var drive = require('../../lib/drive');
+var drive = require('datadriver');
 
 drive.go({
 
 	"config": {
-		"tes": "Home page tests",
+		"description": "Home page tests",
 		"url": "",
 		"suites": [
 			{
