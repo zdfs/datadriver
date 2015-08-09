@@ -18,6 +18,7 @@
   },
   "devDependencies": {
     "compression": "1.5.2",
+    "datadriver": "git+ssh://git@github.com/zdfs/datadriver.git",
     "dir-to-json": "0.0.3",
     "express": "4.13.3",
     "grunt": "0.4.5",
