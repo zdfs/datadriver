@@ -5,28 +5,46 @@ var drive = require('datadriver');
 drive.go({
 
 	"config": {
-		"description": "Home page tests",
+		"description": "Duck Duck Go Test",
 		"url": "",
 		"suites": [
 			{
-				"description": "Verify lone paragraph",
-				"tests": ["alone"],
+				"description": "Search for DataDriver.io",
+				"tests": ["duck-duck-go"],
 				"viewports": { small: true }
 			}
 		]
 	},
 
-	"alone": {
+	"duck-duck-go": {
 
 		"steps": [
 
 			{
-				"selector": "p",
+				"selector": "#search_form_input_homepage",
+				"execute": [
+					{
+						"action": "type",
+						"text": "Datadriver.io"
+					}
+				]
+			},
+
+			{
+				"selector": "#search_button_homepage",
+				"execute": [
+					{
+						"action": "click"
+					}
+				]
+			},
+
+			{
 				"verify": [
 					{
-						"method": "verifyCount",
+						"method": "verifyPageTitle",
 						"asserts": {
-							"count": 1
+							"title": "Datadriver.io at DuckDuckGo"
 						}
 					}
 				]

@@ -358,6 +358,7 @@ pre[class*='language-'] {
   position: relative; }
 
 pre[class*='language-'][data-language]::before {
+  border-bottom: 1px solid rgba(51, 51, 51, 0.3);
   content: attr(data-language);
   color: rgba(51, 51, 51, 0.7);
   display: block;
@@ -367,6 +368,7 @@ pre[class*='language-'][data-language]::before {
   left: -2rem;
   font-size: 0.9em;
   margin-bottom: 1rem;
+  padding-bottom: .5rem;
   text-shadow: none; }
 
 .centered-navigation {
