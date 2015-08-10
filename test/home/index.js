@@ -36,10 +36,7 @@ drive.go({
 					{
 						"action": "click"
 					}
-				]
-			},
-
-			{
+				],
 				"verify": [
 					{
 						"method": "verifyPageTitle",

@@ -37,40 +37,74 @@
   <div class="section--light">
     <div class="section--container">
       <div class="flex-boxes">
-        <div class="flex-box flex-code">
-          <h1 class="flex-title">Arbitrary viewports</h1>
+        <div class="flex-box flex-box-code">
+          <h2 class="flex-title">Selenium tests without complicated code</h2>
           <p>
-            Data driver extends the functionality of <a href="https://github.com/webdriverio/grunt-webdriver">
-            grunt-webdriver</a>. You can declare any breakpoint you need to use in your tests.
+            Datadriver delivers the WebdriverIO API in easy-to-swallow data structures. Your tests follow a logical
+            step sequence of objects, arrays, and key-value pairs.
           </p>
-        </div>
-        <div class="flex-box flex-code">
-          <pre class="language-javascript line-numbers"><code>webdriver: {
-  options: {
-    desiredCapabilities: {
-      browserName: 'chrome',
-      name: 'Documentation Tests',
-      viewports: {
-        small: {
-          width: 430,
-          height: 1000
-        },
-        medium: {
-          width: 700,
-          height: 1000
-        },
-        large: {
-          width: 1280,
-          height: 1000
-        }
+          <pre class="language-javascript line-numbers"><code>'use strict';
+<br>
+var drive = require('datadriver');
+<br>
+drive.go({
+  "config": {
+    "description": "Duck Duck Go Test",
+    "suites": [
+      {
+        "description": "Search for DataDriver.io",
+        "tests": ["duck-duck-go"],
+        "viewports": { small: true }
       }
-    }
+    ]
+  },
+<br>
+  "duck-duck-go": {
+    "steps": [
+      {
+        "selector": "#search_form_input_homepage",
+        "execute": [
+          {
+            "action": "type",
+            "text": "Datadriver.io"
+          }
+        ]
+      },
+      {
+        "selector": "#search_button_homepage",
+        "execute": [
+          {
+            "action": "click"
+          }
+        ],
+        "verify": [
+          {
+            "method": "verifyPageTitle",
+            "asserts": {
+              "title": "Datadriver.io at DuckDuckGo"
+            }
+          }
+        ]
+      }
+    ]
   }
-}</code></pre>
+});</code></pre>
         </div>
       </div>
-      <hr>
     </div>
   </div>
+  <footer role="contentinfo" class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <div data-grunticon-embed class="icon-speed"></div>
+      </div>
+      <ul>
+        <li><a>Quick Start</a></li>
+        <li><a>API</a></li>
+        <li><a>Github</a></li>
+        <li><a>Contribute</a></li>
+      </ul>
+    </div>
+  </footer>
   <script src="public/scripts/min/app.js"></script>
 </body>

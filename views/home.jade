@@ -13,34 +13,56 @@ block main
 	.section--light
 		.section--container
 			.flex-boxes
-				.flex-box.flex-code
-					h1.flex-title Arbitrary viewports
+				.flex-box.flex-box-code
+					h2.flex-title Selenium tests without complicated code
 					p
-						| Data driver extends the functionality of <a href="https://github.com/webdriverio/grunt-webdriver">
-						| grunt-webdriver</a>. You can declare any breakpoint you need to use in your tests.
-				.flex-box.flex-code
+						| Datadriver delivers the WebdriverIO API in easy-to-swallow data structures. Your tests follow a logical
+						| step sequence of objects, arrays, and key-value pairs.
 					pre.language-javascript.line-numbers
 						code
-							| webdriver: {
-							|   options: {
-							|     desiredCapabilities: {
-							|       browserName: 'chrome',
-							|       name: 'Documentation Tests',
-							|       viewports: {
-							|         small: {
-							|           width: 430,
-							|           height: 1000
-							|         },
-							|         medium: {
-							|           width: 700,
-							|           height: 1000
-							|         },
-							|         large: {
-							|           width: 1280,
-							|           height: 1000
-							|         }
+							| 'use strict';
+							| <br>
+							| var drive = require('datadriver');
+							| <br>
+							| drive.go({
+							|   "config": {
+							|     "description": "Duck Duck Go Test",
+							|     "suites": [
+							|       {
+							|         "description": "Search for DataDriver.io",
+							|         "tests": ["duck-duck-go"],
+							|         "viewports": { small: true }
 							|       }
-							|     }
+							|     ]
+							|   },
+							| <br>
+							|   "duck-duck-go": {
+							|     "steps": [
+							|       {
+							|         "selector": "#search_form_input_homepage",
+							|         "execute": [
+							|           {
+							|             "action": "type",
+							|             "text": "Datadriver.io"
+							|           }
+							|         ]
+							|       },
+							|       {
+							|         "selector": "#search_button_homepage",
+							|         "execute": [
+							|           {
+							|             "action": "click"
+							|           }
+							|         ],
+							|         "verify": [
+							|           {
+							|             "method": "verifyPageTitle",
+							|             "asserts": {
+							|               "title": "Datadriver.io at DuckDuckGo"
+							|             }
+							|           }
+							|         ]
+							|       }
+							|     ]
 							|   }
-							| }
-			hr
+							| });

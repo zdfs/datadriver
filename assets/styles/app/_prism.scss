@@ -16,7 +16,7 @@ pre[class*="language-"] {
 	word-spacing: normal;
 	word-break: normal;
 	line-height: 1.5;
-	margin-top: 0;
+	margin-top: 1rem;
 
 	-moz-tab-size: 2;
 	-o-tab-size: 2;
@@ -136,7 +136,7 @@ pre[class*="language-"] {
 
 pre.line-numbers {
 	position: relative;
-	padding-left: 3.8em;
+	padding-left: 2.2em;
 	counter-reset: linenumber;
 }
 
@@ -147,9 +147,9 @@ pre.line-numbers > code {
 .line-numbers .line-numbers-rows {
 	position: absolute;
 	pointer-events: none;
-	top: -.15rem;
+	top: -.2rem;
 	font-size: 100%;
-	left: -3.8em;
+	left: -4.3em;
 	width: 3em; /* works for line-numbers below 1000 lines */
 	letter-spacing: -1px;
 
@@ -170,7 +170,6 @@ pre.line-numbers > code {
 			content: counter(linenumber);
 			color: #999;
 			display: block;
-			padding-right: 0.8em;
 			text-align: right;
 		}
 
