@@ -4,7 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <title>Drive</title>
-  <link rel="icon" type="public/image/x-icon" href="images/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="public/images/favicon.ico">
   <link rel="stylesheet" href="public/styles/min/home.css">
 </head>
 <body data-path="public/">
@@ -32,6 +32,44 @@
       <div class="hero-copy">
         <p>A grunt-webdriver extension for writing data-driven Selenium tests with simple JavaScript data structures.</p>
       </div>
+    </div>
+  </div>
+  <div class="section--light">
+    <div class="section--container">
+      <div class="flex-boxes">
+        <div class="flex-box flex-code">
+          <h1 class="flex-title">Arbitrary viewports</h1>
+          <p>
+            Data driver extends the functionality of <a href="https://github.com/webdriverio/grunt-webdriver">
+            grunt-webdriver</a>. You can declare any breakpoint you need to use in your tests.
+          </p>
+        </div>
+        <div class="flex-box flex-code">
+          <pre class="language-javascript line-numbers"><code>webdriver: {
+  options: {
+    desiredCapabilities: {
+      browserName: 'chrome',
+      name: 'Documentation Tests',
+      viewports: {
+        small: {
+          width: 430,
+          height: 1000
+        },
+        medium: {
+          width: 700,
+          height: 1000
+        },
+        large: {
+          width: 1280,
+          height: 1000
+        }
+      }
+    }
+  }
+}</code></pre>
+        </div>
+      </div>
+      <hr>
     </div>
   </div>
   <script src="public/scripts/min/app.js"></script>

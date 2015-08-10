@@ -11,6 +11,7 @@ var gruntConfig = {
 			src: [
 				'node_modules/jquery/dist/jquery.js',
 				'assets/scripts/vendor/modernizr.js',
+				'assets/scripts/vendor/prism.js',
 				'public/images/icons/grunticon.loader.js',
 				'assets/scripts/app/grunticon.js',
 				'assets/scripts/app/main-nav.js'
@@ -166,7 +167,7 @@ var gruntConfig = {
 		},
 
 		scripts: {
-			files: ['assets/scripts/app/*.js'],
+			files: ['assets/scripts/app/*.js', 'assets/scripts/vendor/*.js'],
 			tasks: [
 				'concat:dev',
 				'uglify:dev'
