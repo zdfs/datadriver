@@ -37,40 +37,17 @@
   <div class="section--light">
     <div class="section--container">
       <div class="flex-boxes">
-        <div class="flex-box">
-          <div data-grunticon-embed class="icon-browser"></div>
+        <div class="flex-box flex-box-code">
           <h2 class="flex-title">Selenium tests without complicated code</h2>
           <p>
-            Datadriver delivers the <a href="http://webdriver.io">WebdriverIO</a> API in easy-to-swallow data
-            structures. Your tests follow a logical step sequence of objects, arrays, and key-value pairs.
-          </p>
-        </div>
-        <div class="flex-box">
-          <div data-grunticon-embed class="icon-bulb"></div>
-          <h2 class="flex-title">Enable non-developers to do more in less time</h2>
-          <p>
-            Datadriver was built for the non-developer. There's no complicated logic, just simple declarative steps.
-            Datadriver will transform those steps to actual tests executed in a browser.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="section--light">
-    <div class="section--container">
-      <div class="flex-boxes">
-        <div class="flex-box border-gray">
-          <h2 class="flex-title">Example test</h2>
-          <p>
-            This is an example of a simple test built with datadriver. Just give a quick look-over right now, we'll
-            give you the working code in the <a href="quick-start.html">Quick Start</a> section.
+            Datadriver delivers the WebdriverIO API in easy-to-swallow data structures. Your tests follow a logical
+            step sequence of objects, arrays, and key-value pairs.
           </p>
           <pre class="language-javascript line-numbers"><code>'use strict';
 <br>
 var drive = require('datadriver');
 <br>
 drive.go({
-<br>
   "config": {
     "description": "Duck Duck Go Test",
     "suites": [
@@ -86,27 +63,32 @@ drive.go({
     "steps": [
       {
         "selector": "#search_form_input_homepage",
-        "execute": [{ "action": "type", "text": "Datadriver.io" }]
+        "execute": [
+          {
+            "action": "type",
+            "text": "Datadriver.io"
+          }
+        ]
       },
       {
         "selector": "#search_button_homepage",
-        "execute": [{ "action": "click" }],
-      },
-      {
+        "execute": [
+          {
+            "action": "click"
+          }
+        ],
         "verify": [
           {
             "method": "verifyPageTitle",
-            "asserts": { "title": "Datadriver.io at DuckDuckGo" }
+            "asserts": {
+              "title": "Datadriver.io at DuckDuckGo"
+            }
           }
         ]
       }
     ]
   }
-<br>
 });</code></pre>
-          <hr>
-          <h2 class="flex-title">Run it</h2>
-          <pre class="language-bash line-numbers"><code>grunt webdriver:chrome --url=http://duckduckgo.com</code></pre>
         </div>
       </div>
     </div>
