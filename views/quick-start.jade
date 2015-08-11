@@ -1,68 +1,136 @@
 extend layouts/default
 block css
-	link(rel="stylesheet", href="#{path}styles/min/home.css")
+	link(rel="stylesheet", href="#{path}styles/min/quick-start.css")
 block main
-	.hero
-		.hero-inner
-			.hero-title
-				.icon-config(data-grunticon-embed)
-				h1 Data Driver
-			.hero-copy
-				p
-					| A grunt-webdriver extension for writing data-driven Selenium tests with simple JavaScript data structures.
 	.section--light
 		.section--container
-			.flex-boxes
-				.flex-box.flex-box-code
-					h2.flex-title Selenium tests without complicated code
-					p
-						| Datadriver delivers the WebdriverIO API in easy-to-swallow data structures. Your tests follow a logical
-						| step sequence of objects, arrays, and key-value pairs.
-					pre.language-javascript.line-numbers
-						code
-							| 'use strict';
-							| <br>
-							| var drive = require('datadriver');
-							| <br>
-							| drive.go({
-							|   "config": {
-							|     "description": "Duck Duck Go Test",
-							|     "suites": [
-							|       {
-							|         "description": "Search for DataDriver.io",
-							|         "tests": ["duck-duck-go"],
-							|         "viewports": { small: true }
-							|       }
-							|     ]
-							|   },
-							| <br>
-							|   "duck-duck-go": {
-							|     "steps": [
-							|       {
-							|         "selector": "#search_form_input_homepage",
-							|         "execute": [
-							|           {
-							|             "action": "type",
-							|             "text": "Datadriver.io"
-							|           }
-							|         ]
-							|       },
-							|       {
-							|         "selector": "#search_button_homepage",
-							|         "execute": [
-							|           {
-							|             "action": "click"
-							|           }
-							|         ],
-							|         "verify": [
-							|           {
-							|             "method": "verifyPageTitle",
-							|             "asserts": {
-							|               "title": "Datadriver.io at DuckDuckGo"
-							|             }
-							|           }
-							|         ]
-							|       }
-							|     ]
-							|   }
-							| });
+			.section--content
+				h2 Quick Start
+				p
+					| Datadriver works in conjunction with the <a href="http://webdriver.io">WebdriverIO</a> API and the
+					| <a href="https://github.com/webdriverio/grunt-webdriver">grunt-webdriver</a> plugin. We'll take you
+					| through setting up a project step-by-step, or you can just <a href="#">download the code</a>.
+				.flex-boxes
+					.flex-box.border-gray
+						ol.default
+							li
+								| In a new directory, create a <code>package.json</code> file with the following contents.
+								pre.language-javascript.line-numbers
+									code
+										| {
+										|   "version": "1.0.0",
+										|   "description": "Get up and running with datadriver.io",
+										|   "engines": {
+										|     "node": ">= 0.12.0"
+										|   },
+										|   "devDependencies": {
+										|     "datadriver": "1.0",
+										|     "grunt": "0.4.5",
+										|     "grunt-webdriver": "0.5.2"
+										|   }
+										| }
+							li
+								| Create a <code>gruntfile.js</code> file with the following contents.
+								pre.language-javascript.line-numbers
+									code
+										| var gruntConfig = {
+										|   webdriver: {
+										|     options: {
+										|       desiredCapabilities: {
+										|         browserName: 'chrome',
+										|         name: 'Documentation Tests',
+										|         viewports: {
+										|           small: {
+										|             width: 430,
+										|             height: 1000
+										|           },
+										|           medium: {
+										|             width: 700,
+										|             height: 1000
+										|           },
+										|           large: {
+										|             width: 1280,
+										|             height: 1000
+										|           }
+										|         }
+										|       }
+										|     },
+										|     home: {
+										|       tests: ['tests/*.js']
+										|     }
+										|   }
+										| };
+										| <br>
+										| module.exports = function(grunt) {
+										|   grunt.initConfig(gruntConfig);
+										|   grunt.loadNpmTasks('grunt-webdriver');
+										| };
+							li
+								| In your root directory, create another directory called <code>tests</code>.
+								hr
+							li
+								| Inside of your <code>tests</code> directory, create a file called <code>duck-duck-go.js</code>
+								| with the following contents.
+								pre.language-javascript.line-numbers
+									code
+										| 'use strict';
+										| <br>
+										| var drive = require('datadriver');
+										| <br>
+										| drive.go({
+										| <br>
+										|   "config": {
+										|     "description": "Duck Duck Go Test",
+										|     "suites": [
+										|       {
+										|         "description": "Search for DataDriver.io",
+										|         "tests": ["duck-duck-go"],
+										|         "viewports": { small: true }
+										|       }
+										|     ]
+										|   },
+										| <br>
+										|   "duck-duck-go": {
+										|     "steps": [
+										|       {
+										|         "selector": "#search_form_input_homepage",
+										|         "execute": [{ "action": "type", "text": "Datadriver.io" }]
+										|       },
+										|       {
+										|         "selector": "#search_button_homepage",
+										|         "execute": [{ "action": "click" }],
+										|       },
+										|       {
+										|         "verify": [
+										|           {
+										|             "method": "verifyPageTitle",
+										|             "asserts": { "title": "Datadriver.io at DuckDuckGo" }
+										|           }
+										|         ]
+										|       }
+										|     ]
+										|   }
+										| <br>
+										| });
+							li
+								| From your command line program, navigate to your root directory and run the test.
+								pre.language-bash.line-numbers
+									code
+										| cd &lt;your root directory path&gt;
+										| npm install
+										| grunt webdriver --url=http://duckduckgo.com
+							li
+								| Your output should look something like this:
+								pre.language-bash.line-numbers
+									code
+										| $ grunt webdriver:home --url=http://duckduckgo.com
+										| Running "webdriver:home" (webdriver) task
+										| Duck Duck Go Test
+										|   Rendered in a small viewport
+										|     Search for DataDriver.io
+										|       ✓ executing "setValue" on "#search_form_input_homepage".
+										|       ✓ clicking the "#search_button_homepage" element.
+										|       ✓ the "title" of this page should equal "Datadriver.io at DuckDuckGo"
+						hr
+						p
+							a.button Download the code
