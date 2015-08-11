@@ -54,7 +54,9 @@ pre[class*="language-"] {
 
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
-	background: transparent;
+	background: #F5F5F5;
+	border: 1px solid #DDD;
+	padding-bottom: 1rem;
 }
 
 /* Inline code */
@@ -103,7 +105,6 @@ pre[class*="language-"] {
 .language-css .token.string,
 .style .token.string {
 	color: #a67f59;
-	background: hsla(0, 0%, 100%, .5);
 }
 
 .token.atrule,
@@ -149,7 +150,7 @@ pre.line-numbers > code {
 	pointer-events: none;
 	top: -.2rem;
 	font-size: 100%;
-	left: -4.3em;
+	left: -4em;
 	width: 3em; /* works for line-numbers below 1000 lines */
 	letter-spacing: -1px;
 
@@ -160,33 +161,36 @@ pre.line-numbers > code {
 
 }
 
-	.line-numbers-rows > span {
-		pointer-events: none;
-		display: block;
-		counter-increment: linenumber;
-	}
+.line-numbers-rows > span {
+	pointer-events: none;
+	display: block;
+	counter-increment: linenumber;
+}
 
-		.line-numbers-rows > span:before {
-			content: counter(linenumber);
-			color: #999;
-			display: block;
-			text-align: right;
-		}
+.line-numbers-rows > span:before {
+	content: counter(linenumber);
+	color: #999;
+	display: block;
+	text-align: right;
+}
 
 pre[class*='language-'] {
 	position: relative;
 }
 pre[class*='language-'][data-language]::before {
-	border-bottom: 1px solid rgba(51,51,51,.3);
+	border-bottom: 1px solid #ddd;
 	content: attr(data-language);
 	color: rgba(51,51,51,.7);
 	display: block;
 	font-family: $helvetica;
 	position: relative;
-	top: 0;
-	left: -2rem;
+	top: .3rem;
+	left: -1.5rem;
 	font-size: 0.9em;
 	margin-bottom: 1rem;
 	padding-bottom: .5rem;
 	text-shadow: none;
+	width: -webkit-calc(100% + 2rem);
+	width: -moz-calc(100% + 2rem);
+	width: calc(100% + 1rem);
 }

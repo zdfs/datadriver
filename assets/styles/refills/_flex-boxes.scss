@@ -46,11 +46,14 @@
       }
     }
 
-    img {
+    &.border-gray {
+      border-top: 6px solid #CCC;
+    }
+
+    img, svg {
       display: block;
-      height: 3em;
+      height: 4em;
       margin: 0 auto 1em;
-      opacity: 0.4;
     }
 
     .flex-title {
