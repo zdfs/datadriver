@@ -1,0 +1,30 @@
+extend layouts/default
+block css
+	link(rel="stylesheet", href="#{path}styles/min/about.css")
+block main
+	.section.section--light
+		.section--container
+			.section--content
+				h2 About
+				p
+					| Datadriver was created to help non-technical individuals quickly and easily begin writing their first
+					| automated tests. It was written by <a href="http://github.com/zdfs">Zachary Forrest</a> and
+					| <a href="https://github.com/Yanchek99">Matt Yanchek</a> to work in conjunction with
+					| <a href="http://webdriver.io">WebdriverIO</a> and the
+					| <a href="https://github.com/webdriverio/grunt-webdriver">WebdriverIO grunt plugin</a>.
+					| Datadriver adds the following functionality:
+				ol.default
+					li Create automated tests through a declarative API
+					li Create arbitrary viewports easily and quickly
+					li
+						| Make it easy to assert different values per browser (for example, the CSS cursor property is different
+						| in Chrome and Firefox).
+					li Write your tests with a simple step-by-step flow
+				p
+					| We understand that this library isn't for everyone, but we've found that it helps non-technical people
+					| to brave the scary world of automated test development where manual testing is all that existed before.
+					| We didn't set out to do any thing amazing, but to do our best to solve a simple problem. If datadriver
+					| is something that helped you, <a href="mailto:me@zdfs.com">we'd love to know about it</a>.
+				p
+					| If you would like to contribute, feel free to <a href="https://github.com/zdfs/datadriver">fork the repo</a>,
+					| add your changes, and submit a pull request.

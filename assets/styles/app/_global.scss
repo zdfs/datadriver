@@ -10,9 +10,8 @@ body {
 	margin: 0;
 }
 
-.section--light {
+.section {
 
-	background-color: #f5f5f5;
 	padding: 1.5rem 0;
 
 	.section--container {
@@ -22,10 +21,16 @@ body {
 
 	.section--content {
 		@include span-columns(12);
-		@include pad();
+		@include pad(0 default);
 	}
 
 }
+
+.section--light { background-color: #f5f5f5; }
+.section--dark { background-color: #333; }
+.section--slate { background-color: #EEE; }
+
+.white { color: #FFF; }
 
 h2 {
 	color: $heading-color;
