@@ -2,4 +2,11 @@ extend ../layouts/nested-1
 block css
 	link(rel="stylesheet", href="../#{path}styles/min/api.css")
 block main
-	p hello
+	h2.flex-title Datadriver API Documentation
+	p
+		| Welcome to the documentation for the datadriver API. Please note that <b>this API is not complete</b>. We don't
+		| have any of the Appium bindings, for example, as well as many other methods. This project is a work in progress.
+	p
+		| You should also be aware that you should consider this software in beta. Naming conventions, how things work
+		| under the hood and API additions will all be considered par for the course until we hit 1.0. If you have an
+		| issue or a request, you can <a href="https://github.com/zdfs/datadriver/issues">file it here</a>.

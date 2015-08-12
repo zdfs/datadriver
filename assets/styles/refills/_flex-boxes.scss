@@ -66,6 +66,8 @@
       color: transparentize($flex-box-color, 0.1);
       line-height: 1.5em;
       margin: auto;
+
+      + p { margin-top: 1rem; }
     }
   }
 

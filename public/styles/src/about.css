@@ -544,6 +544,8 @@ h2 {
       color: rgba(51, 51, 51, 0.6);
       line-height: 1.5em;
       margin: auto; }
+      .flex-boxes .flex-box p + p {
+        margin-top: 1rem; }
   .flex-boxes .flex-box-big {
     -webkit-box-flex: 1;
     -moz-box-flex: 1;
