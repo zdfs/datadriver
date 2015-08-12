@@ -552,7 +552,7 @@ h2 {
     -moz-flex: 1 1 40em;
     -ms-flex: 1 1 40em;
     flex: 1 1 40em; }
-  .flex-boxes .flex-code {
+  .flex-boxes .api-box {
     -webkit-box-flex: 1;
     -moz-box-flex: 1;
     box-flex: 1;
@@ -560,9 +560,40 @@ h2 {
     -moz-flex: 1 1 20em;
     -ms-flex: 1 1 20em;
     flex: 1 1 20em; }
+    .flex-boxes .api-box:nth-child(1) {
+      -webkit-box-ordinal-group: 2;
+      -moz-box-ordinal-group: 2;
+      box-ordinal-group: 2;
+      -webkit-order: 2;
+      -moz-order: 2;
+      order: 2;
+      -ms-flex-order: 2; }
+    .flex-boxes .api-box:nth-child(2) {
+      -webkit-box-ordinal-group: 1;
+      -moz-box-ordinal-group: 1;
+      box-ordinal-group: 1;
+      -webkit-order: 1;
+      -moz-order: 1;
+      order: 1;
+      -ms-flex-order: 1; }
   @media screen and (min-width: 53.75em) {
-    .flex-boxes .flex-code:nth-child(1) {
-      max-width: 22em; } }
+    .flex-boxes .api-box:nth-child(1) {
+      max-width: 22em;
+      -webkit-box-ordinal-group: 0;
+      -moz-box-ordinal-group: 0;
+      box-ordinal-group: 0;
+      -webkit-order: 0;
+      -moz-order: 0;
+      order: 0;
+      -ms-flex-order: 0; }
+    .flex-boxes .api-box:nth-child(2) {
+      -webkit-box-ordinal-group: 1;
+      -moz-box-ordinal-group: 1;
+      box-ordinal-group: 1;
+      -webkit-order: 1;
+      -moz-order: 1;
+      order: 1;
+      -ms-flex-order: 1; } }
 
 .footer {
   background-color: #D5485A;

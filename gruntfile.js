@@ -219,7 +219,9 @@ var gruntConfig = {
 						height: 100
 					}
 				}
-			}
+			},
+
+			slow: 800
 
 		},
 

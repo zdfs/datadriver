@@ -8,7 +8,14 @@ head
 	block css
 body(data-path="../#{path}")
 	include ../common/main-nav
-	block main
+	.section.section--light
+		.section--container
+			.section--content
+				.flex-boxes
+					.flex-box.api-box
+						include ../common/api-sidebar
+					.flex-box
+						block main
 	include ../common/footer
 	script(src="../#{path}scripts/min/app.js")
 	block scripts
