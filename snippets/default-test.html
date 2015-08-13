@@ -1,0 +1,40 @@
+
+<pre class="language-javascript line-numbers"><code>'use strict';
+<br>
+var drive = require('datadriver');
+<br>
+drive.go({
+<br>
+  "config": {
+    "description": "Duck Duck Go Test",
+    "suites": [
+      {
+        "description": "Search for DataDriver.io",
+        "tests": ["duck-duck-go"],
+        "viewports": { small: true }
+      }
+    ]
+  },
+<br>
+  "duck-duck-go": {
+    "steps": [
+      {
+        "selector": "#search_form_input_homepage",
+        "execute": [{ "action": "type", "text": "Datadriver.io" }]
+      },
+      {
+        "selector": "#search_button_homepage",
+        "execute": [{ "action": "click" }],
+      },
+      {
+        "verify": [
+          {
+            "method": "verifyPageTitle",
+            "asserts": { "title": "Datadriver.io at DuckDuckGo" }
+          }
+        ]
+      }
+    ]
+  }
+<br>
+});</code></pre>

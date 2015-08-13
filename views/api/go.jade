@@ -1,0 +1,158 @@
+extend ../layouts/nested-1
+block main
+	h2.flex-title go()
+	p
+		| Our <code>go()</code> method ties everything together. This method takes an object, specifically, your test
+		| data structure and turns that structure in to specific actions and asserts that are executed in the browser.
+	p
+		| The <code>go()</code> method aims to validate the data structure you pass as much as possible to ensure that it
+		| can do what is required. If the data structure is missing something, <code>go()</code> will probably throw an
+		| error and a stacktrace. This isn't really perfect yet, but we're working to make it better.
+		| <a href="https://github.com/zdfs/datadriver/issues">Let us know</a> where we can improve.
+	hr
+	h2.flex-title A good data structure
+	p
+		| Let's break down what a good data structure looks like. As a reference, let's look at our DuckDuckGo test.
+		include ../snippets/default-test
+	p
+		| As you can see from the code example above, the <code>drive.go()</code> method takes an object with a particular
+		| structure. In this structure we have two keys, one is <code>"config"</code> (and it always needs to be named
+		| "config") and the other is called <code>"duck-duck-go"</code>, which we can call anything we want, as long as we
+		| reference it correctly from the <code>"config.tests"</code> array.
+	hr
+	h2.flex-title Let's talk about the "config"
+	p Here is the code we're talking about for reference:
+	include ../snippets/config-object
+	p
+		| As mentioned before, the <code>"config"</code> object must always be named "config". This object sets up our
+		| <a href="https://mochajs.org/#interfaces">BDD</a> interface, allowing our tests to execute in a logical manner.
+		| It's important to know that we don't have hooks in to everything the interface supports, as the <code>go()</code>
+		| method handles all of this for you, but in short, the BDD interface allows for the output you've been seeing in
+		| our examples.
+	include ../snippets/default-output
+	p
+		| If you look at the test itself and the output you're given, you can see that there's a pretty good match up.
+		| So let's walk through the <code>"config"</code> object.
+	ul
+		li
+			include ../snippets/config-object
+		li
+			| <b>"description"</b>: This is the description of our test file. If I'm testing various elements on a page, I'll
+			| give the description something like "DuckDuckGo Homepage Elements". If it's a step-by-step flow, I'll give the
+			| description something like "Sign up flow".
+			hr
+		li
+			| <b>"url"</b>: Not shown in this example, but you can see how we can use it on the
+			| <a href="/api/getBaseUrl.html">getBaseUrl()</a> page. The url field doesn't take an absolute url, only the
+			| the path you need in addition to the url returned by <code>getBaseUrl</code>. So, for example, if I passed
+			| in <code>--url=http://duckduckgo.com</code> from the command line and changed my <code>"url"</code> field to
+			| be <code>"url": "about"</code>, the end result would be <code>http://duckduckgo.com/about</code>.
+			hr
+		li
+			| <b>"suites"</b>: The <code>"suites"</code> key should always take an array of objects. Each object, marked by
+			| their <code>{ }</code> defines a group of tests that should be run together. Each suite object has three keys
+			| we need to define.
+			ul
+				li
+					| <b>"description"</b>: This is the description of your test suite. Again, try to give it a description
+					| that says <i>these tests go together</i>.
+				li
+					| <b>"tests"</b>: The <code>"tests"</code> also receives an array. This allows you to choose from multiple
+					| test objects and arbitrarily string them together. For example, we could include another test object that
+					| verifies a logo on the DuckDuckGo about page and string it together in our suite. Let's take a look at
+					| what that could look like.
+					include ../snippets/multiple-test-objects
+					| This should give us the following output:
+					pre.language-bash.line-numbers
+						code
+							| $ grunt webdriver:duckduckgo --url=http://duckduckgo.com
+							| Running "webdriver:duckduckgo" (webdriver) task
+							| Duck Duck Go Tests
+							|   Rendered in a small viewport
+							|     Do the search and verify the logo
+							|        ⚙ executing "setValue" on "#search_form_input_homepage".
+							|        ⚙ clicking the "#search_button_homepage" element.
+							|        ✓ the "title" of this page should equal "Datadriver.io at DuckDuckGo"
+							|        ⚙ redirecting to https://duckduckgo.com/about
+							|        ✓ the "src" attribute of ".timeline__logo" should equal "https://duckduckgo.com/assets/dax-alt.svg"
+							| <br>
+							| 2 passing
+				li
+					| <b>"viewports"</b>: This key takes an object, which corresponds to any viewports that you have defined in
+					| the <code>gruntfile</code>. Please note you need at least one viewport defined in the
+					| <code>gruntfile</code>. Let's say that you have three viewports defined, <code>small</code>,
+					| <code>medium</code> and <code>large</code>. In our example config, we've been using <code>small:true</code>
+					| to demonstrate running the tests in a small viewport. If we defined our viewports object to
+					| <code>medium: true</code>, it would run all the test objects in the medium viewport. If we added both, like
+					pre.language-javascript.line-numbers
+						code
+							| "viewports: {
+							|   "small": true,
+							|   "medium": true
+							| }
+					| then <code>go()</code> will run all the tests for both the small and medium viewports, doubling your test
+					| count. You can see the output below:
+					pre.language-bash.line-numbers
+						code
+							| $ grunt webdriver:duckduckgo --url=https://duckduckgo.com
+							| Running "webdriver:duckduckgo" (webdriver) task
+							| Duck Duck Go Tests
+							|   Rendered in a small viewport
+							|     Verify the logo
+							|        ⚙ redirecting to https://duckduckgo.com/about
+							|        ✓ the "src" attribute of ".timeline__logo" should equal "https://duckduckgo.com/assets/dax-alt.svg"
+							|   Rendered in a medium viewport
+							|     Verify the logo
+							|        ⚙ redirecting to https://duckduckgo.com/about
+							|        ✓ the "src" attribute of ".timeline__logo" should equal "https://duckduckgo.com/assets/dax-alt.svg"
+							| <br>
+							| 2 passing
+	hr
+	h2.flex-title Let's talk about test objects
+	p The following is a test object.
+	pre.language-javascript.line-numbers
+		code
+			| "duck-duck-go": {
+			|   "steps": [
+			|     {
+			|       "selector": "#search_form_input_homepage",
+			|       "execute": [{ "action": "type", "text": "Datadriver.io" }]
+			|     },
+			|     {
+			|       "selector": "#search_button_homepage",
+			|       "execute": [{ "action": "click" }],
+			|     },
+			|     {
+			|       "verify": [
+			|         {
+			|           "method": "verifyPageTitle",
+			|           "asserts": { "title": "Datadriver.io at DuckDuckGo" }
+			|         }
+			|       ]
+			|     }
+			|   ]
+			| }
+	p
+		| The key for this test object is <code>"duck-duck-go"</code>, but you can name it anything you want, as long as
+		| you reference it inside of the <code>"tests"</code> array in the <code>"config"</code>. Inside the test object
+		| you will immediately encounter a <code>"steps"</code> array, which just takes a list of objects to be executed
+		| in sequential order.
+	p
+		| Each step object can have the following keys:
+	ul
+		li
+			| <b>"selector"</b>: This sets the context of actions or asserts inside of the step. If you look at the above
+			| example, our first step searches for an element on the page with an <code>id</code> of
+			| <code>search_form_input_homepage</code> (we're using CSS selectors here, but you can also use XPath). Therefore,
+			| the <code>execute</code> action that follows will be executed <i>on that selector</i>. You don't have to pass
+			| a selector, in which case the default selector is <code>window</code> (not a valid CSS selector).
+		li
+			| <b>"execute"</b>: The <code>execute</code> key takes an array, full of action objects. You can specify multiple
+			| actions to be executed per step. More details are available under "Execute actions" in the sidebar.
+		li
+			| <b>"verify"</b>: The <code>verify</code> key takes an array full of assert objects. Each assert object takes a
+			| <code>"method"</code> key and an <code>"asserts"</code> object of key value pairs that you want to verify to be
+			| true. We use the <a href="http://chaijs.com/">Chai.js</a> assertion library if you feel like changing the
+			| <code>assert-mode</code> of an assert object. More details under <a href="/api/assert-modes.html">assert
+			| modes</a>. For examples of how to use a particular verification step, visit any of the <code>verify</code>
+			| links in the sidebar.

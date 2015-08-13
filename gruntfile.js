@@ -228,7 +228,7 @@ var gruntConfig = {
 		},
 
 		duckduckgo: {
-			tests: ['test/duckduckgo/about.js']
+			tests: ['test/duckduckgo/multiple.js']
 		},
 
 		actions: {

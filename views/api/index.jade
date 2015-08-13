@@ -1,6 +1,4 @@
 extend ../layouts/nested-1
-block css
-	link(rel="stylesheet", href="../#{path}styles/min/api.css")
 block main
 	h2.flex-title Datadriver API documentation
 	p
@@ -69,15 +67,4 @@ block main
 			|   grunt.loadNpmTasks('grunt-webdriver');
 			| };
 	p Your test output should look something like the following (all API examples will use this format):
-	pre.language-bash.line-numbers
-		code
-			| $ grunt webdriver:home --url=http://duckduckgo.com
-			| Running "webdriver:home" (webdriver) task
-			| Duck Duck Go Test
-			|   Rendered in a small viewport
-			|     Search for DataDriver.io
-			|       ⚙ executing "setValue" on "#search_form_input_homepage".
-			|       ⚙ clicking the "#search_button_homepage" element.
-			|       ✓ the "title" of this page should equal "Datadriver.io at DuckDuckGo"
-			| <br>
-			| 1 passing (3s)
+	include ../snippets/default-output

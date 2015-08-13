@@ -717,7 +717,15 @@ pre[class*='language-'][data-language]::before {
       color: rgba(51, 51, 51, 0.6);
       line-height: 1.5em;
       margin: auto; }
-      .flex-boxes .flex-box p + p {
+      .flex-boxes .flex-box p + p,
+      .flex-boxes .flex-box p + ul {
+        margin-top: 1rem; }
+    .flex-boxes .flex-box ul {
+      color: rgba(51, 51, 51, 0.6);
+      line-height: 1.5em;
+      margin-left: 1rem; }
+      .flex-boxes .flex-box ul li + li,
+      .flex-boxes .flex-box ul ul li {
         margin-top: 1rem; }
   .flex-boxes .flex-box-big {
     -webkit-box-flex: 1;

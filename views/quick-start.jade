@@ -71,47 +71,7 @@ block main
 							li
 								| Inside of your <code>tests</code> directory, create a file called <code>duck-duck-go.js</code>
 								| with the following contents.
-								pre.language-javascript.line-numbers
-									code
-										| 'use strict';
-										| <br>
-										| var drive = require('datadriver');
-										| <br>
-										| drive.go({
-										| <br>
-										|   "config": {
-										|     "description": "Duck Duck Go Test",
-										|     "suites": [
-										|       {
-										|         "description": "Search for DataDriver.io",
-										|         "tests": ["duck-duck-go"],
-										|         "viewports": { small: true }
-										|       }
-										|     ]
-										|   },
-										| <br>
-										|   "duck-duck-go": {
-										|     "steps": [
-										|       {
-										|         "selector": "#search_form_input_homepage",
-										|         "execute": [{ "action": "type", "text": "Datadriver.io" }]
-										|       },
-										|       {
-										|         "selector": "#search_button_homepage",
-										|         "execute": [{ "action": "click" }],
-										|       },
-										|       {
-										|         "verify": [
-										|           {
-										|             "method": "verifyPageTitle",
-										|             "asserts": { "title": "Datadriver.io at DuckDuckGo" }
-										|           }
-										|         ]
-										|       }
-										|     ]
-										|   }
-										| <br>
-										| });
+								include snippets/default-test
 							li
 								| From your command line program, navigate to your root directory and run the test.
 								pre.language-bash.line-numbers
