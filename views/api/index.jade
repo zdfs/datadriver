@@ -2,7 +2,7 @@ extend ../layouts/nested-1
 block css
 	link(rel="stylesheet", href="../#{path}styles/min/api.css")
 block main
-	h2.flex-title Datadriver API Documentation
+	h2.flex-title Datadriver API documentation
 	p
 		| Welcome to the documentation for the datadriver API. Please note that <b>this API is not complete</b>. We don't
 		| have any of the Appium bindings, for example, as well as many other methods. This project is a work in progress.
@@ -10,3 +10,74 @@ block main
 		| You should also be aware that you should consider this software in beta. Naming conventions, how things work
 		| under the hood and API additions will all be considered par for the course until we hit 1.0. If you have an
 		| issue or a request, you can <a href="https://github.com/zdfs/datadriver/issues">file it here</a>.
+	hr
+	h3.flex-title Test output
+	p
+		| Please note that the default output of Mocha's test runner treats everything like a test. If you click a button,
+		| type some text in to a field (basically any executable action), they will be treated like "tests" and increase
+		| your test count though no asserts are actually happening. For example:
+	pre.language-bash.line-numbers
+		code
+			| $ grunt webdriver:home --url=http://duckduckgo.com
+			| Running "webdriver:home" (webdriver) task
+			| Duck Duck Go Test
+			|   Rendered in a small viewport
+			|     Search for DataDriver.io
+			|       ✓ executing "setValue" on "#search_form_input_homepage".
+			|       ✓ clicking the "#search_button_homepage" element.
+			|       ✓ the "title" of this page should equal "Datadriver.io at DuckDuckGo"
+			| <br>
+			| 3 passing (3s)
+	p
+		| If this bothers you, datadriver provides a custom Mocha reporter and Mocha UI that will give better feedback.
+		| To enable it, just modify your <code>gruntfile.js</code> to include the <code>reporter</code> and <code>ui</code>
+		| options.
+	pre.language-javascript.line-numbers
+		code
+			| var gruntConfig = {
+			|   webdriver: {
+			|     options: {
+			|       desiredCapabilities: {
+			|         browserName: 'chrome',
+			|         name: 'Documentation Tests',
+			|         viewports: {
+			|           small: {
+			|             width: 430,
+			|             height: 1000
+			|           },
+			|           medium: {
+			|             width: 700,
+			|             height: 1000
+			|           },
+			|           large: {
+			|             width: 1280,
+			|             height: 1000
+			|           }
+			|         }
+			|       },
+			|       reporter: require('datadriver/lib/support/reporter'),
+			|       ui: 'ddui'
+			|     },
+			|     home: {
+			|       tests: ['tests/*.js']
+			|     }
+			|   }
+			| };
+			| <br>
+			| module.exports = function(grunt) {
+			|   grunt.initConfig(gruntConfig);
+			|   grunt.loadNpmTasks('grunt-webdriver');
+			| };
+	p Your test output should look something like the following (all API examples will use this format):
+	pre.language-bash.line-numbers
+		code
+			| $ grunt webdriver:home --url=http://duckduckgo.com
+			| Running "webdriver:home" (webdriver) task
+			| Duck Duck Go Test
+			|   Rendered in a small viewport
+			|     Search for DataDriver.io
+			|       ⚙ executing "setValue" on "#search_form_input_homepage".
+			|       ⚙ clicking the "#search_button_homepage" element.
+			|       ✓ the "title" of this page should equal "Datadriver.io at DuckDuckGo"
+			| <br>
+			| 1 passing (3s)

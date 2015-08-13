@@ -221,12 +221,18 @@ var gruntConfig = {
 				}
 			},
 
-			slow: 800
+			slow: 800,
+			reporter: require('datadriver/lib/support/reporter'),
+			ui: 'ddui'
 
 		},
 
 		home: {
 			tests: ['test/home/*.js']
+		},
+
+		actions: {
+			tests: ['test/actions/*.js']
 		},
 
 		browserstack: {
