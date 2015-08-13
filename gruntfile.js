@@ -227,8 +227,8 @@ var gruntConfig = {
 
 		},
 
-		home: {
-			tests: ['test/home/*.js']
+		duckduckgo: {
+			tests: ['test/duckduckgo/about.js']
 		},
 
 		actions: {

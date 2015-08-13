@@ -87,7 +87,7 @@
   	}
   }
 
-  @include media($large-screen-up) {
+  @include media($medium-screen-up) {
 		.api-box:nth-child(1) {
 		  max-width: 22em;
 		  @include order(0);
