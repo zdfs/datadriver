@@ -953,3 +953,24 @@ pre[class*='language-'][data-language]::before {
   border: 1px solid #DDD;
   background: #EEE;
   padding: 1rem; }
+  .element-area .grid {
+    background-color: #D64F61;
+    max-width: 68em;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2.3576515979%; }
+    .element-area .grid::after {
+      clear: both;
+      content: "";
+      display: table; }
+    .element-area .grid .grid--half {
+      background-color: #be2c40;
+      padding: 1rem;
+      float: left;
+      display: block;
+      margin-right: 2.3576515979%;
+      width: 48.821174201%; }
+      .element-area .grid .grid--half:last-child {
+        margin-right: 0; }
+      .element-area .grid .grid--half p {
+        color: #FFF; }

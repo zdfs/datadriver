@@ -12,4 +12,19 @@
 	border: 1px solid #DDD;
 	background: #EEE;
 	padding: 1rem;
+
+	.grid {
+		background-color: #D64F61;
+		@include outer-container();
+		@include pad();
+
+		.grid--half {
+			background-color: scale-color(#D64F61, $lightness: -20%);
+			padding: 1rem;
+			@include span-columns(6);
+
+			p { color: #FFF; }
+		}
+
+	}
 }
