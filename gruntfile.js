@@ -228,11 +228,15 @@ var gruntConfig = {
 		},
 
 		duckduckgo: {
-			tests: ['test/duckduckgo/multiple.js']
+			tests: ['test/duckduckgo/*.js']
 		},
 
 		actions: {
 			tests: ['test/actions/*.js']
+		},
+
+		verify: {
+			tests: ['test/verify/*.js']
 		},
 
 		browserstack: {

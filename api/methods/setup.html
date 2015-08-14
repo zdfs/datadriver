@@ -4,10 +4,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <title>Datadriver</title>
-  <link rel="icon" type="image/x-icon" href="../public/images/favicon.ico">
-  <link rel="stylesheet" href="../public/styles/min/api.css">
+  <link rel="icon" type="image/x-icon" href="../../public/images/favicon.ico">
+  <link rel="stylesheet" href="../../public/styles/min/api.css">
 </head>
-<body data-path="../public/">
+<body data-path="../../public/">
   <header role="banner" class="centered-navigation">
     <div class="centered-navigation-wrapper"><a class="mobile-logo">
         <div data-grunticon-embed class="icon-speed"></div></a><a id="js-centered-navigation-mobile-menu" class="centered-navigation-mobile-menu">MENU</a>
@@ -85,83 +85,19 @@
           </div>
         </div>
         <div class="flex-box">
-          <h2 class="flex-title">Datadriver API documentation</h2>
+          <h2 class="flex-title">setup()</h2>
           <p>
-            Welcome to the documentation for the datadriver API. Please note that <b>this API is not complete</b>. We don't
-            have any of the Appium bindings, for example, as well as many other methods. This project is a work in progress.
+            The <code>setup()</code> method should never be called directly. We'll probably make this method private in the
+            future, but we'll document what it does so you know what's going on.
           </p>
           <p>
-            You should also be aware that you should consider this software in beta. Naming conventions, how things work
-            under the hood and API additions will all be considered par for the course until we hit 1.0. If you have an
-            issue or a request, you can <a href="https://github.com/zdfs/datadriver/issues">file it here</a>.
+            First, we actually call this method for you when you require the datadriver module. What it does is expose
+            the <a href="http://chaijs.com">Chai.js</a> assertion library with
+            <a href="http://chaijs.com/plugins/chai-as-promised">promises support</a>. We expose the <code>should()</code>
+            <a href="http://chaijs.com/guide/styles/#should">interface</a> and create a custom
+            <a href="http://webdriver.io/guide/usage/customcommands.html">WebdriverIO command</a> that allows us to have an
+            action that stores information to LocalStorage.
           </p>
-          <hr>
-          <h3 class="flex-title">Test output</h3>
-          <p>
-            Please note that the default output of Mocha's test runner treats everything like a test. If you click a button,
-            type some text in to a field (basically any executable action), they will be treated like "tests" and increase
-            your test count though no asserts are actually happening. For example:
-          </p>
-          <pre class="language-bash line-numbers"><code>$ grunt webdriver:home --url=http://duckduckgo.com
-Running "webdriver:home" (webdriver) task
-Duck Duck Go Test
-  Rendered in a small viewport
-    Search for DataDriver.io
-      ✓ executing "setValue" on "#search_form_input_homepage".
-      ✓ clicking the "#search_button_homepage" element.
-      ✓ the "title" of this page should equal "Datadriver.io at DuckDuckGo"
-<br>
-3 passing (3s)</code></pre>
-          <p>
-            If this bothers you, datadriver provides a custom Mocha reporter and Mocha UI that will give better feedback.
-            To enable it, just modify your <code>gruntfile.js</code> to include the <code>reporter</code> and <code>ui</code>
-            options.
-          </p>
-          <pre class="language-javascript line-numbers"><code>var gruntConfig = {
-  webdriver: {
-    options: {
-      desiredCapabilities: {
-        browserName: 'chrome',
-        name: 'Documentation Tests',
-        viewports: {
-          small: {
-            width: 430,
-            height: 1000
-          },
-          medium: {
-            width: 700,
-            height: 1000
-          },
-          large: {
-            width: 1280,
-            height: 1000
-          }
-        }
-      },
-      reporter: require('datadriver/lib/support/reporter'),
-      ui: 'ddui'
-    },
-    home: {
-      tests: ['tests/*.js']
-    }
-  }
-};
-<br>
-module.exports = function(grunt) {
-  grunt.initConfig(gruntConfig);
-  grunt.loadNpmTasks('grunt-webdriver');
-};</code></pre>
-          <p>Your test output should look something like the following (all API examples will use this format):</p>
-          <pre class="language-bash line-numbers"><code>$ grunt webdriver:home --url=http://duckduckgo.com
-Running "webdriver:home" (webdriver) task
-Duck Duck Go Test
-  Rendered in a small viewport
-    Search for DataDriver.io
-      ⚙ executing "setValue" on "#search_form_input_homepage".
-      ⚙ clicking the "#search_button_homepage" element.
-      ✓ the "title" of this page should equal "Datadriver.io at DuckDuckGo"
-<br>
-1 passing (3s)</code></pre>
         </div>
       </div>
     </div>
@@ -177,5 +113,5 @@ Duck Duck Go Test
       </ul>
     </div>
   </footer>
-  <script src="../public/scripts/min/app.js"></script>
+  <script src="../../public/scripts/min/app.js"></script>
 </body>

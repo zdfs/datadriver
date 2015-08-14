@@ -4,10 +4,10 @@ head
 	meta(name="viewport", content="width=device-width, initial-scale=1.0")
 	meta(name="robots", content="noindex, nofollow")
 	title Datadriver
-	link(rel="icon", type="image/x-icon", href="../#{path}images/favicon.ico")
-	link(rel="stylesheet", href="../#{path}styles/min/api.css")
+	link(rel="icon", type="image/x-icon", href="../../#{path}images/favicon.ico")
+	link(rel="stylesheet", href="../../#{path}styles/min/api.css")
 	block css
-body(data-path="../#{path}")
+body(data-path="../../#{path}")
 	include ../common/main-nav
 	.section.section--light
 		.section--container
@@ -17,5 +17,5 @@ body(data-path="../#{path}")
 				.flex-box
 					block main
 	include ../common/footer
-	script(src="../#{path}scripts/min/app.js")
+	script(src="../../#{path}scripts/min/app.js")
 	block scripts

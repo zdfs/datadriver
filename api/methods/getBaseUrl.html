@@ -4,10 +4,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <title>Datadriver</title>
-  <link rel="icon" type="image/x-icon" href="../public/images/favicon.ico">
-  <link rel="stylesheet" href="../public/styles/min/api.css">
+  <link rel="icon" type="image/x-icon" href="../../public/images/favicon.ico">
+  <link rel="stylesheet" href="../../public/styles/min/api.css">
 </head>
-<body data-path="../public/">
+<body data-path="../../public/">
   <header role="banner" class="centered-navigation">
     <div class="centered-navigation-wrapper"><a class="mobile-logo">
         <div data-grunticon-embed class="icon-speed"></div></a><a id="js-centered-navigation-mobile-menu" class="centered-navigation-mobile-menu">MENU</a>
@@ -85,83 +85,81 @@
           </div>
         </div>
         <div class="flex-box">
-          <h2 class="flex-title">Datadriver API documentation</h2>
+          <h2 class="flex-title">getBaseUrl()</h2>
+          <p>When you run a test from the command line, like this for example:</p>
+          <pre class="language-bash line-numbers"><code>grunt webdriver --url=http://duckduckgo.com</code></pre>
           <p>
-            Welcome to the documentation for the datadriver API. Please note that <b>this API is not complete</b>. We don't
-            have any of the Appium bindings, for example, as well as many other methods. This project is a work in progress.
+            You're passing the url you want your tests to begin from to the <code>getBaseUrl()</code> function, which is
+            exposed to you for use within your tests. Let's look at our DuckDuckGo example again, but this time, we're going
+            to have the test go to the <code>/about</code> page and verify that a logo exists.
           </p>
+          <pre class="language-javascript line-numbers"><code>'use strict';
+<br>
+var drive = require('datadriver');
+<br>
+drive.go({
+<br>
+  "config": {
+    "description": "Duck Duck Go Test",
+    "url": "about",
+    "suites": [
+      {
+        "description": "Verify DuckDuckGo logo",
+        "tests": ["duck-duck-go-about"],
+        "viewports": { large: true }
+      }
+    ]
+  },
+<br>
+  "duck-duck-go-about": {
+    "steps": [
+      {
+        "selector": ".timeline__logo",
+        "verify": [
+          {
+            "method": "verifyAttribute",
+            "asserts": {
+              "src": drive.getBaseUrl() + "assets/dax-alt.svg"
+            }
+          }
+        ]
+      }
+    ]
+  }
+<br>
+});</code></pre>
+          <p>When I run the script from the command line:</p>
+          <pre class="language-bash line-numbers"><code>grunt webdriver --url=https://duckduckgo.com</code></pre>
+          <p>I get the following output.</p>
+          <pre class="language-bash line-numbers"><code>$ grunt webdriver:duckduckgo --url=https://duckduckgo.com
+Running "webdriver:duckduckgo" (webdriver) task
+Duck Duck Go Test
+  Rendered in a large viewport
+    Verify DuckDuckGo logo
+      ✓ the "src" attribute of ".timeline__logo" should equal "https://duckduckgo.com/assets/dax-alt.svg"
+<br>
+1 passing</code></pre>
+          <hr>
+          <h2>Some things to note</h2>
           <p>
-            You should also be aware that you should consider this software in beta. Naming conventions, how things work
-            under the hood and API additions will all be considered par for the course until we hit 1.0. If you have an
-            issue or a request, you can <a href="https://github.com/zdfs/datadriver/issues">file it here</a>.
+            When you look at the <code>config</code> object of the test above, you'll notice that there is a new
+            <code>url</code> key. Since the url we're looking for is <code>https://duckduckgo/about</code>, all we need to
+            pass to the config is a simple string, <code>"about"</code>. Datadriver automatically gives you the base url,
+            which to reiterate, is only the url you passed in via the command line with the <code>--url</code> option.
+            The <code>getBaseUrl()</code> method will always return a url with a <code>/</code> at the end.
           </p>
           <hr>
-          <h3 class="flex-title">Test output</h3>
           <p>
-            Please note that the default output of Mocha's test runner treats everything like a test. If you click a button,
-            type some text in to a field (basically any executable action), they will be treated like "tests" and increase
-            your test count though no asserts are actually happening. For example:
+            The second thing you can do with <code>getBaseUrl()</code> is using the method in an actual test. When we test
+            for the <code>src</code> attribute of an <code>img</code>, like we did above, Selenium is always going to return
+            an absolute url. If we want to match it exactly (which is the default mode for our assertions), we can use
+            <code>getBaseUrl()</code> to do exactly that. You can see an example of that in the test written out above.
           </p>
-          <pre class="language-bash line-numbers"><code>$ grunt webdriver:home --url=http://duckduckgo.com
-Running "webdriver:home" (webdriver) task
-Duck Duck Go Test
-  Rendered in a small viewport
-    Search for DataDriver.io
-      ✓ executing "setValue" on "#search_form_input_homepage".
-      ✓ clicking the "#search_button_homepage" element.
-      ✓ the "title" of this page should equal "Datadriver.io at DuckDuckGo"
-<br>
-3 passing (3s)</code></pre>
+          <hr>
           <p>
-            If this bothers you, datadriver provides a custom Mocha reporter and Mocha UI that will give better feedback.
-            To enable it, just modify your <code>gruntfile.js</code> to include the <code>reporter</code> and <code>ui</code>
-            options.
+            If you don't use the <code>--url</code> option from the command line, we assume that you're trying to find a
+            local development server, so we default <code>getBaseUrl()</code> to <code>http://localhost:3000</code>.
           </p>
-          <pre class="language-javascript line-numbers"><code>var gruntConfig = {
-  webdriver: {
-    options: {
-      desiredCapabilities: {
-        browserName: 'chrome',
-        name: 'Documentation Tests',
-        viewports: {
-          small: {
-            width: 430,
-            height: 1000
-          },
-          medium: {
-            width: 700,
-            height: 1000
-          },
-          large: {
-            width: 1280,
-            height: 1000
-          }
-        }
-      },
-      reporter: require('datadriver/lib/support/reporter'),
-      ui: 'ddui'
-    },
-    home: {
-      tests: ['tests/*.js']
-    }
-  }
-};
-<br>
-module.exports = function(grunt) {
-  grunt.initConfig(gruntConfig);
-  grunt.loadNpmTasks('grunt-webdriver');
-};</code></pre>
-          <p>Your test output should look something like the following (all API examples will use this format):</p>
-          <pre class="language-bash line-numbers"><code>$ grunt webdriver:home --url=http://duckduckgo.com
-Running "webdriver:home" (webdriver) task
-Duck Duck Go Test
-  Rendered in a small viewport
-    Search for DataDriver.io
-      ⚙ executing "setValue" on "#search_form_input_homepage".
-      ⚙ clicking the "#search_button_homepage" element.
-      ✓ the "title" of this page should equal "Datadriver.io at DuckDuckGo"
-<br>
-1 passing (3s)</code></pre>
         </div>
       </div>
     </div>
@@ -177,5 +175,5 @@ Duck Duck Go Test
       </ul>
     </div>
   </footer>
-  <script src="../public/scripts/min/app.js"></script>
+  <script src="../../public/scripts/min/app.js"></script>
 </body>

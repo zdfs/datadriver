@@ -1,0 +1,99 @@
+extend ../../layouts/nested-2
+block main
+	h2.flex-title verify()
+	.flash-notice
+		span Be advised that the name of this function could possibly change.
+	p
+		| The <code>verify()</code> function is responsible for sorting through the <code>steps</code> of a test object
+		| and executing the actions or verifying the assertions of a particular step. You can have both a unique
+		| <code>execute</code> and a unique <code>verify</code> key in the same step. You <i>cannot</i> have multiple
+		| <code>execute</code> and <code>verify</code> keys in the same step.
+	p
+		| Here is an example of calling <code>verify()</code> directly (though we recommend using <code>go()</code>
+		| instead). If you don't need all the structure of the <code>go()</code> method, the <code>verify()</code>
+		| method is a great choice to just execute the steps you need.
+	pre.language-javascript.line-numbers
+		code
+			| 'use strict';
+			| <br>
+			| var drive = require('datadriver');
+			| <br>
+			| drive.verify({
+			| <br>
+			|   "steps": [
+			| <br>
+			|     // We're not certain that we'll be on the correct page
+			|     // when we execute this step, so let's make sure we're
+			|     // where we need to be.
+			| <br>
+			|     {
+			|       "execute": [
+			|         {
+			|           "action": "redirect",
+			|           "page": "api/methods/verify.html"
+			|         }
+			|       ]
+			|     },
+			| <br>
+			|     // Let's grab the first link in the sidebar, verify the color
+			|     // is correct, then hover over (since it's the same selector)
+			|     // and verify the color changes to something we expect. After
+			|     // we're done verifying the link colors, let's click the link
+			|     // with an execute action.
+			| <br>
+			|     {
+			|       "selector": "a[href*=\"executeAction.html\"]",
+			|       "verify": [
+			|         {
+			|           "method": "verifyCssProperty",
+			|           "asserts": {
+			|             "color": "rgba(213,72,90,1)"
+			|           },
+			|           "then": [
+			|             {
+			|               "hover": {
+			|                 "asserts": {
+			|                   "color": "rgba(170,39,56,1)"
+			|                 }
+			|               }
+			|             }
+			|           ]
+			|         }
+			|       ],
+			|       "execute": [
+			|         { "action": "click" }
+			|       ]
+			|     },
+			| <br>
+			|     // With this new step, we're going to verify the url is actually
+			|     // the executeAction() documentation page.
+			| <br>
+			|     {
+			|       "verify": [
+			|         {
+			|           "method": "verifyUrl",
+			|           "asserts": {
+			|             "url": drive.getBaseUrl() + "api/methods/executeAction.html"
+			|           }
+			|         }
+			|       ]
+			|     }
+			| <br>
+			|   ]
+			| <br>
+			| });
+	p This is the output you will get:
+	pre.language-javascript.line-numbers
+		code
+			| $ grunt webdriver:verify --url=http://datadriver.io
+			| Running "webdriver:verify" (webdriver) task
+			| <br>
+			|   ⚙ redirecting to http://datadriver.io/api/methods/verify.html
+			|   ✓ the "color" property of "a[href*="executeAction.html"]" should equal "rgba(213,72,90,1)"
+			|   ⚙ moving to the center of the "a[href*="executeAction.html"]" element.
+			|   ⚙ pausing on "a[href*="executeAction.html"]" for 350 milliseconds.
+			|   ✓ the "color" property of "a[href*="executeAction.html"]" should equal "rgba(170,39,56,1)"
+			|   ⚙ clicking the "a[href*="executeAction.html"]" element.
+			|   ✓ the "url" of this page is should equal "http://datadriver.io/api/methods/executeAction.html"
+			| <br>
+			|   3 passing

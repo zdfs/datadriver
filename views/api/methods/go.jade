@@ -1,4 +1,4 @@
-extend ../layouts/nested-1
+extend ../../layouts/nested-2
 block main
 	h2.flex-title go()
 	p
@@ -13,7 +13,7 @@ block main
 	h2.flex-title A good data structure
 	p
 		| Let's break down what a good data structure looks like. As a reference, let's look at our DuckDuckGo test.
-		include ../snippets/default-test
+		include ../../snippets/default-test
 	p
 		| As you can see from the code example above, the <code>drive.go()</code> method takes an object with a particular
 		| structure. In this structure we have two keys, one is <code>"config"</code> (and it always needs to be named
@@ -22,20 +22,20 @@ block main
 	hr
 	h2.flex-title Let's talk about the "config"
 	p Here is the code we're talking about for reference:
-	include ../snippets/config-object
+	include ../../snippets/config-object
 	p
 		| As mentioned before, the <code>"config"</code> object must always be named "config". This object sets up our
 		| <a href="https://mochajs.org/#interfaces">BDD</a> interface, allowing our tests to execute in a logical manner.
 		| It's important to know that we don't have hooks in to everything the interface supports, as the <code>go()</code>
 		| method handles all of this for you, but in short, the BDD interface allows for the output you've been seeing in
 		| our examples.
-	include ../snippets/default-output
+	include ../../snippets/default-output
 	p
 		| If you look at the test itself and the output you're given, you can see that there's a pretty good match up.
 		| So let's walk through the <code>"config"</code> object.
 	ul
 		li
-			include ../snippets/config-object
+			include ../../snippets/config-object
 		li
 			| <b>"description"</b>: This is the description of our test file. If I'm testing various elements on a page, I'll
 			| give the description something like "DuckDuckGo Homepage Elements". If it's a step-by-step flow, I'll give the
@@ -61,7 +61,7 @@ block main
 					| test objects and arbitrarily string them together. For example, we could include another test object that
 					| verifies a logo on the DuckDuckGo about page and string it together in our suite. Let's take a look at
 					| what that could look like.
-					include ../snippets/multiple-test-objects
+					include ../../snippets/multiple-test-objects
 					| This should give us the following output:
 					pre.language-bash.line-numbers
 						code
