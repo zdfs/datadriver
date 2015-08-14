@@ -33,3 +33,17 @@ drive.verify({
   ]
 
 });
+
+drive.verifyAttribute({
+	selector: '#input1',
+	assertKey: 'class',
+	assert: 'test',
+	mode: [ 'equal' ]
+});
+
+drive.verifyAttribute({
+  selector: '#input1',
+  assertKey: 'class',
+  assert: 'error',
+  mode: [ 'not', 'equal' ]
+});

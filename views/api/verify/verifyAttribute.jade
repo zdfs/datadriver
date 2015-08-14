@@ -60,8 +60,7 @@ block main
 			|     }
 			|   ]
 			| }
-	p
-		| In fact, here is a test that we have for the <code>input</code> element on this page.
+	p In fact, here is a test that we have for the <code>input</code> element on this page.
 	pre.language-javascript.line-numbers
 		code
 			| 'use strict';
@@ -95,3 +94,52 @@ block main
 			|     }
 			|   ]
 			| });
+	p And this is our expected output:
+	pre.language-bash.line-numbers
+		code
+			| $ grunt webdriver:verify --url=http://datadriver.io
+			| Running "webdriver:verify" (webdriver) task
+			| <br>
+			| ⚙ redirecting to http://datadriver.io/api/verify/verifyAttribute.html
+			| ✓ the "disabled" attribute of "#input1" should equal "null"
+			| ✓ the "required" attribute of "#input1" should equal "true"
+			| ✓ the "data-type" attribute of "#input1" should equal "test"
+			| ✓ the "class" attribute of "#input1" should equal "test"
+			| ✓ the "type" attribute of "#input1" should equal "text"
+			| <br>
+			| 5 passing
+	hr
+	h2.flex-title Call verifyAttribute() directly
+	p
+		| You can also call <code>verifyAttribute()</code> directly in your tests for even greater flexibility. The
+		| method takes an object with four keys. For example, this test is verifying the <code>class</code> attribute
+		| on the <code>#input1</code> element (visible on this page).
+	pre.language-javascript.line-numbers
+		code
+			| 'use strict';
+			| <br>
+			| var drive = require('datadriver');
+			| <br>
+			| drive.verifyAttribute({
+			|   selector: '#input1',
+			|   assertKey: 'class',
+			|   assert: 'test',
+			|   mode: [ 'equal' ]
+			| });
+	p
+		| The <code>mode</code> key is an array because we can pass multiple ChaiJS modes to our test. Modes should be
+		| read with a prefix of <i>should</i>, since we're using the <code>should</code> interface from ChaiJS. For example,
+		| if we wanted to assert that the <code>class</code> was not equal to <code>"error"</code>, then we could do this:
+	pre.language-javascript.line-numbers
+		code
+			| 'use strict';
+			| <br>
+			| var drive = require('datadriver');
+			| <br>
+			| drive.verifyAttribute({
+			|   selector: '#input1',
+			|   assertKey: 'class',
+			|   assert: 'error',
+			|   mode: [ 'not', 'equal' ]
+			| });
+	p We can also set the <a href="/api/extras/assert-modes/">assert mode</a> in our data structures.
