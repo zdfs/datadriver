@@ -946,3 +946,9 @@ pre[class*='language-'][data-language]::before {
         .footer .footer-content .footer-secondary-links ul.footer-social img:focus,
         .footer .footer-content .footer-secondary-links ul.footer-social img:hover {
           opacity: 1; }
+
+.element-area {
+  margin: 2rem 0;
+  border: 1px solid #DDD;
+  background: #EEE;
+  padding: 1rem; }

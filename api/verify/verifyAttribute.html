@@ -85,100 +85,96 @@
           </div>
         </div>
         <div class="flex-box">
-          <h2 class="flex-title">verify()</h2>
-          <div class="flash-notice"><span>Be advised that the name of this function could possibly change.</span></div>
+          <h2 class="flex-title">verifyAttribute()</h2>
           <p>
-            The <code>verify()</code> function is responsible for sorting through the <code>steps</code> of a test object
-            and executing the actions or verifying the assertions of a particular step. You can have both a unique
-            <code>execute</code> and a unique <code>verify</code> key in the same step. You <i>cannot</i> have multiple
-            <code>execute</code> and <code>verify</code> keys in the same step.
+            The <code>verifyAttribute()</code> method maps directly to
+            <a href="http://webdriver.io/api/property/getAttribute.html">getAttribute() method</a> on WebdriverIO.
           </p>
           <p>
-            Here is an example of calling <code>verify()</code> directly (though we recommend using <code>go()</code>
-            instead). If you don't need all the structure of the <code>go()</code> method, the <code>verify()</code>
-            method is a great choice to just execute the steps you need.
+            The attribute of the HTML element you're looking for will always be the assert key in your <code>"asserts"</code>
+            object. Consider the following element (any HTML element will work, we chose an <code>input</code>):
           </p>
+          <div class="element-area">
+            <input id="input1" required type="text" data-type="test" class="test">
+            <pre class="language-markup line-numbers"><code>&lt;input class="test" id="input1" required type="text" data-type="test" /&gt;</code></pre>
+          </div>
+          <p>
+            if you wanted to verify that the <code>input</code> field had the type of <code>text</code>, you could do the
+            following:
+          </p>
+          <pre class="language-javascript line-numbers"><code>{
+  "selector": "#input1",
+  "verify": [
+    {
+      "method": "verifyAttribute",
+      "asserts": {
+        "type": "text"
+      }
+    }
+  ]
+}</code></pre>
+          <p>
+            Let's say that we wanted to make sure the <code>disabled</code> attribute doesn't exist on our input. We could
+            make sure that was the case with:
+          </p>
+          <pre class="language-javascript line-numbers"><code>{
+  "selector": "#input1",
+  "verify": [
+    {
+      "method": "verifyAttribute",
+      "asserts": {
+        "disabled": null
+      }
+    }
+  ]
+}</code></pre>
+          <p>
+            We can also test for boolean HTML attributes, so I can make sure that <code>input</code> has a
+            <code>required</code> attribute on it.
+          </p>
+          <pre class="language-javascript line-numbers"><code>{
+  "selector": "#input1",
+  "verify": [
+    {
+      "method": "verifyAttribute",
+      "asserts": {
+        "required": true
+      }
+    }
+  ]
+}</code></pre>
+          <p>In fact, here is a test that we have for the <code>input</code> element on this page.</p>
           <pre class="language-javascript line-numbers"><code>'use strict';
 <br>
 var drive = require('datadriver');
 <br>
 drive.verify({
-<br>
   "steps": [
-<br>
-    // We're not certain that we'll be on the correct page
-    // when we execute this step, so let's make sure we're
-    // where we need to be.
-<br>
     {
       "execute": [
         {
           "action": "redirect",
-          "page": "api/methods/verify.html"
+          "page": "api/verify/verifyAttribute.html"
         }
       ]
     },
-<br>
-    // Let's grab the first link in the sidebar, verify the color
-    // is correct, then hover over (since it's the same selector)
-    // and verify the color changes to something we expect. After
-    // we're done verifying the link colors, let's click the link
-    // with an execute action.
-<br>
     {
-      "selector": "a[href*=\"executeAction.html\"]",
+      "selector": "#input1",
       "verify": [
         {
-          "method": "verifyCssProperty",
+          "method": "verifyAttribute",
           "asserts": {
-            "color": "rgba(213,72,90,1)"
-          },
-          "then": [
-            {
-              "hover": {
-                "asserts": {
-                  "color": "rgba(170,39,56,1)"
-                }
-              }
-            }
-          ]
-        }
-      ],
-      "execute": [
-        { "action": "click" }
-      ]
-    },
-<br>
-    // With this new step, we're going to verify the url is actually
-    // the executeAction() documentation page.
-<br>
-    {
-      "verify": [
-        {
-          "method": "verifyUrl",
-          "asserts": {
-            "url": drive.getBaseUrl() + "api/methods/executeAction.html"
+            "disabled": null,
+            "required": true,
+            "data-type": "test",
+            "class": "test",
+            "type": "text"
           }
         }
       ]
     }
-<br>
   ]
-<br>
 });</code></pre>
-          <p>This is the output you will get:</p>
-          <pre class="language-javascript line-numbers"><code>$ grunt webdriver:verify --url=http://datadriver.io
-Running "webdriver:verify" (webdriver) task
-<br>
-  ⚙ redirecting to http://datadriver.io/api/methods/verify.html
-  ✓ the "color" property of "a[href*="executeAction.html"]" should equal "rgba(213,72,90,1)"
-  ⚙ moving to the center of the "a[href*="executeAction.html"]" element.
-  ⚙ pausing on "a[href*="executeAction.html"]" for 350 milliseconds.
-  ✓ the "color" property of "a[href*="executeAction.html"]" should equal "rgba(170,39,56,1)"
-  ⚙ clicking the "a[href*="executeAction.html"]" element.
-  ✓ the "url" of this page is should equal "http://datadriver.io/api/methods/executeAction.html"
-<br>
-  3 passing</code></pre>
         </div>
       </div>
     </div>

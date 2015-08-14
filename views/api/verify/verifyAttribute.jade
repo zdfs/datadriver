@@ -1,0 +1,97 @@
+extend ../../layouts/nested-2
+block main
+	h2.flex-title verifyAttribute()
+	p
+		| The <code>verifyAttribute()</code> method maps directly to
+		| <a href="http://webdriver.io/api/property/getAttribute.html">getAttribute() method</a> on WebdriverIO.
+	p
+		| The attribute of the HTML element you're looking for will always be the assert key in your <code>"asserts"</code>
+		| object. Consider the following element (any HTML element will work, we chose an <code>input</code>):
+	.element-area
+		input.test(id="input1", required, type="text", data-type="test")
+		pre.language-markup.line-numbers
+			code
+				| &lt;input class="test" id="input1" required type="text" data-type="test" /&gt;
+	p
+		| if you wanted to verify that the <code>input</code> field had the type of <code>text</code>, you could do the
+		| following:
+	pre.language-javascript.line-numbers
+		code
+			| {
+			|   "selector": "#input1",
+			|   "verify": [
+			|     {
+			|       "method": "verifyAttribute",
+			|       "asserts": {
+			|         "type": "text"
+			|       }
+			|     }
+			|   ]
+			| }
+	p
+		| Let's say that we wanted to make sure the <code>disabled</code> attribute doesn't exist on our input. We could
+		| make sure that was the case with:
+	pre.language-javascript.line-numbers
+		code
+			| {
+			|   "selector": "#input1",
+			|   "verify": [
+			|     {
+			|       "method": "verifyAttribute",
+			|       "asserts": {
+			|         "disabled": null
+			|       }
+			|     }
+			|   ]
+			| }
+	p
+		| We can also test for boolean HTML attributes, so I can make sure that <code>input</code> has a
+		| <code>required</code> attribute on it.
+	pre.language-javascript.line-numbers
+		code
+			| {
+			|   "selector": "#input1",
+			|   "verify": [
+			|     {
+			|       "method": "verifyAttribute",
+			|       "asserts": {
+			|         "required": true
+			|       }
+			|     }
+			|   ]
+			| }
+	p
+		| In fact, here is a test that we have for the <code>input</code> element on this page.
+	pre.language-javascript.line-numbers
+		code
+			| 'use strict';
+			| <br>
+			| var drive = require('datadriver');
+			| <br>
+			| drive.verify({
+			|   "steps": [
+			|     {
+			|       "execute": [
+			|         {
+			|           "action": "redirect",
+			|           "page": "api/verify/verifyAttribute.html"
+			|         }
+			|       ]
+			|     },
+			|     {
+			|       "selector": "#input1",
+			|       "verify": [
+			|         {
+			|           "method": "verifyAttribute",
+			|           "asserts": {
+			|             "disabled": null,
+			|             "required": true,
+			|             "data-type": "test",
+			|             "class": "test",
+			|             "type": "text"
+			|           }
+			|         }
+			|       ]
+			|     }
+			|   ]
+			| });
