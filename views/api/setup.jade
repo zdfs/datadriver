@@ -1,0 +1,13 @@
+extend ../layouts/nested-1
+block main
+	h2.flex-title setup()
+	p
+		| The <code>setup()</code> method should never be called directly. We'll probably make this method private in the
+		| future, but we'll document what it does so you know what's going on.
+	p
+		| First, we actually call this method for you when you require the datadriver module. What it does is expose
+		| the <a href="http://chaijs.com">Chai.js</a> assertion library with
+		| <a href="http://chaijs.com/plugins/chai-as-promised">promises support</a>. We expose the <code>should()</code>
+		| <a href="http://chaijs.com/guide/styles/#should">interface</a> and create a custom
+		| <a href="http://webdriver.io/guide/usage/customcommands.html">WebdriverIO command</a> that allows us to have an
+		| action that stores information to LocalStorage.
