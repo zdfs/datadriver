@@ -190,7 +190,7 @@ Running "webdriver:verify" (webdriver) task
           <hr>
           <h2 class="flex-title">Call verifyAttribute() directly</h2>
           <p>
-            You can also call <code>verifyAttribute()</code> directly in your tests for even greater flexibility. The
+            You can also call <code>verifyAttribute()</code> directly in your tests for even more granularity. The
             method takes an object with four keys. For example, this test is verifying the <code>class</code> attribute
             on the <code>#input1</code> element (visible on this page).
           </p>
@@ -207,7 +207,8 @@ drive.verifyAttribute({
           <p>
             The <code>mode</code> key is an array because we can pass multiple ChaiJS modes to our test. Modes should be
             read with a prefix of <i>should</i>, since we're using the <code>should</code> interface from ChaiJS. For example,
-            if we wanted to assert that the <code>class</code> was not equal to <code>"error"</code>, then we could do this:
+            if we wanted to assert that the <code>class</code> should not equal to <code>"error"</code>, then we could do
+            this:
           </p>
           <pre class="language-javascript line-numbers"><code>'use strict';
 <br>

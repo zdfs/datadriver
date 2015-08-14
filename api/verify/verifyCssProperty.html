@@ -86,6 +86,150 @@
         </div>
         <div class="flex-box">
           <h2 class="flex-title">verifyCssProperty()</h2>
+          <p>
+            The <code>verifyCssProperty()</code> method maps directly to
+            <a href="http://webdriver.io/api/property/getCssProperty.html">getCssProperty() method</a> on WebdriverIO.
+          </p>
+          <p>
+            The CSS property of the HTML element you're looking for will always be the assert key in your
+            <code>"asserts"</code> object. Consider the following element (any HTML element will work, we chose
+            a <code>button</code>):
+          </p>
+          <div class="element-area">
+            <button id="button1" class="button">Hi!</button>
+            <pre class="language-markup line-numbers"><code>&lt;button class="button" id="button1"&gt;Hi!&lt;/button&gt;</code></pre>
+          </div>
+          <p>
+            Testing CSS properties can be a hassle and maybe that's something you're not really in to, or maybe it was
+            always too cumbersome. With datadriver, this becomes a lot easier. As an example, I'm going to test everything
+            I can about this button (though this is probably a bit overkill, tbh).
+          </p>
+          <pre class="language-javascript line-numbers"><code>'use strict';
+<br>
+var drive = require('datadriver');
+<br>
+drive.verify({
+<br>
+  "steps": [
+    {
+      "execute": [
+        {
+          "action": "redirect",
+          "page": "api/verify/verifyCssProperty.html"
+        }
+      ]
+    },
+    {
+      "selector": "#button1",
+      "verify": [
+        {
+          "method": "verifyCssProperty",
+          "asserts": {
+            "background-color": "rgba(213,72,90,1)",
+            "border-top-left-radius": 3,
+            "border-top-right-radius": 3,
+            "border-bottom-right-radius": 3,
+            "border-bottom-left-radius": 3,
+            "color": "rgba(255,255,255,1)",
+            "cursor": "pointer",
+            "display": "inline-block",
+            "padding-bottom": 12,
+            "padding-top": 12,
+            "padding-left": 16,
+            "padding-right": 16
+          },
+          "then": [
+            {
+              "hover": {
+                "asserts": {
+                  "background-color": "rgba(170,39,56,1)",
+                  "border-top-left-radius": 3,
+                  "border-top-right-radius": 3,
+                  "border-bottom-right-radius": 3,
+                  "border-bottom-left-radius": 3,
+                  "color": "rgba(255,255,255,1)",
+                  "cursor": "pointer",
+                  "display": "inline-block",
+                  "padding-bottom": 12,
+                  "padding-top": 12,
+                  "padding-left": 16,
+                  "padding-right": 16
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+});</code></pre>
+          <p>And this is our expected output:</p>
+          <pre class="language-bash line-numbers"><code>$ grunt webdriver:verify --url=http://datadriver.io
+Running "webdriver:verify" (webdriver) task
+<br>
+⚙ redirecting to http://datadriver.io/api/verify/verifyCssProperty.html
+✓ the "background-color" property of "#button1" should equal "rgba(213,72,90,1)"
+✓ the "border-top-left-radius" property of "#button1" should equal "3"
+✓ the "border-top-right-radius" property of "#button1" should equal "3"
+✓ the "border-bottom-right-radius" property of "#button1" should equal "3"
+✓ the "border-bottom-left-radius" property of "#button1" should equal "3"
+✓ the "color" property of "#button1" should equal "rgba(255,255,255,1)"
+✓ the "cursor" property of "#button1" should equal "pointer"
+✓ the "display" property of "#button1" should equal "inline-block"
+✓ the "padding-bottom" property of "#button1" should equal "12"
+✓ the "padding-top" property of "#button1" should equal "12"
+✓ the "padding-left" property of "#button1" should equal "16"
+✓ the "padding-right" property of "#button1" should equal "16"
+⚙ moving to the center of the "#button1" element.
+⚙ pausing on "#button1" for 350 milliseconds.
+✓ the "background-color" property of "#button1" should equal "rgba(170,39,56,1)"
+✓ the "border-top-left-radius" property of "#button1" should equal "3"
+✓ the "border-top-right-radius" property of "#button1" should equal "3"
+✓ the "border-bottom-right-radius" property of "#button1" should equal "3"
+✓ the "border-bottom-left-radius" property of "#button1" should equal "3"
+✓ the "color" property of "#button1" should equal "rgba(255,255,255,1)"
+✓ the "cursor" property of "#button1" should equal "pointer"
+✓ the "display" property of "#button1" should equal "inline-block"
+✓ the "padding-bottom" property of "#button1" should equal "12"
+✓ the "padding-top" property of "#button1" should equal "12"
+✓ the "padding-left" property of "#button1" should equal "16"
+✓ the "padding-right" property of "#button1" should equal "16"
+<br>
+24 passing</code></pre>
+          <hr>
+          <h2 class="flex-title">Call verifyCssProperty() directly</h2>
+          <p>
+            You can also call <code>verifyCssProperty()</code> directly in your tests for even more granularity. The
+            method takes an object with four keys. For example, this test is verifying the <code>background-color</code>
+            attribute on the <code>#button1</code> element (visible on this page).
+          </p>
+          <pre class="language-javascript line-numbers"><code>'use strict';
+<br>
+var drive = require('datadriver');
+<br>
+drive.verifyCssProperty({
+  selector: '#button1',
+  assertKey: 'background-color',
+  assert: 'rgba(213,72,90,1)',
+  mode: [ 'equal' ]
+});</code></pre>
+          <p>
+            The <code>mode</code> key is an array because we can pass multiple ChaiJS modes to our test. Modes should be
+            read with a prefix of <i>should</i>, since we're using the <code>should</code> interface from ChaiJS. For example,
+            if we wanted to assert that the <code>border-top-left-radius</code> should be at least <code>3</code>, then we
+            could do this:
+          </p>
+          <pre class="language-javascript line-numbers"><code>'use strict';
+<br>
+var drive = require('datadriver');
+<br>
+drive.verifyCssProperty({
+  selector: '#button1',
+  assertKey: 'border-top-left-radius',
+  assert: '3',
+  mode: [ 'be', 'at', 'least' ]
+});</code></pre>
+          <p>We can also set the <a href="/api/extras/assert-modes/">assert mode</a> in our data structures.</p>
         </div>
       </div>
     </div>
