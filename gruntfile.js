@@ -236,7 +236,7 @@ var gruntConfig = {
 		},
 
 		verify: {
-			tests: ['test/verify/*.js']
+			tests: ['test/verify/verifyCssProperty.js']
 		},
 
 		browserstack: {

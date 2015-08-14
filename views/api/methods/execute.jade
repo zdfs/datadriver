@@ -1,10 +1,8 @@
 extend ../../layouts/nested-2
 block main
-	h2.flex-title executeAction()
-	.flash-notice
-		span Be advised that the name of this function could possibly change.
+	h2.flex-title execute()
 	p
-		| The <code>executeAction()</code> method doesn't do a whole lot on its own. The method takes a single object
+		| The <code>execute()</code> method doesn't do a whole lot on its own. The method takes a single object
 		| with a particular structure and runs it. For example:
 	pre.language-javascript.line-numbers
 		code
@@ -12,7 +10,7 @@ block main
 			| <br>
 			| var drive = require('datadriver');
 			| <br>
-			| drive.executeAction({
+			| drive.execute({
 			|   "execute": {
 			|     "action": "redirect",
 			|     "page": "http://google.com"

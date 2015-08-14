@@ -2,7 +2,7 @@
 
 var drive = require('datadriver');
 
-drive.executeAction({
+drive.execute({
   "execute": {
     "action": "redirect",
     "page": "http://google.com"
