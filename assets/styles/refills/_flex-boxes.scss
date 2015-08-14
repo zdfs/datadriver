@@ -91,25 +91,29 @@
 	}
 
 	.api-box {
-		@include flex(1 1 20em);
+		@include flex(1 1 15em);
+	}
 
-		&:nth-child(1) {
-			@include order(2);
+	@include media(new-breakpoint(max-width 740px 12)) {
+		.api-box {
+			@include flex(1 1 30em);
 		}
+	}
 
-		&:nth-child(2) {
-			@include order(1);
+	@include media(new-breakpoint(max-width 640px 12)) {
+		.api-box {
+			&:nth-child(1) {
+				@include order(2);
+			}
+
+			&:nth-child(2) {
+				@include order(1);
+			}
 		}
 	}
 
 	@include media($medium-screen-up) {
-		.api-box:nth-child(1) {
-			max-width: 22em;
-			@include order(0);
-		}
-		.api-box:nth-child(2) {
-			@include order(1);
-		}
+		.api-box { max-width: 15rem;}
 	}
 
 }
