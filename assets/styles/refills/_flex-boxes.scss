@@ -67,7 +67,7 @@
 			line-height: 1.5em;
 			margin: auto;
 
-			+ p,
+			+ p(:not(.dropdown-button)),
 			+ ul {
 				margin-top: 1rem;
 			}
