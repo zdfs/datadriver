@@ -14,7 +14,8 @@ var gruntConfig = {
 				'assets/scripts/vendor/prism.js',
 				'public/images/icons/grunticon.loader.js',
 				'assets/scripts/app/grunticon.js',
-				'assets/scripts/app/main-nav.js'
+				'assets/scripts/app/main-nav.js',
+				'assets/scripts/app/dropdown.js'
 			],
 			dest: 'public/scripts/src/app.js'
 		}
@@ -236,7 +237,7 @@ var gruntConfig = {
 		},
 
 		verify: {
-			tests: ['test/verify/verifyCssProperty.js']
+			tests: ['test/verify/*.js']
 		},
 
 		browserstack: {
