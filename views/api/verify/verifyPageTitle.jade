@@ -1,0 +1,64 @@
+extend ../../layouts/nested-2
+block main
+	h2.flex-title verifyPageTitle()
+	p
+		| The <code>verifyPageTitle()</code> method maps directly to the the
+		| <a href="http://webdriver.io/api/property/getTitle.html">getTitle() method</a> in WebdriverIO. You can use it to
+		| verify that the <code>&lt;title&gt;</code> of the page is correct. Using this method is rather simple.
+	pre.language-javascript.line-numbers
+		code
+			| 'use strict';
+			| <br>
+			| var drive = require('datadriver');
+			| <br>
+			| drive.verify({
+			| <br>
+			|   "steps": [
+			|     {
+			|       "execute": [
+			|         {
+			|           "action": "redirect",
+			|           "page": "api/verify/verifyPageTitle.html"
+			|         }
+			|       ]
+			|     },
+			|     {
+			|       "verify": [
+			|         {
+			|           "method": "verifyPageTitle",
+			|           "asserts": {
+			|             "title": "Datadriver"
+			|           }
+			|         }
+			|       ]
+			|     }
+			|   ]
+			| <br>
+			| });
+	p And here is our expected output:
+	pre.language-bash.line-numbers
+		code
+			| $ grunt webdriver:verify --url=http://datadriver.io
+			| Running "webdriver:verify" (webdriver) task
+			| <br>
+			| ⚙ redirecting to http://datadriver.io/api/verify/verifyPageTitle.html
+			| ✓ the "title" of this page should equal "Datadriver"
+			| <br>
+			| 1 passing
+	hr
+	h2.flex-title Calling verifyPageTitle() directly
+	p
+		| You can also call <code>verifyPageTitle()</code> directly in your tests for even more granularity. The
+		| method takes an object with four keys.
+	pre.language-javascript.line-numbers
+		code
+			| 'use strict';
+			| <br>
+			| var drive = require('datadriver');
+			| <br>
+			| drive.verifyPageTitle({
+			|   selector: 'window',
+			|   assertKey: 'title',
+			|   assert: "Datadriver",
+			|   mode: [ 'equal' ]
+			| });
