@@ -1,0 +1,368 @@
+extend ../../layouts/nested-2
+block main
+	h2.flex-title verifyState()
+	p
+		| The <code>verifyState()</code> method is capable of checking to see if an element is <code>isEnabled</code>,
+		| <code>isExisting</code>, <code>isSelected</code>, or <code>isVisible</code>. We'll work our way through each
+		| state with examples and tests.
+	hr
+	h2.flex-title isEnabled
+	p
+		| The <code>isEnabled</code> state maps directly to the <a href="http://webdriver.io/api/state/isEnabled.html">
+		| isEnabled()</a> method in WebdriverIO. It returns <code>true</code> or <code>false</code> if the selected DOM
+		| element is enabled.
+	.element-area
+		input(type="text", id="input1", placeholder="enabled")
+		input(type="text", id="input2", placeholder="disabled", disabled)
+		input(type="text", id="input3", placeholder="disabled", disabled="disabled")
+		pre.language-markup.line-numbers
+			code
+				| &lt;input id="input1" type="text" placeholder="enabled" /&gt
+				| &lt;input id="input2" type="text" placeholder="disabled" disabled /&gt
+				| &lt;input id="input3" type="text" placeholder="disabled" disabled="disabled" /&gt
+	p Let's write a test to verify that these inputs are <code>enabled</code> or <code>disabled</code>.
+	pre.language-javascript.line-numbers
+		code
+			| 'use strict';
+			| <br>
+			| var drive = require('datadriver');
+			| <br>
+			| drive.verify({
+			| <br>
+			|   "steps": [
+			|     {
+			|       "execute": [
+			|         {
+			|           "action": "redirect",
+			|           "page": "api/verify/verifyState.html"
+			|         }
+			|       ]
+			|     },
+			|     {
+			|       "selector": "#input1",
+			|       "verify": [
+			|         {
+			|           "method": "verifyState",
+			|           "asserts": {
+			|             "isEnabled": true
+			|           }
+			|         }
+			|       ]
+			|     },
+			|     {
+			|       "selector": "#input2",
+			|       "verify": [
+			|         {
+			|           "method": "verifyState",
+			|           "asserts": {
+			|             "isEnabled": false
+			|           }
+			|         }
+			|       ]
+			|     },
+			|     {
+			|       "selector": "#input3",
+			|       "verify": [
+			|         {
+			|           "method": "verifyState",
+			|           "asserts": {
+			|             "isEnabled": false
+			|           }
+			|         }
+			|       ]
+			|     }
+			|   ]
+			| <br>
+			| });
+	p And here is our test output:
+	pre.language-bash.line-numbers
+		code
+			| $ grunt webdriver:verify --url=http://datadriver.io
+			| Running "webdriver:verify" (webdriver) task
+			| <br>
+			| ⚙ redirecting to http://datadriver.io/api/verify/verifyState.html
+			| ✓ the "#input1" element is enabled on the page
+			| ✓ the "#input2" element is not enabled on the page
+			| ✓ the "#input3" element is not enabled on the page
+			| <br>
+			| 3 passing
+	hr
+	h2.flex-title isExisting
+	p
+		| The <code>isExisting</code> state maps directly to the <a href="http://webdriver.io/api/state/isExisting.html">
+		| isExisting()</a> method in WebdriverIO. It returns <code>true</code> if the selector returns an element that
+		| exists in the DOM and <code>false</code> otherwise.
+	div#notDisplayed(style="display:none") hola
+	div#notVisible(style="visibility:hidden") hola
+	div#notInViewport(style="position:absolute; left:9999999px;") hola
+	div#zeroOpacity(style="opacity:0") hola
+	pre.language-markup.line-numbers
+		code
+			| &lt;div id="#notDisplayed" style="display: none"&gt;&lt;/div&gt;
+			| &lt;div id="#notVisible" style="visibility: hidden"&gt;&lt;/div&gt;
+			| &lt;div id="#notInViewport" style="position: absolute; left: 9999999px;"&gt;&lt;/div&gt;
+			| &lt;div id="#zeroOpacity" style="opacity: 0"&gt;&lt;/div&gt;
+	p Let's write a test to verify that these <code>div</code>s exist.
+	pre.language-javascript.line-numbers
+		code
+			| 'use strict';
+			| <br>
+			| var drive = require('datadriver');
+			| <br>
+			| drive.verify({
+			| <br>
+			|   "steps": [
+			|     {
+			|       "execute": [
+			|         {
+			|           "action": "redirect",
+			|           "page": "api/verify/verifyState.html"
+			|         }
+			|       ]
+			|     },
+			|     {
+			|       "selector": "#someNonExistingElement",
+			|       "verify": [
+			|         {
+			|           "method": "verifyState",
+			|           "asserts": {
+			|             "isExisting": false
+			|           }
+			|         }
+			|       ]
+			|     },
+			|     {
+			|       "selector": "#notDisplayed",
+			|       "verify": [
+			|         {
+			|           "method": "verifyState",
+			|           "asserts": {
+			|             "isExisting": true
+			|           }
+			|         }
+			|       ]
+			|     },
+			|     {
+			|       "selector": "#notVisible",
+			|       "verify": [
+			|         {
+			|           "method": "verifyState",
+			|           "asserts": {
+			|             "isExisting": true
+			|           }
+			|         }
+			|       ]
+			|     },
+			|     {
+			|       "selector": "#notInViewport",
+			|       "verify": [
+			|         {
+			|           "method": "verifyState",
+			|           "asserts": {
+			|             "isExisting": true
+			|           }
+			|         }
+			|       ]
+			|     },
+			|     {
+			|       "selector": "#zeroOpacity",
+			|       "verify": [
+			|         {
+			|           "method": "verifyState",
+			|           "asserts": {
+			|             "isExisting": true
+			|           }
+			|         }
+			|       ]
+			|     }
+			|   ]
+			| <br>
+			| });
+	p And here is our test output:
+	pre.language-bash.line-numbers
+		code
+			| $ grunt webdriver:verify --url=http://datadriver.io
+			| Running "webdriver:verify" (webdriver) task
+			| <br>
+			| ⚙ redirecting to http://datadriver.io/api/verify/verifyState.html
+			| ✓ the "#someNonExistingElement" element does not exist on the page
+			| ✓ the "#notDisplayed" element exists on the page
+			| ✓ the "#notVisible" element exists on the page
+			| ✓ the "#notInViewport" element exists on the page
+			| ✓ the "#zeroOpacity" element exists on the page
+			| <br>
+			| 5 passing
+	hr
+	h2.flex-title isSelected
+	p
+		| The <code>isSelected</code> state maps directly to the <a href="http://webdriver.io/api/state/isSelected.html">
+		| isSelected()</a> method in WebdriverIO. It returns <code>true</code> or <code>false</code> if an
+		| <code>option</code> element or <code>input</code> of type <i>checkbox</i> or <i>radio</i> is currently selected.
+	.element-area
+		select#select1
+			option(value="Andrew Hudgins") Andrew Hudgins
+			option(value="Sharon Olds" selected) Sharon Olds
+			option(value="Yusef Komunyakaa") Yusef Komunyakaa
+		pre.language-markup.line-numbers
+			code
+				| &lt;select id="select1"&gt;
+				|   &lt;option value="Andrew Hudgins"&gt;Andrew Hudgins&lt;/option&gt;
+				|   &lt;option value="Sharon Olds" selected&gt;Sharon Olds&lt;/option&gt;
+				|   &lt;option value="Yusef Komunyakaa"&gt;Yusef Komunyakaa&lt;/option&gt;
+				| &lt;/select&gt;
+	p Let's write a test to verify that the right <code>option</code> is selected.
+	pre.language-javascript.line-numbers
+		code
+			| 'use strict';
+			| <br>
+			| var drive = require('datadriver');
+			| <br>
+			| drive.verify({
+			| <br>
+			|   "steps": [
+			|     {
+			|       "execute": [
+			|         {
+			|           "action": "redirect",
+			|           "page": "api/verify/verifyState.html"
+			|         }
+			|       ]
+			|     },
+			|     {
+			|       "selector": "#select1 option:nth-of-type(1)",
+			|       "verify": [
+			|         {
+			|           "method": "verifyState",
+			|           "asserts": {
+			|             "isSelected": false
+			|           }
+			|         }
+			|       ]
+			|     },
+			|     {
+			|       "selector": "#select1 option:nth-of-type(2)",
+			|       "verify": [
+			|         {
+			|           "method": "verifyState",
+			|           "asserts": {
+			|             "isSelected": true
+			|           }
+			|         }
+			|       ]
+			|     },
+			|     {
+			|       "selector": "#select1 option:nth-of-type(3)",
+			|       "verify": [
+			|         {
+			|           "method": "verifyState",
+			|           "asserts": {
+			|             "isSelected": false
+			|           }
+			|         }
+			|       ]
+			|     }
+			|   ]
+			| <br>
+			| });
+	p And here is our test output:
+	pre.language-bash.line-numbers
+		code
+			| $ grunt webdriver:verify --url=http://datadriver.io
+			| Running "webdriver:verify" (webdriver) task
+			| <br>
+			| ⚙ redirecting to http://datadriver.io/api/verify/verifyState.html
+			| ✓ the "#select1 option:nth-of-type(1)" element is not selected on the page
+			| ✓ the "#select1 option:nth-of-type(2)" element is selected on the page
+			| ✓ the "#select1 option:nth-of-type(3)" element is not selected on the page
+			| <br>
+			| 3 passing
+	hr
+	h2.flex-title isVisible
+	p
+		| The <code>isVisible</code> state maps directly to the <a href="http://webdriver.io/api/state/isVisible.html">
+		| isVisible()</a> method in WebdriverIO. It returns <code>true</code> if a DOM element is visible and
+		| <code>false</code> if it's not visible.
+	pre.language-markup.line-numbers
+		code
+			| &lt;div id="#notDisplayed" style="display: none"&gt;&lt;/div&gt;
+			| &lt;div id="#notVisible" style="visibility: hidden"&gt;&lt;/div&gt;
+			| &lt;div id="#notInViewport" style="position: absolute; left: 9999999px;"&gt;&lt;/div&gt;
+			| &lt;div id="#zeroOpacity" style="opacity: 0"&gt;&lt;/div&gt;
+	p Let's write a test to verify what <code>div</code>s are visible.
+	pre.language-javascript.line-numbers
+		code
+			| 'use strict';
+			| <br>
+			| var drive = require('datadriver');
+			| <br>
+			| drive.verify({
+			| <br>
+			|   "steps": [
+			|     {
+			|       "execute": [
+			|         {
+			|           "action": "redirect",
+			|           "page": "api/verify/verifyState.html"
+			|         }
+			|       ]
+			|     },
+			|     {
+			|       "selector": "#notDisplayed",
+			|       "verify": [
+			|         {
+			|           "method": "verifyState",
+			|           "asserts": {
+			|             "isVisible": false
+			|           }
+			|         }
+			|       ]
+			|     },
+			|     {
+			|       "selector": "#notVisible",
+			|       "verify": [
+			|         {
+			|           "method": "verifyState",
+			|           "asserts": {
+			|             "isVisible": false
+			|           }
+			|         }
+			|       ]
+			|     },
+			|     {
+			|       "selector": "#notInViewport",
+			|       "verify": [
+			|         {
+			|           "method": "verifyState",
+			|           "asserts": {
+			|             "isVisible": true
+			|           }
+			|         }
+			|       ]
+			|     },
+			|     {
+			|       "selector": "#zeroOpacity",
+			|       "verify": [
+			|         {
+			|           "method": "verifyState",
+			|           "asserts": {
+			|             "isVisible": false
+			|           }
+			|         }
+			|       ]
+			|     }
+			|   ]
+			| <br>
+			| });
+	p And here is our expected output:
+	pre.language-bash.line-numbers
+		code
+			| $ grunt webdriver:verify --url=http://datadriver.io
+			| Running "webdriver:verify" (webdriver) task
+			| <br>
+			| ⚙ redirecting to http://datadriver.io/api/verify/verifyState.html
+			| ✓ the "#notDisplayed" element is not visible on the page
+			| ✓ the "#notVisible" element is not visible on the page
+			| ✓ the "#notInViewport" element is visible on the page
+			| ✓ the "#zeroOpacity" element is not visible on the page
+			| <br>
+			| 4 passing
