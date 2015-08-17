@@ -4,10 +4,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <title>Datadriver</title>
-  <link rel="icon" type="image/x-icon" href="../public/images/favicon.ico">
-  <link rel="stylesheet" href="../public/styles/min/api.css">
+  <link rel="icon" type="image/x-icon" href="../../public/images/favicon.ico">
+  <link rel="stylesheet" href="../../public/styles/min/api.css">
 </head>
-<body data-path="../public/">
+<body data-path="../../public/">
   <header role="banner" class="centered-navigation">
     <div class="centered-navigation-wrapper"><a class="mobile-logo">
         <div data-grunticon-embed class="icon-speed"></div></a><a id="js-centered-navigation-mobile-menu" class="centered-navigation-mobile-menu">MENU</a>
@@ -84,86 +84,73 @@
           </div>
         </div>
         <div class="flex-box">
-          <h2 class="flex-title">Datadriver API documentation</h2>
-          <div class="flash-notice">
-            <p>
-              Welcome to the documentation for the datadriver API. Please note that <b>this API is not complete</b>. We don't
-              have any of the Appium bindings, for example, as well as many other methods. This project is a work in
-              progress.
-            </p>
-            <p>
-              You should also be aware that you should consider this software as alpha. Naming conventions, how things work
-              under the hood and API additions will all be considered par for the course until we hit 1.0. If you have an
-              issue or a request, you can <a href="https://github.com/zdfs/datadriver/issues">file it here</a>.
-            </p>
+          <h2 class="flex-title">verifyText()</h2>
+          <p>
+            The <code>verifyText()</code> method maps directly to the <a href="http://webdriver.io/api/property/getText.html">
+            getText() method</a> in WebdriverIO. This method allows you to easily verify the text content of a DOM element
+            returned by a selector.
+          </p>
+          <div class="element-area">
+            <p id="poem">Our Father who art in heaven, I am drunk.<br>Again. Red wine. For which I offer thanks.</p>
+            <pre class="language-markup line-numbers"><code>&lt;p id="poem"&gt;Our Father who art in heaven, I am drunk.&lt;br&gt;
+Again. Red wine. For which I offer thanks.&lt;/p&gt;</code></pre>
+            <p><small>from <a href="http://www.poetryfoundation.org/poem/178478">Praying Drunk</a> by Andrew Hudgins</small></p>
           </div>
-          <hr>
-          <h3 class="flex-title">Test output</h3>
-          <p>
-            Please note that the default output of Mocha's test runner treats everything like a test. If you click a button,
-            type some text in to a field (basically any executable action), they will be treated like "tests" and increase
-            your test count though no asserts are actually happening. For example:
-          </p>
-          <pre class="language-bash line-numbers"><code>$ grunt webdriver:home --url=http://duckduckgo.com
-Running "webdriver:home" (webdriver) task
-Duck Duck Go Test
-  Rendered in a small viewport
-    Search for DataDriver.io
-      ✓ executing "setValue" on "#search_form_input_homepage".
-      ✓ clicking the "#search_button_homepage" element.
-      ✓ the "title" of this page should equal "Datadriver.io at DuckDuckGo"
+          <p>And here is what our test could look like:</p>
+          <pre class="language-javascript line-numbers"><code>'use strict';
 <br>
-3 passing (3s)</code></pre>
-          <p>
-            If this bothers you, datadriver provides a custom Mocha reporter and Mocha UI that will give better feedback.
-            To enable it, just modify your <code>gruntfile.js</code> to include the <code>reporter</code> and <code>ui</code>
-            options.
-          </p>
-          <pre class="language-javascript line-numbers"><code>var gruntConfig = {
-  webdriver: {
-    options: {
-      desiredCapabilities: {
-        browserName: 'chrome',
-        name: 'Documentation Tests',
-        viewports: {
-          small: {
-            width: 430,
-            height: 1000
-          },
-          medium: {
-            width: 700,
-            height: 1000
-          },
-          large: {
-            width: 1280,
-            height: 1000
+var drive = require('datadriver');
+<br>
+drive.verify({
+<br>
+  "steps": [
+    {
+      "execute": [
+        {
+          "action": "redirect",
+          "page": "api/verify/verifyText.html"
+        }
+      ]
+    },
+    {
+      "selector": "#poem",
+      "verify": [
+        {
+          "method": "verifyText",
+          "asserts": {
+            "text": "Our Father who art in heaven, I am drunk.\nAgain. Red wine. For which I offer thanks."
           }
         }
-      },
-      reporter: require('datadriver/lib/support/reporter'),
-      ui: 'ddui'
-    },
-    home: {
-      tests: ['tests/*.js']
+      ]
     }
-  }
-};
+  ]
 <br>
-module.exports = function(grunt) {
-  grunt.initConfig(gruntConfig);
-  grunt.loadNpmTasks('grunt-webdriver');
-};</code></pre>
-          <p>Your test output should look something like the following (all API examples will use this format):</p>
-          <pre class="language-bash line-numbers"><code>$ grunt webdriver:home --url=http://duckduckgo.com
-Running "webdriver:home" (webdriver) task
-Duck Duck Go Test
-  Rendered in a small viewport
-    Search for DataDriver.io
-      ⚙ executing "setValue" on "#search_form_input_homepage".
-      ⚙ clicking the "#search_button_homepage" element.
-      ✓ the "title" of this page should equal "Datadriver.io at DuckDuckGo"
+});</code></pre>
+          <p>And our expected test output:</p>
+          <pre class="language-bash line-numbers"><code>$ grunt webdriver:verify --url=http://datadriver.io
+Running "webdriver:verify" (webdriver) task
 <br>
-1 passing (3s)</code></pre>
+⚙ redirecting to http://datadriver.io/api/verify/verifyText.html
+✓ the "#poem" element's text should equal "Our Father who art in heaven, I am drunk.
+Again. Red wine. For which I offer thanks."
+<br>
+1 passing</code></pre>
+          <hr>
+          <h2 class="flexTitle">Calling verifyText() directly</h2>
+          <p>
+            You can also call <code>verifyText()</code> directly in your tests for even more granularity. The
+            method takes an object with four keys.
+          </p>
+          <pre class="language-javascript line-numbers"><code>'use strict';
+<br>
+var drive = require('datadriver');
+<br>
+drive.verifyText({
+  selector: '#poem',
+  assertKey: 'text',
+  assert: 'Our Father who art in heaven, I am drunk.\nAgain. Red wine. For which I offer thanks.',
+  mode: [ 'equal' ]
+});</code></pre>
         </div>
       </div>
     </div>
@@ -179,5 +166,5 @@ Duck Duck Go Test
       </ul>
     </div>
   </footer>
-  <script src="../public/scripts/min/app.js"></script>
+  <script src="../../public/scripts/min/app.js"></script>
 </body>

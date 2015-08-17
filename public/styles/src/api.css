@@ -718,7 +718,7 @@ pre[class*='language-'][data-language]::before {
       color: rgba(51, 51, 51, 0.6);
       line-height: 1.5em;
       margin: auto; }
-      .flex-boxes .flex-box p + p(:not(.dropdown-button)),
+      .flex-boxes .flex-box p + p:not(.dropdown-button),
       .flex-boxes .flex-box p + ul {
         margin-top: 1rem; }
     .flex-boxes .flex-box ul {
@@ -876,8 +876,7 @@ pre[class*='language-'][data-language]::before {
   color: #8c7800;
   display: block;
   margin-bottom: 0.75em;
-  padding: 0.75em;
-  text-align: center; }
+  padding: 0.75em; }
   .flash-alert a {
     color: #594c00;
     text-decoration: underline; }
@@ -890,8 +889,7 @@ pre[class*='language-'][data-language]::before {
   color: #96151b;
   display: block;
   margin-bottom: 0.75em;
-  padding: 0.75em;
-  text-align: center; }
+  padding: 0.75em; }
   .flash-error a {
     color: #6a0f13;
     text-decoration: underline; }
@@ -904,8 +902,7 @@ pre[class*='language-'][data-language]::before {
   color: #244e87;
   display: block;
   margin-bottom: 0.75em;
-  padding: 0.75em;
-  text-align: center; }
+  padding: 0.75em; }
   .flash-notice a {
     color: #19375f;
     text-decoration: underline; }
@@ -918,8 +915,7 @@ pre[class*='language-'][data-language]::before {
   color: #56651a;
   display: block;
   margin-bottom: 0.75em;
-  padding: 0.75em;
-  text-align: center; }
+  padding: 0.75em; }
   .flash-success a {
     color: #333c10;
     text-decoration: underline; }

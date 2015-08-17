@@ -544,7 +544,7 @@ h2 {
       color: rgba(51, 51, 51, 0.6);
       line-height: 1.5em;
       margin: auto; }
-      .flex-boxes .flex-box p + p(:not(.dropdown-button)),
+      .flex-boxes .flex-box p + p:not(.dropdown-button),
       .flex-boxes .flex-box p + ul {
         margin-top: 1rem; }
     .flex-boxes .flex-box ul {
