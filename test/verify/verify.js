@@ -25,7 +25,7 @@ drive.verify({
 		// the link colors, let's click the link with an execute action.
 
 		{
-			"selector": "a[href*=\"executeAction.html\"]",
+			"selector": "a[href*=\"api/methods/execute.html\"]",
 			"verify": [
 				{
 					"method": "verifyCssProperty",
@@ -49,14 +49,14 @@ drive.verify({
 		},
 
 		// With this new step, we're going to verify the url is actually
-		// the executeAction() documentation page.
+		// the execute() documentation page.
 
 		{
 			"verify": [
 				{
 					"method": "verifyUrl",
 					"asserts": {
-						"url": drive.getBaseUrl() + "api/methods/executeAction.html"
+						"url": drive.getBaseUrl() + "api/methods/execute.html"
 					}
 				}
 			]
