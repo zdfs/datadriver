@@ -236,3 +236,10 @@ drive.verify({
 	]
 
 });
+
+drive.verifyState({
+	selector: '#zeroOpacity',
+	assertKey: 'isVisible',
+	assert: false,
+	mode: [ 'equal' ]
+});

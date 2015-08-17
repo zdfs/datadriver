@@ -366,3 +366,20 @@ block main
 			| ✓ the "#zeroOpacity" element is not visible on the page
 			| <br>
 			| 4 passing
+	hr
+	h2.flex-title Call verifyState() directly
+	p
+		| You can also call <code>verifyState()</code> directly in your tests for even more granularity. The
+		| method takes an object with four keys.
+	pre.language-javascript.line-numbers
+		code
+			| 'use strict';
+			| <br>
+			| var drive = require('datadriver');
+			| <br>
+			| drive.verifyState({
+			|   selector: '#zeroOpacity',
+			|   assertKey: 'isVisible',
+			|   assert: false,
+			|   mode: [ 'equal' ]
+			| });

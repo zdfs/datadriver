@@ -434,6 +434,22 @@ Running "webdriver:verify" (webdriver) task
 ✓ the "#zeroOpacity" element is not visible on the page
 <br>
 4 passing</code></pre>
+          <hr>
+          <h2 class="flex-title">Call verifyState() directly</h2>
+          <p>
+            You can also call <code>verifyState()</code> directly in your tests for even more granularity. The
+            method takes an object with four keys.
+          </p>
+          <pre class="language-javascript line-numbers"><code>'use strict';
+<br>
+var drive = require('datadriver');
+<br>
+drive.verifyState({
+  selector: '#zeroOpacity',
+  assertKey: 'isVisible',
+  assert: false,
+  mode: [ 'equal' ]
+});</code></pre>
         </div>
       </div>
     </div>
