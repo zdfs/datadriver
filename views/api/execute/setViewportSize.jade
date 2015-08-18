@@ -1,0 +1,36 @@
+extend ../../layouts/nested-2
+block main
+	h2.flex-title setViewportSize()
+	p
+		| The <code>setViewportSize()</code> method maps directly to
+		| <a href="http://webdriver.io/api/window/setViewportSize.html">setViewportSize() method</a> on WebdriverIO. This
+		| allows us to more easily test responsive designs with our tests.
+	pre.language-javascript.line-numbers
+		code
+			| 'use strict';
+			| <br>
+			| var drive = require('datadriver');
+			| <br>
+			| drive.execute({
+			|   "execute": {
+			|     "action": "redirect",
+			|     "page": "api/execute/setViewportSize.html"
+			|   }
+			| });
+			| <br>
+			| drive.execute({
+			|   "execute": {
+			|     "action": "setViewportSize",
+			|     "height": 400,
+			|     "width": 400
+			|   }
+			| });
+	p And this is our expected output:
+	pre.language-bash.line-numbers
+		code
+			| $ grunt webdriver:execute --url=http://datadriver.io
+			| Running "webdriver:execute" (webdriver) task
+			| <br>
+			| ⚙ redirecting to "http://datadriver.io/api/execute/setViewportSize.html"
+			| ⚙ giving the viewport a height of 400 and a width of 400
+			| 0 passing
