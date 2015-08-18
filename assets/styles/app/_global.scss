@@ -8,6 +8,7 @@ $heading-color: transparentize($base-font-color, 0.3);
 body {
 	box-sizing: border-box;
 	margin: 0;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 .section {

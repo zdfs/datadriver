@@ -1,0 +1,82 @@
+extend ../../layouts/nested-2
+block main
+	h2.flex-title Browser-specific properties
+	p
+		| The <code>asserts</code> object will always use the browser you have defined in your <code>gruntfile.js</code>.
+		| But what happens when you have a test that returns different values for the same CSS property in two different
+		| browsers. For example, this test will pass in Chrome, but fail in Firefox.
+	.element-area
+		a#button1.button(style="font-weight: bold;") Hi!
+	pre.language-javascript.line-numbers
+		code
+			| 'use strict';
+			| <br>
+			| var drive = require('datadriver');
+			| <br>
+			| drive.verify({
+			| <br>
+			|   "steps": [
+			|     {
+			|       "execute": [
+			|         {
+			|           "action": "redirect",
+			|           "page": "api/extras/browser-properties.html"
+			|         }
+			|       ]
+			|     },
+			|     {
+			|       "selector": "#button1",
+			|       "verify": [
+			|         {
+			|           "method": "verifyCssProperty",
+			|           "asserts": {
+			|             "font-weight": "bold"
+			|           }
+			|         }
+			|       ]
+			|     }
+			|   ]
+			| <br>
+			| });
+	p
+		| So why does this happen? This is a browser inconsistency that we can't really do anything about. However, we
+		| can modify our test so that it works in both Firefox and Chrome using a browser-specific <code>asserts</code>
+		| object.
+	pre.language-javascript.line-numbers
+		code
+			| 'use strict';
+			| <br>
+			| var drive = require('datadriver');
+			| <br>
+			| drive.verify({
+			| <br>
+			|   "steps": [
+			|     {
+			|       "execute": [
+			|         {
+			|           "action": "redirect",
+			|           "page": "api/extras/browser-properties.html"
+			|         }
+			|       ]
+			|     },
+			|     {
+			|       "selector": "#button1",
+			|       "verify": [
+			|         {
+			|           "method": "verifyCssProperty",
+			|           "asserts": {
+			|             "font-weight": "bold"
+			|           },
+			|           "asserts-firefox": {
+			|             "font-weight": 700
+			|           }
+			|         }
+			|       ]
+			|     }
+			|   ]
+			| <br>
+			| });
+	p
+		| We can have an <code>asserts</code> object for any browser that we define in our <code>gruntfile.js</code>. If
+		| the <code>asserts-&lt;browser-name&gt;</code> object exists, it'll use any properties inside first, falling back
+		| to the regular <code>asserts</code> object for properties that are consistent across browsers.
