@@ -1,0 +1,45 @@
+extend ../../layouts/nested-2
+block main
+	h2.flex-title switchTab()
+	p
+		| The <code>switchTab()</code> method maps directly to
+		| <a href="http://webdriver.io/api/window/switchTab.html">switchTab() method</a> on WebdriverIO. This method
+		| takes an <code>"index"</code> key to know which tab to open. Your original window always has a value of
+		| <code>0</code>.
+	pre.language-javascript.line-numbers
+		code
+			| 'use strict';
+			| <br>
+			| var drive = require('datadriver');
+			| <br>
+			| drive.execute({
+			|   "execute": {
+			|     "action": "redirect",
+			|     "page": "api/execute/switchTab.html"
+			|   }
+			| });
+			| <br>
+			| drive.execute({
+			|   "execute": {
+			|     "action": "newWindow",
+			|     "text": "http://google.com"
+			|   }
+			| });
+			| <br>
+			| drive.execute({
+			|   "execute": {
+			|     "action": "switchTab",
+			|     "index": 1
+			|   }
+			| });
+	p And this is our expected output:
+	pre.language-bash.line-numbers
+		code
+			| $ grunt webdriver:execute --url=http://datadriver.io
+			| Running "webdriver:execute" (webdriver) task
+			| <br>
+			| ⚙ redirecting to "http://datadriver.io/api/execute/switchTab.html"
+			| ⚙ opening a new tab to the url: "http://google.com"
+			| ⚙ retrieving tab list
+			| ⚙ current tab has been switched to selected index
+			| 0 passing
