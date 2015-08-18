@@ -1,0 +1,37 @@
+extend ../../layouts/nested-2
+block main
+	h2.flex-title evalAndStore()
+	p
+		| The <code>evalAndStore()</code> method is a method specific to datadriver. This method works exactly like the
+		| eval() method</a> on WebdriverIO, but stores the result in local storage for later use. Here's an example of how
+		| to use this action:
+	pre.language-javascript.line-numbers
+		code
+			| 'use strict';
+			| <br>
+			| var drive = require('datadriver');
+			| <br>
+			| drive.execute({
+			|   "execute": {
+			|     "action": "redirect",
+			|     "page": "api/execute/evalAndStore.html"
+			|   }
+			| });
+			| <br>
+			| drive.execute({
+			|   "execute": {
+			|     "action": "evalAndStore",
+			|     "script": "return 2 + 2;",
+			|     "resultKey": "sumUp"
+			|   }
+			| });
+	p And here is our expected output:
+	pre.language-bash.line-numbers
+		code
+			| $ grunt webdriver:execute --url=http://datadriver.io
+			| Running "webdriver:execute" (webdriver) task
+			| <br>
+			| ⚙ redirecting to "http://datadriver.io/api/execute/evalAndStore.html"
+			| ⚙ executing javascript and storing the result to local storage.
+			| <br>
+			| 0 passing
