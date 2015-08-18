@@ -16,3 +16,17 @@ drive.execute({
     "url": "http://google.com"
   }
 });
+
+drive.execute({
+  "execute": {
+    "action": "switchTab",
+    "index": 0
+  }
+});
+
+drive.execute({
+  "execute": {
+    "action": "closeTab",
+    "index": 1
+  }
+});

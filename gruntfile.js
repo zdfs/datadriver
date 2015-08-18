@@ -232,8 +232,8 @@ var gruntConfig = {
 			tests: ['test/duckduckgo/*.js']
 		},
 
-		actions: {
-			tests: ['test/actions/*.js']
+		execute: {
+			tests: ['test/execute/*.js']
 		},
 
 		verify: {

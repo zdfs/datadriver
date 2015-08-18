@@ -2,10 +2,11 @@
 
 var drive = require('datadriver');
 
+
 drive.execute({
 	"execute": {
 		"action": "redirect",
-		"page": "api/execute/switchTab.html"
+		"page": "api/execute/closeTab.html"
 	}
 });
 
@@ -19,13 +20,13 @@ drive.execute({
 drive.execute({
   "execute": {
     "action": "switchTab",
-    "index": 1
+    "index": 0
   }
 });
 
 drive.execute({
   "execute": {
-    "action": "switchTab",
-    "index": 0
+    "action": "closeTab",
+    "index": 1
   }
 });
