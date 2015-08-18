@@ -1,41 +1,12 @@
 {
-  "version": "1.0.0",
-  "author": {
-    "name": "Zachary Forrest",
-    "email": "zforrest@gmail.com"
-  },
-  "name": "datadriver.io",
-  "description": "The website for the data driver helper library.",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/zdfs/datadriver"
-  },
-  "bugs": {
-    "url": "https://github.com/zdfs/datadriver/issues"
-  },
-  "engines": {
-    "node": ">= 0.12.0"
-  },
-  "devDependencies": {
-    "compression": "1.5.2",
-    "datadriver": "git+ssh://git@github.com/zdfs/datadriver.git",
-    "dir-to-json": "0.0.3",
-    "express": "4.13.3",
-    "grunt": "0.4.5",
-    "grunt-concurrent": "2.0.1",
-    "grunt-contrib-clean": "0.6.0",
-    "grunt-contrib-concat": "0.5.1",
-    "grunt-contrib-copy": "0.8.0",
-    "grunt-contrib-cssmin": "0.13.0",
-    "grunt-contrib-jade": "0.15.0",
-    "grunt-contrib-uglify": "0.9.1",
-    "grunt-contrib-watch": "0.6.1",
-    "grunt-express-server": "0.5.1",
-    "grunt-grunticon": "2.2.1",
-    "grunt-sass": "1.0.0",
-    "grunt-webdriver": "0.5.2",
-    "jade": "1.11.0",
-    "jquery": "2.1.4"
-  },
-  "readmeFilename": "README.md"
+	"version": "1.0.0",
+	"description": "Get up and running with datadriver.io",
+	"engines": {
+		"node": ">= 0.12.0"
+	},
+	"devDependencies": {
+		"datadriver": "git+ssh://git@github.com/zdfs/datadriver.git",
+		"grunt": "0.4.5",
+		"grunt-webdriver": "0.5.2"
+	}
 }

@@ -23,7 +23,7 @@ drive.go({
       },
       {
         "selector": "#search_button_homepage",
-        "execute": [{ "action": "click" }],
+        "execute": [{ "action": "click" }]
       },
       {
         "verify": [
