@@ -858,7 +858,7 @@ pre[class*='language-'][data-language]::before {
       -ms-flex-order: 1; } }
   @media screen and (min-width: 40em) {
     .flex-boxes .api-box {
-      max-width: 15rem; } }
+      max-width: 18rem; } }
 
 .footer {
   background-color: #D5485A;
