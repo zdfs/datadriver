@@ -1,0 +1,60 @@
+extend ../../layouts/nested-2
+block main
+	h2.flex-title buttonDown()
+	p
+		| The <code>buttonDown()</code> method maps directly to
+		| <a href="http://webdriver.io/api/protocol/buttonDown.html">buttonDown() method</a> on WebdriverIO. Let's see
+		| how we would execute this command on the button below.
+	.element-area
+		a#button1.button Hi!
+		pre.language-markup.line-numbers
+			code
+				| &lt;a id="button1" class="button"&gt;Hi!&lt;/a&gt;
+	pre.language-javascript.line-numbers
+		code
+			| 'use strict';
+			| <br>
+			| var drive = require('datadriver');
+			| <br>
+			| drive.execute({
+			|   "execute": {
+			|     "action": "redirect",
+			|     "page": "api/execute/buttonDown.html"
+			|   }
+			| });
+			| <br>
+			| drive.execute({
+			|   "selector": "#button1",
+			|   "execute": {
+			|     "action": "buttonDown",
+			|     "button": 0 // left click
+			|   }
+			| });
+			| <br>
+			| drive.execute({
+			|   "selector": "#button1",
+			|   "execute": {
+			|     "action": "buttonDown",
+			|     "button": 1 // middle click
+			|   }
+			| });
+			| <br>
+			| drive.execute({
+			|   "selector": "#button1",
+			|   "execute": {
+			|     "action": "buttonDown",
+			|     "button": 2 // right click
+			|   }
+			| });
+	p And here is our expected output:
+	pre.language-bash.line-numbers
+		code
+			| $ grunt webdriver:execute --url=http://datadriver.io
+			| Running "webdriver:execute" (webdriver) task
+			| <br>
+			| ⚙ redirecting to http://datadriver.io/api/execute/buttonDown.html
+			| ⚙ pushing the left click down
+			| ⚙ pushing the middle click down
+			| ⚙ pushing the right click down
+			| <br>
+			| 0 passing
