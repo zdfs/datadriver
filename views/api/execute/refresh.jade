@@ -1,0 +1,34 @@
+extend ../../layouts/nested-2
+block main
+	h2.flex-title refresh()
+	p
+		| The <code>refresh()</code> method maps directly to <a href="http://webdriver.io/api/protocol/refresh.html">
+		| refresh() method</a> on WebdriverIO. This action allows you to refresh a page at any time.
+	pre.language-javascript.line-numbers
+		code
+			| 'use strict';
+			| <br>
+			| var drive = require('datadriver');
+			| <br>
+			| drive.execute({
+			|   "execute": {
+			|     "action": "refresh",
+			|     "page": "api/execute/refresh.html"
+			|   }
+			| });
+			| <br>
+			| drive.execute({
+			|   "execute": {
+			|     "action": "refresh"
+			|   }
+			| });
+	p And here is our expected output:
+	pre.language-bash.line-numbers
+		code
+			| $ grunt webdriver:execute --url=http://datadriver.io
+			| Running "webdriver:execute" (webdriver) task
+			| <br>
+			| ⚙ redirecting to "http://datadriver.io/api/execute/refresh.html"
+			| ⚙ executing a browser refresh on the current page
+			| <br>
+			| 0 passing
