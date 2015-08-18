@@ -1,0 +1,40 @@
+extend ../../layouts/nested-2
+block main
+	h2.flex-title hover()
+	p
+		| The <code>hover()</code> method maps directly to <a href="http://webdriver.io/api/action/moveToObject.html">
+		| moveToObject() method</a> on WebdriverIO. This action let's you hover over an element without all the hassle.
+	.element-area
+		a#button1.button Hi!
+		pre.language-markup.line-numbers
+			code
+				| &lt;a id="button1" class="button"&gt;Hi!&lt;/a&gt;
+	pre.language-javascript.line-numbers
+		code
+			| 'use strict';
+			| <br>
+			| var drive = require('datadriver');
+			| <br>
+			| drive.execute({
+			|   "execute": {
+			|     "action": "redirect",
+			|     "page": "api/execute/hover.html"
+			|   }
+			| });
+			| <br>
+			| drive.execute({
+			|   "selector": "#button1",
+			|   "execute": {
+			|     "action": "hover"
+			|   }
+			| });
+	p And here is our expected output:
+	pre.language-bash.line-numbers
+		code
+			| $ grunt webdriver:execute --url=http://datadriver.io
+			| Running "webdriver:execute" (webdriver) task
+			| <br>
+			| ⚙ redirecting to "http://datadriver.io/api/execute/hover.html"
+			| ⚙ moving to the center of the "#button1" element.
+			| <br>
+			| 0 passing
