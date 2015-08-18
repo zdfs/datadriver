@@ -240,6 +240,10 @@ var gruntConfig = {
 			tests: ['test/verify/*.js']
 		},
 
+		extras: {
+			tests: ['test/extras/*.js']
+		},
+
 		browserstack: {
 
 			options: {

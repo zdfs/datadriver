@@ -1051,14 +1051,24 @@ pre[class*='language-'][data-language]::before {
       clear: both;
       content: "";
       display: table; }
-    .element-area .grid .grid--half {
+    .element-area .grid .grid--half,
+    .element-area .grid .grid--third {
       background-color: #be2c40;
       padding: 1rem;
       float: left;
       display: block;
       margin-right: 2.3576515979%;
       width: 48.821174201%; }
-      .element-area .grid .grid--half:last-child {
+      .element-area .grid .grid--half:last-child,
+      .element-area .grid .grid--third:last-child {
         margin-right: 0; }
-      .element-area .grid .grid--half p {
+      .element-area .grid .grid--half p,
+      .element-area .grid .grid--third p {
         color: #FFF; }
+    .element-area .grid .grid--third {
+      float: left;
+      display: block;
+      margin-right: 2.3576515979%;
+      width: 31.7615656014%; }
+      .element-area .grid .grid--third:last-child {
+        margin-right: 0; }

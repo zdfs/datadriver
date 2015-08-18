@@ -92,46 +92,72 @@
           </div>
         </div>
         <div class="flex-box">
-          <h2 class="flex-title">switchTab()</h2>
+          <h2 class="flex-title">Assert Modes</h2>
           <p>
-            The <code>switchTab()</code> method maps directly to
-            <a href="http://webdriver.io/api/window/switchTab.html">switchTab() method</a> on WebdriverIO. This method
-            takes an <code>"index"</code> key to know which tab to open. Your original window always has a value of
-            <code>0</code>.
+            Most of the time, the default assertion mode of <code>equal</code> is going to be all you need for a decent test.
+            But there are many more use-cases where a strict equal assertion isn't going to work. Maybe you're testing for a
+            value that needs to be above <code>2</code>. How do you write a test for that?
           </p>
+          <p>Simple. You can change the assertion mode. Let's see what this might look like.</p>
+          <div class="element-area">
+            <div class="grid">
+              <div class="grid--third">
+                <p>hello!</p>
+              </div>
+              <div class="grid--third">
+                <p>¡hola!</p>
+              </div>
+              <div class="grid--third">
+                <p>bonjour!</p>
+              </div>
+            </div>
+          </div>
           <pre class="language-javascript line-numbers"><code>'use strict';
 <br>
 var drive = require('datadriver');
 <br>
-drive.execute({
-  "execute": {
-    "action": "redirect",
-    "page": "api/execute/switchTab.html"
-  }
-});
+drive.verify({
 <br>
-drive.execute({
-  "execute": {
-    "action": "newWindow",
-    "text": "http://google.com"
-  }
-});
+  "steps": [
+    {
+      "execute": [
+        {
+          "action": "redirect",
+          "page": "api/extras/assert-modes.html"
+        }
+      ]
+    },
+    {
+      "selector": ".grid--third",
+      "verify": [
+        {
+          "method": "verifyCount",
+          "assert-mode": "be above",
+          "asserts": {
+            "count": 2
+          }
+        }
+      ]
+    }
+  ]
 <br>
-drive.execute({
-  "execute": {
-    "action": "switchTab",
-    "index": 1
-  }
 });</code></pre>
-          <p>And this is our expected output:</p>
-          <pre class="language-bash line-numbers"><code>$ grunt webdriver:execute --url=http://datadriver.io
-Running "webdriver:execute" (webdriver) task
+          <p>And here is our expected output:</p>
+          <pre class="language-bash line-numbers"><code>$ grunt webdriver:verify --url=http://datadriver.io
+Running "webdriver:verify" (webdriver) task
 <br>
-⚙ redirecting to "http://datadriver.io/api/execute/switchTab.html"
-⚙ opening a new tab to the url: "http://google.com"
-⚙ retrieving tab list
-⚙ current tab has been switched to selected index
-0 passing</code></pre>
+⚙ redirecting to http://datadriver.io/api/extras/assert-modes.html
+✓ the number of ".grid--third" elements on the page should to be above "2"
+<br>
+1 passing</code></pre>
+          <p>
+            Your assertion modes correspond to most of the <a href="http://chaijs.com/api/bdd/">ChaiJS</a> API. We use the
+            <code>should</code> interface, so the assertion mode in the above example reads "should be above".
+          </p>
+          <p>
+            We don't support the ChaiJS API perfectly, but we do support a lot where it makes sense for our declarative
+            syntax.
+          </p>
         </div>
       </div>
     </div>
