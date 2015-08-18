@@ -91,120 +91,41 @@
           </div>
         </div>
         <div class="flex-box">
-          <h2 class="flex-title">verifyScriptResult()</h2>
+          <h2 class="flex-title">type()</h2>
           <p>
-            The <code>verifyScriptResult()</code> method serves a specialized use case. You can run a piece of JavaScript
-            in your test and verify the result. We'll illustrate how to use this method by writing a test for a dropdown
-            menu. We're going to write a test that verifies the menu is initially hidden, then clicking the button and
-            verifying that the dropdown menu appears below the button, then clicking once more to verify the dropdown is
-            once again hidden.
+            The <code>type()</code> method maps directly to
+            <a href="http://webdriver.io/api/action/setValue.html">setValue() method</a> on WebdriverIO. This method
+            sends a sequence of keystrokes to an element (it clears the value beforehand).
           </p>
           <div class="element-area">
-            <div class="dropdown">
-              <div class="dropdown-container">
-                <p class="dropdown-description">Description</p>
-                <p class="dropdown-button">Click to Select</p>
-                <ul class="dropdown-menu dropdown-select">
-                  <li>Dropdown Menu Item</li>
-                  <li>Another Item</li>
-                  <li>Item Three</li>
-                  <li>The Last One</li>
-                </ul>
-              </div>
-            </div>
+            <input type="text" id="text1">
+            <pre class="language-markup line-numbers"><code>&lt;input type="text" id="text1" /&gt;</code></pre>
           </div>
           <pre class="language-javascript line-numbers"><code>'use strict';
 <br>
 var drive = require('datadriver');
 <br>
-drive.verify({
-<br>
-  "steps": [
-    {
-      "execute": [
-        {
-          "action": "redirect",
-          "page": "api/verify/verifyScriptResult.html"
-        }
-      ]
-    },
-    {
-      "selector": ".dropdown-menu",
-      "verify": [
-        {
-          "method": "verifyCssProperty",
-          "asserts": {
-            "display": "none"
-          }
-        }
-      ]
-    },
-    {
-      "selector": ".dropdown-button",
-      "execute": [{ "action": "click" }]
-    },
-    {
-      "selector": ".dropdown-menu",
-      "verify": [
-        {
-          "method": "verifyCssProperty",
-          "asserts": {
-            "display": "block"
-          }
-        }
-      ]
-    },
-    {
-      "selector": "return document.querySelector('.dropdown-button').offsetTop < document.querySelector('.dropdown-menu').offsetTop",
-      "verify": [
-        {
-          "method": "verifyScriptResult",
-          "asserts": {
-            "result": true
-          }
-        }
-      ]
-    },
-    {
-      "selector": ".dropdown-button",
-      "execute": [{ "action": "click" }]
-    },
-    {
-      "selector": ".dropdown-menu",
-      "verify": [
-        {
-          "method": "verifyCssProperty",
-          "asserts": {
-            "display": "none"
-          }
-        }
-      ]
-    }
-  ]
-<br>
-});</code></pre>
-          <p>
-            With the <code>verifyScriptResult()</code> method, our <code>selector</code> key is actually the script we want
-            to execute. You can execute almost any script as long as it returns a result. However, this is just us being
-            honest, trying to execute full blown functions might prove problematic.
-          </p>
-          <hr>
-          <h2 class="flex-title">Calling verifyScriptResult() directly</h2>
-          <p>
-            You can also call <code>verifyScriptResult()</code> directly in your tests for even more granularity. The
-            method takes an object with four keys. Here's an example of how to call the method.
-          </p>
-          <pre class="language-javascript line-numbers"><code>drive.execute({
-  "selector": ".dropdown-button",
-  "execute": { "action": "click" }
+drive.execute({
+  "execute": {
+    "action": "redirect",
+    "page": "api/execute/type.html"
+  }
 });
 <br>
-drive.verifyScriptResult({
-  selector: 'return document.querySelector(\'.dropdown-button\').offsetTop < document.querySelector(\'.dropdown-menu\').offsetTop',
-	  assertKey: 'result',
-  assert: true,
-  mode: [ 'equal' ]
+drive.execute({
+  "selector": "#text1",
+  "execute": {
+    "action": "type",
+    "text": "hello, world"
+  }
 });</code></pre>
+          <p>And this is our expected output:</p>
+          <pre class="language-bash line-numbers"><code>$ grunt webdriver:execute --url=http://datadriver.io
+Running "webdriver:execute" (webdriver) task
+<br>
+⚙ redirecting to "http://datadriver.io/api/execute/setViewportSize.html"
+⚙ executing "setValue" on "#text1".
+0 passing</code></pre>
         </div>
       </div>
     </div>

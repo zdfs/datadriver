@@ -1,0 +1,41 @@
+extend ../../layouts/nested-2
+block main
+	h2.flex-title type()
+	p
+		| The <code>type()</code> method maps directly to
+		| <a href="http://webdriver.io/api/action/setValue.html">setValue() method</a> on WebdriverIO. This method
+		| sends a sequence of keystrokes to an element (it clears the value beforehand).
+	.element-area
+		input(type="text", id="text1")
+		pre.language-markup.line-numbers
+			code
+				| &lt;input type="text" id="text1" /&gt;
+	pre.language-javascript.line-numbers
+		code
+			| 'use strict';
+			| <br>
+			| var drive = require('datadriver');
+			| <br>
+			| drive.execute({
+			|   "execute": {
+			|     "action": "redirect",
+			|     "page": "api/execute/type.html"
+			|   }
+			| });
+			| <br>
+			| drive.execute({
+			|   "selector": "#text1",
+			|   "execute": {
+			|     "action": "type",
+			|     "text": "hello, world"
+			|   }
+			| });
+	p And this is our expected output:
+	pre.language-bash.line-numbers
+		code
+			| $ grunt webdriver:execute --url=http://datadriver.io
+			| Running "webdriver:execute" (webdriver) task
+			| <br>
+			| ⚙ redirecting to "http://datadriver.io/api/execute/setViewportSize.html"
+			| ⚙ executing "setValue" on "#text1".
+			| 0 passing
