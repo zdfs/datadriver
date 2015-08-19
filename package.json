@@ -1,11 +1,11 @@
 {
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": {
     "name": "Zachary Forrest",
     "email": "zforrest@gmail.com"
   },
   "name": "datadriver",
-  "description": "A Webdriverio helper library for data-driven selenium tests.",
+  "description": "A WebdriverIO helper library for data-driven selenium tests.",
   "keywords": [
     "test",
     "assertion",
@@ -15,7 +15,8 @@
     "selenium",
     "saucelabs",
     "browserstack",
-    "webdriver"
+    "webdriver",
+    "data-driven"
   ],
   "license": "MIT",
   "contributors": [
@@ -44,8 +45,5 @@
     "chai-as-promised": "5.1.0",
     "minimist": "1.1.2"
   },
-  "readmeFilename": "README.md",
-  "_id": "datadriver@0.0.1",
-  "_from": "datadriver@~0.0.1",
-  "private": true
+  "readmeFilename": "README.md"
 }
