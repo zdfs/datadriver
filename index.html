@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Datadriver</title>
+  <link rel="icon" type="image/x-icon" href="public/images/favicon.ico">
+  <link rel="stylesheet" href="public/styles/min/home.css">
+</head>
+<body data-path="public/">
+  <header role="banner" class="centered-navigation">
+    <div class="centered-navigation-wrapper"><a class="mobile-logo">
+        <div data-grunticon-embed class="icon-speed"></div></a><a id="js-centered-navigation-mobile-menu" class="centered-navigation-mobile-menu">MENU</a>
+      <nav role="navigation">
+        <ul id="js-centered-navigation-menu" class="centered-navigation-menu show">
+          <li class="nav-link"><a href="/quick-start.html">Quick Start</a></li>
+          <li class="nav-link"><a href="/api/index.html">API</a></li>
+          <li class="nav-link logo"><a href="/" class="logo">
+              <div data-grunticon-embed class="icon-speed"></div></a></li>
+          <li class="nav-link"><a href="https://github.com/zdfs/datadriver">Github</a></li>
+          <li class="nav-link"><a a href="/about.html">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-title">
+        <div data-grunticon-embed class="icon-config"></div>
+        <h1>Data Driver</h1>
+      </div>
+      <div class="hero-copy">
+        <p>A grunt-webdriver extension for writing data-driven Selenium tests with simple JavaScript data structures.</p>
+      </div>
+    </div>
+  </div>
+  <div class="section section--light">
+    <div class="section--container">
+      <div class="flex-boxes">
+        <div class="flex-box">
+          <div data-grunticon-embed class="icon-browser"></div>
+          <h2 class="flex-title">Selenium tests without complicated code</h2>
+          <p>
+            Datadriver delivers the <a href="http://webdriver.io">WebdriverIO</a> API in easy-to-swallow data
+            structures. Your tests follow a logical step sequence of objects, arrays, and key-value pairs.
+          </p>
+        </div>
+        <div class="flex-box">
+          <div data-grunticon-embed class="icon-bulb"></div>
+          <h2 class="flex-title">Enable non-developers to do more in less time</h2>
+          <p>
+            Datadriver was built for the non-developer. There's no complicated logic, just simple declarative steps.
+            Datadriver will transform those steps to actual tests executed in a browser.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section section--light">
+    <div class="section--container">
+      <div class="flex-boxes">
+        <div class="flex-box border-gray">
+          <h2 class="flex-title">Example test</h2>
+          <p>
+            This is an example of a simple test built with datadriver. Just give a quick look-over right now, we'll
+            give you the working code in the <a href="quick-start.html">Quick Start</a> section.
+          </p>
+          <pre class="language-javascript line-numbers"><code>'use strict';
+<br>
+var drive = require('datadriver');
+<br>
+drive.go({
+<br>
+  "config": {
+    "description": "Duck Duck Go Test",
+    "suites": [
+      {
+        "description": "Search for DataDriver.io",
+        "tests": ["duck-duck-go"],
+        "viewports": { small: true }
+      }
+    ]
+  },
+<br>
+  "duck-duck-go": {
+    "steps": [
+      {
+        "selector": "#search_form_input_homepage",
+        "execute": [{ "action": "type", "text": "Datadriver.io" }]
+      },
+      {
+        "selector": "#search_button_homepage",
+        "execute": [{ "action": "click" }],
+      },
+      {
+        "verify": [
+          {
+            "method": "verifyPageTitle",
+            "asserts": { "title": "Datadriver.io at DuckDuckGo" }
+          }
+        ]
+      }
+    ]
+  }
+<br>
+});</code></pre>
+          <hr>
+          <h2 class="flex-title">Run it</h2>
+          <pre class="language-bash line-numbers"><code>grunt webdriver --url=http://duckduckgo.com</code></pre>
+          <hr>
+          <h2 class="flex title">Output</h2>
+<pre class="language-bash line-numbers"><code>$ grunt webdriver:home --url=http://duckduckgo.com
+Running "webdriver:home" (webdriver) task
+Duck Duck Go Test
+  Rendered in a small viewport
+    Search for DataDriver.io
+      ⚙ executing "setValue" on "#search_form_input_homepage".
+      ⚙ clicking the "#search_button_homepage" element.
+      ✓ the "title" of this page should equal "Datadriver.io at DuckDuckGo"
+<br>
+1 passing (3s)</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer role="contentinfo" class="footer">
+    <div class="footer-content"><a href="/" class="footer-logo">
+        <div data-grunticon-embed class="icon-speed"></div></a>
+      <ul>
+        <li><a href="/quick-start.html">Quick Start</a></li>
+        <li><a href="/api/index.html">API</a></li>
+        <li><a href="https://github.com/zdfs/datadriver">Github</a></li>
+        <li><a a href="/about.html">About</a></li>
+      </ul>
+    </div>
+  </footer>
+  <script src="public/scripts/min/app.js"></script>
+</body>
