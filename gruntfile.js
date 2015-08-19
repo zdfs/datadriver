@@ -18,7 +18,9 @@ var gruntConfig = {
 						height: 1000
 					}
 				}
-			}
+			},
+			reporter: require('datadriver/lib/support/reporter'),
+			ui: 'ddui'
 		},
 		home: {
 			tests: ['tests/*.js']
