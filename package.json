@@ -6,6 +6,7 @@
   },
   "name": "datadriver.io",
   "description": "The website for the data driver helper library.",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/zdfs/datadriver"
