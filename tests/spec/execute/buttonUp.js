@@ -1,6 +1,6 @@
 'use strict';
 
-var drive = require('datadriver');
+var drive = require('../../../lib/datadriver');
 
 drive.execute({
 	"execute": {
