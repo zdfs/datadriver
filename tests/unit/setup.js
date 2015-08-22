@@ -1,7 +1,7 @@
 var test = require('tape');
 var drive = require('../../lib/datadriver');
 
-test('setup() method', function(t) {
+test('The setup() method', function(t) {
 
 	var setup = drive.setup();
 
