@@ -120,17 +120,12 @@ validAssertArrayWithOverrides = {
 };
 
 /**
- * Calling this method makes sure our browser object is
- * initialized properly so the assert overrides will work.
- */
-
-drive.setup();
-
-/**
  * Run our tests.
  */
 
 test('The testProperties() function', function(t) {
+
+	drive.setup();
 
 	var testProperties = drive.__get__('testProperties'),
 			result;

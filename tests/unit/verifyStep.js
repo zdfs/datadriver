@@ -39,13 +39,6 @@ drive.__set__({
 });
 
 /**
- * Call this function to make sure our browser object is
- * set up properly.
- */
-
-drive.setup();
-
-/**
  * Set up or mock functions that push return values to arrays
  * that we can use in our tests.
  */
@@ -133,6 +126,8 @@ dataSet3 = {
 test('The verifyStep() function', function(t) {
 
 	var result;
+
+	drive.setup();
 
 	drive.__set__("testProperties", testPropertiesMock);
 	drive.__set__("fireEvents", fireEventsMock);
