@@ -1,6 +1,19 @@
+/**
+ * Import tape and rewire.
+ */
+
 var test = require('tape');
 var rewire = require('rewire');
+
+/**
+ * Rewire our datadriver module.
+ */
+
 var drive = rewire('../../lib/datadriver');
+
+/**
+ * Run our tests.
+ */
 
 test('The testProperty() function', function(t) {
 

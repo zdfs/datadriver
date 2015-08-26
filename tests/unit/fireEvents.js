@@ -1,76 +1,121 @@
+/**
+ * Import tape and rewire.
+ */
+
 var test = require('tape');
 var rewire = require('rewire');
-var drive = rewire('../../lib/datadriver');
-var called = [];
 
-var executeMock = function(args) {
+/**
+ * Rewire the datadriver module.
+ */
+
+var drive = rewire('../../lib/datadriver');
+
+/**
+ * Test vars that we'll need later.
+ */
+
+var called = [];
+var executeMock;
+var hoverData;
+var moveData;
+var clickData;
+
+/**
+ * Mock out the it function that we use in our asserts.
+ */
+
+drive.__set__({
+	it: function(title, fn) {}
+});
+
+/**
+ * Our executeMock just keeps track of what is called by
+ * pushing the return data to our called[] array.
+ * @param args
+ */
+
+executeMock = function(args) {
 	called.push(args);
 };
 
-var hoverData = {
-	"verifyIndex": 0,
-	"selector": "a[href*=\"api/methods/execute.html\"]",
-	"method": "verifyCssProperty",
-	"asserts": {
-		"color": "rgba(213,72,90,1)"
+/**
+ * Mock data for what a hover event looks like.
+ */
+
+hoverData = {
+	selector: 'a[href*="api/methods/execute.html"]',
+	method: 'verifyCssProperty',
+	asserts: {
+		color: 'rgba(213,72,90,1)'
 	},
-	"mode": [ "equal" ],
-	"actions": [
+	mode: [ 'equal' ],
+	actions: [
 		{
-			"hover": {
-				"assert-mode": "contains",
-				"asserts": {
-					"color": "rgba(170,39,56,1)"
+			hover: {
+				'assert-mode': 'contains',
+				asserts: {
+					color: 'rgba(170,39,56,1)'
 				}
 			}
 		}
 	]
 };
 
-var moveData = {
-	"verifyIndex": 0,
-	"selector": "a[href*=\"api/methods/execute.html\"]",
-	"method": "verifyCssProperty",
-	"asserts": {
-		"color": "rgba(213,72,90,1)"
+/**
+ * Mock data for what a move event looks like.
+ */
+
+moveData = {
+	selector: 'a[href*="api/methods/execute.html"]',
+	method: 'verifyCssProperty',
+	asserts: {
+		color: 'rgba(213,72,90,1)'
 	},
-	"mode": [ "equal" ],
-	"actions": [
+	mode: [ 'equal' ],
+	actions: [
 		{
-			"move": {
-				"to": "a[href*=\"some-other-element\"]",
-				"method": "verifyCount",
-				"assert-mode": "contains",
-				"asserts": {
-					"color": "rgba(0,0,0,1)"
+			move: {
+				to: 'a[href*="some-other-element"]',
+				method: 'verifyCount',
+				'assert-mode': 'contains',
+				asserts: {
+					color: 'rgba(0,0,0,1)'
 				}
 			}
 		}
 	]
 };
 
-var clickData = {
-	"verifyIndex": 0,
-	"selector": "a[href*=\"api/methods/execute.html\"]",
-	"method": "verifyCssProperty",
-	"asserts": {
-		"color": "rgba(213,72,90,1)"
+/**
+ * Mock data for what a click event looks like.
+ */
+
+clickData = {
+	selector: 'a[href*="api/methods/execute.html"]',
+	method: 'verifyCssProperty',
+	asserts: {
+		color: 'rgba(213,72,90,1)'
 	},
-	"mode": [ "equal" ],
-	"actions": [
+	mode: [ 'equal' ],
+	actions: [
 		{
-			"click": {
-				"on": "a[href*=\"some-other-element\"]",
-				"method": "verifyCount",
-				"assert-mode": "contains",
-				"asserts": {
-					"color": "rgba(0,0,0,1)"
+			click: {
+				on: 'a[href*="some-other-element"]',
+				method: 'verifyCount',
+				'assert-mode': 'contains',
+				asserts: {
+					color: 'rgba(0,0,0,1)'
 				},
-				"off": "a[href*=\"jibberish.html\"]"
+				off: 'a[href*="jibberish.html"]'
 			}
 		}
 	]
 };
+
+/**
+ * Run our tests.
+ */
 
 test('The fireEvents() function', function(t) {
 

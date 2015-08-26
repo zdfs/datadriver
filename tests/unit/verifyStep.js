@@ -1,72 +1,134 @@
+/**
+ * Import tape and rewire.
+ */
+
 var test = require('tape');
 var rewire = require('rewire');
+
+/**
+ * Rewire our datadriver module.
+ */
+
 var drive = rewire('../../lib/datadriver');
+
+/**
+ * Other variables our tests are going to need.
+ */
+
 var testPropertiesCalled = [];
 var fireEventsCalled = [];
+var testPropertiesMock;
+var fireEventsMock;
+var dataSet1;
+var dataSet2;
+var dataSet3;
 
-var testPropertiesMock = function(args) {
+/**
+ * Set the capabilities of our browser object.
+ */
+
+drive.__set__({
+	browser: {
+		addCommand: function(title, fn) {
+			return browser[title] = fn;
+		},
+		desiredCapabilities: {
+			browserName: "firefox"
+		}
+	}
+});
+
+/**
+ * Call this function to make sure our browser object is
+ * set up properly.
+ */
+
+drive.setup();
+
+/**
+ * Set up or mock functions that push return values to arrays
+ * that we can use in our tests.
+ */
+
+testPropertiesMock = function(args) {
 	testPropertiesCalled.push(args);
 };
 
-var fireEventsMock = function(args) {
+fireEventsMock = function(args) {
 	fireEventsCalled.push(args);
 };
 
-var dataSet1 = {
-	"selector": ".grid--third",
-	"verify": [
+/**
+ * First mock data object.
+ */
+
+dataSet1 = {
+	selector: '.grid--third',
+	verify: [
 		{
-			"method": "verifyCount",
-			"assert-mode": "be above",
-			"asserts": {
-				"count": 2
+			method: 'verifyCount',
+			'assert-mode': 'be above',
+			asserts: {
+				count: 2
 			}
 		}
 	]
 };
 
-var dataSet2 = {
-	"selector": "#button1",
-	"verify": [
+/**
+ * Our second mock data object.
+ */
+
+dataSet2 = {
+	selector: '#button1',
+	verify: [
 		{
-			"method": "verifyCssProperty",
-			"asserts": {
-				"font-weight": "bold"
+			method: 'verifyCssProperty',
+			asserts: {
+				'font-weight': 'bold'
 			},
-			"asserts-firefox": {
-				"font-weight": 700
+			'asserts-firefox': {
+				'font-weight': 700
 			}
 		}
 	]
 };
 
-var dataSet3 = {
-	"selector": "a[href*=\"api/methods/execute.html\"]",
-	"verify": [
+/**
+ * Or third mock data object.
+ */
+
+dataSet3 = {
+	selector: 'a[href*="api/methods/execute.html"]',
+	verify: [
 		{
-			"method": "verifyCssProperty",
-			"asserts": {
-				"color": "rgba(213,72,90,1)"
+			method: 'verifyCssProperty',
+			asserts: {
+				color: 'rgba(213,72,90,1)'
 			},
-			"then": [
+			then: [
 				{
-					"hover": {
-						"asserts": {
-							"color": "rgba(170,39,56,1)"
+					hover: {
+						asserts: {
+							color: 'rgba(170,39,56,1)'
 						}
 					}
 				}
 			]
 		},
 		{
-			"method": "verifyCount",
-			"assert-mode": "be above",
-			"asserts": {
-				"count": 2
+			method: 'verifyCount',
+			'assert-mode': 'be above',
+			asserts: {
+				count: 2
 			}
 		}
 	]
 };
+
+/**
+ * Run our tests.
+ */
 
 test('The verifyStep() function', function(t) {
 

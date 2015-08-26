@@ -1,13 +1,51 @@
+/**
+ * Import tape and rewire.
+ */
+
 var test = require('tape');
 var rewire = require('rewire');
+
+/**
+ * Rewire our datadriver module.
+ */
+
 var drive = rewire('../../lib/datadriver');
 
-var invalidAssertObject = {
+/**
+ * More variables we're going to need.
+ */
+
+var invalidAssertObject;
+var validAssertObject;
+var validAssertObjectWithOverride;
+var validAssertArray;
+var validAssertArrayWithOverrides;
+
+/**
+ * Set up our browser capabilities and it function for asserts.
+ */
+
+drive.__set__({
+	it: function(title, fn) {},
+	browser: {
+		addCommand: function(title, fn) {
+			return browser[title] = fn;
+		},
+		desiredCapabilities: {
+			browserName: "firefox"
+		}
+	}
+});
+
+/**
+ * Mock data for an invalid assert object.
+ */
+
+invalidAssertObject = {
 	step: {
 		selector: '.grid--third',
 		verify: [{}]
 	},
-	verifyIndex: 0,
 	selector: '.grid--third',
 	method: 'verifyCount',
 	assert: { count: 2 },
@@ -15,12 +53,15 @@ var invalidAssertObject = {
 	actions: undefined
 };
 
-var validAssertObject = {
+/**
+ * Mock data for a valid assert object.
+ */
+
+validAssertObject = {
 	step: {
 		selector: '.grid--third',
 		verify: [{}]
 	},
-	verifyIndex: 0,
 	selector: '.grid--third',
 	method: 'verifyCount',
 	asserts: { count: 2 },
@@ -28,12 +69,15 @@ var validAssertObject = {
 	actions: undefined
 };
 
-var validAssertObjectWithOverride = {
+/**
+ * Mock data for a valid assert object with browser-specific overrides.
+ */
+
+validAssertObjectWithOverride = {
 	step: {
 		selector: '.grid--third',
 		verify: [{}]
 	},
-	verifyIndex: 0,
 	selector: '.grid--third',
 	method: 'verifyCount',
 	asserts: { count: 2 },
@@ -42,12 +86,15 @@ var validAssertObjectWithOverride = {
 	actions: undefined
 };
 
-var validAssertArray = {
+/**
+ * Mock data for a valid assert array.
+ */
+
+validAssertArray = {
 	step: {
 		selector: '.grid--third',
 		verify: [{}]
 	},
-	verifyIndex: 0,
 	selector: '.grid--third',
 	method: 'verifyCount',
 	asserts: [ { count: 2 }, { count: 3 } ],
@@ -55,12 +102,15 @@ var validAssertArray = {
 	actions: undefined
 };
 
-var validAssertArrayWithOverrides = {
+/**
+ * Mock data for a valid assert array with browser-specific overrides.
+ */
+
+validAssertArrayWithOverrides = {
 	step: {
 		selector: '.grid--third',
 		verify: [{}]
 	},
-	verifyIndex: 0,
 	selector: '.grid--third',
 	method: 'verifyCount',
 	asserts: [ { count: 2 }, { count: 3 } ],
@@ -69,6 +119,16 @@ var validAssertArrayWithOverrides = {
 	actions: undefined
 };
 
+/**
+ * Calling this method makes sure our browser object is
+ * initialized properly so the assert overrides will work.
+ */
+
+drive.setup();
+
+/**
+ * Run our tests.
+ */
 
 test('The testProperties() function', function(t) {
 

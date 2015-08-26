@@ -1,27 +1,55 @@
+/**
+ * Import tape and rewire.
+ */
+
 var test = require('tape');
 var rewire = require('rewire');
+
+/**
+ * Rewire our datadriver module.
+ */
+
 var drive = rewire('../../lib/datadriver');
+
+/**
+ * More variables we're going to need for our tests.
+ */
+
 var verifyCalled = [];
 var executeCalled = [];
+var verifyStepMock;
+var executeStepMock;
+var invalidData;
+var onlySelectorData;
+var validData;
 
-var verifyStepMock = function(args) {
+/**
+ * Initialize our mock functions. Both of which just push
+ * the return objec to an array so we can use it later in tests.
+ */
+
+verifyStepMock = function(args) {
 	verifyCalled.push(args);
 };
 
-var executeStepMock = function(args) {
+executeStepMock = function(args) {
 	executeCalled.push(args);
 };
 
-var invalidData = {
+/**
+ * Mock data for an invalid object.
+ */
 
-	"not-a-step": [
+invalidData = {
+
+	'not-a-step': [
 		{
-			"selector": ".dont-care",
-			"verify": [
+			selector: '.dont-care',
+			verify: [
 				{
-					"method": "verifyCount",
-					"asserts": {
-						"count": 1
+					method: 'verifyCount',
+					asserts: {
+						count: 1
 					}
 				}
 			]
@@ -30,64 +58,77 @@ var invalidData = {
 
 };
 
-var onlySelectorData = {
+/**
+ * Mock data for an object with only a selector, no verify or
+ * execute instructions.
+ */
 
-	"steps": [
+onlySelectorData = {
+
+	steps: [
 		{
-			"selector": ".dont-care"
+			selector: '.dont-care'
 		}
 	]
 
 };
 
-var validData = {
+/**
+ * Mock data for a valid object.
+ */
 
-	"steps": [
+validData = {
+
+	steps: [
 		{
-			"selector": ".dont-care",
-			"verify": [
+			selector: '.dont-care',
+			verify: [
 				{
-					"method": "verifyCount",
-					"asserts": {
-						"count": 1
+					method: 'verifyCount',
+					asserts: {
+						count: 1
 					}
 				},
 				{
-					"method": "verifyPageTitle",
-					"asserts": {
-						"title": "Watch me nay-nay."
+					method: 'verifyPageTitle',
+					asserts: {
+						title: 'Watch me nay-nay.'
 					}
 				}
 			],
-			"execute": [
-				{ "action": "click" },
-				{ "action": "pause", "time": 350 }
+			execute: [
+				{ action: 'click' },
+				{ action: 'pause', time: 350 }
 			]
 		},
 		{
-			"selector": ".dont-care-either",
-			"verify": [
+			selector: '.dont-care-either',
+			verify: [
 				{
-					"method": "verifyCount",
-					"asserts": {
-						"count": 1
+					method: 'verifyCount',
+					asserts: {
+						count: 1
 					}
 				},
 				{
-					"method": "verifyPageTitle",
-					"asserts": {
-						"title": "Watch me nay-nay."
+					method: 'verifyPageTitle',
+					asserts: {
+						title: 'Watch me nay-nay.'
 					}
 				}
 			],
-			"execute": [
-				{ "action": "click" },
-				{ "action": "pause", "time": 350 }
+			execute: [
+				{ action: 'click' },
+				{ action: 'pause', time: 350 }
 			]
 		}
 	]
 
 };
+
+/**
+ * Run our tests.
+ */
 
 test('The verify() function', function(t) {
 

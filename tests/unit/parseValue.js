@@ -1,6 +1,19 @@
+/**
+ * Import tape and rewire.
+ */
+
 var test = require('tape');
 var rewire = require('rewire');
+
+/**
+ * Rewire the datadriver module.
+ */
+
 var drive = rewire('../../lib/datadriver');
+
+/**
+ * Run our tests.
+ */
 
 test('The parseValue() function', function(t) {
 

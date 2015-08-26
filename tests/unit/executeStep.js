@@ -1,23 +1,53 @@
+/**
+ * Require tape and rewire.
+ */
+
 var test = require('tape');
 var rewire = require('rewire');
+
+/**
+ * Rewire the datadriver module
+ */
+
 var drive = rewire('../../lib/datadriver');
+
+/**
+ * An array for keeping track of the actions we call.
+ * @type {Array}
+ */
+
 var executeCalled = [];
+
+/**
+ * A mock function that just pushes the return value
+ * to our executeCalled array for testing.
+ * @param args
+ */
+
 var executeMock = function(args) {
 	executeCalled.push(args);
 };
 
+/**
+ * Our mock data for the executeStep function.
+ */
+
 var actionSet = {
-	"selector": ".some-element",
-	"execute": [
+	selector: '.some-element',
+	execute: [
 		{
-			"action": "pause",
-			"time": 350
+			action: 'pause',
+			time: 350
 		},
 		{
-			"action": "click"
+			action: 'click'
 		}
 	]
 };
+
+/**
+ * Run our test.
+ */
 
 test('The executeStep() function', function(t) {
 

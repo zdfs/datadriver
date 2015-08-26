@@ -1,5 +1,34 @@
+/**
+ * Import tape and rewire.
+ */
+
 var test = require('tape');
-var drive = require('../../lib/datadriver');
+var rewire = require('rewire');
+
+/**
+ * Rewire the datadriver module.
+ */
+
+var drive = rewire('../../lib/datadriver');
+
+/**
+ * Set up our browser capabilities.
+ */
+
+drive.__set__({
+	browser: {
+		addCommand: function(title, fn) {
+			return browser[title] = fn;
+		},
+		desiredCapabilities: {
+			browserName: "firefox"
+		}
+	}
+});
+
+/**
+ * Run our tests.
+ */
 
 test('The setup() method', function(t) {
 

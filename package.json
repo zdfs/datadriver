@@ -47,8 +47,7 @@
   "devDependencies": {
     "rewire": "^2.3.4",
     "tap-spec": "4.0.2",
-    "tape": "4.2.0",
-    "webdriverio": "3.1.0"
+    "tape": "4.2.0"
   },
   "readmeFilename": "README.md"
 }
