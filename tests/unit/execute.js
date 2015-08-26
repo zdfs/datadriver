@@ -27,7 +27,11 @@ methodsCalled = {
 	refresh: 0,
 	pause: 0,
 	moveToObject: 0,
-	click: 0
+	click: 0,
+	setViewportSize: 0,
+	execute: 0,
+	executeAndStore: 0,
+	keys: 0
 };
 
 /**
@@ -60,6 +64,18 @@ drive.__set__({
 		},
 		click: function() {
 			methodsCalled.click++;
+		},
+		setViewportSize: function() {
+			methodsCalled.setViewportSize++;
+		},
+		execute: function() {
+			methodsCalled.execute++;
+		},
+		executeAndStore: function() {
+			methodsCalled.executeAndStore++;
+		},
+		keys: function() {
+			methodsCalled.keys++;
 		}
 	},
 	it: function(title, fn) {
@@ -293,6 +309,155 @@ test('Execute a click action', function(t) {
 	t.equal(result.args[0], '.so-what', 'The test is passed the selector as an argument.');
 	t.equal(result.description, 'clicking the ".so-what" element.', 'The test description is correct.');
 	t.equal(methodsCalled.click, 1, 'The browser.click() method was called.');
+
+	t.end();
+
+});
+
+/**
+ * Tests for a setViewportSize action.
+ */
+
+test('Execute a setViewportSize action', function(t) {
+
+	var result;
+	var setViewportSizeAction;
+
+	setViewportSizeAction = {
+		execute: {
+			action: 'setViewportSize',
+			height: 400,
+			width: 350
+		}
+	};
+
+	result = drive.execute(setViewportSizeAction);
+
+	t.equal(result.method, 'setViewportSize', 'The browser method is setViewportSize()');
+	t.equal(result.args[0].height, 400, 'The test is passed a argument object with a height of 400.');
+	t.equal(result.args[0].width, 350, 'The test is passed a argument object with a width of 350.');
+	t.equal(result.description, 'giving the viewport a height of "400" and a width of "350"', 'The test description should be correct.');
+	t.equal(methodsCalled.setViewportSize, 1, 'the browser.setViewportSize() method was called.');
+
+	t.end();
+
+});
+
+/**
+ * Tests for an execute or eval action.
+ */
+
+test('Execute an eval or execute action', function(t) {
+
+	var result;
+	var evalAction;
+	var executeAction;
+
+	evalAction = {
+		execute: {
+			action: 'eval',
+			script: 'return 2 + 2;'
+		}
+	};
+
+	executeAction = {
+		execute: {
+			action: 'execute',
+			script: 'return 2 + 2;'
+		}
+	};
+
+	result = drive.execute(evalAction);
+
+	t.equal(result.method, 'execute', 'The browser method is execute()');
+	t.equal(result.args[0], 'return 2 + 2;', 'The script to be executed is passed as an argument.');
+	t.equal(result.description, 'executing javascript: return 2 + 2;', 'The test description is correct.');
+	t.equal(methodsCalled.execute, 1, 'The browser.execute() method was called.');
+
+	drive.execute(executeAction);
+
+	t.equal(methodsCalled.execute, 2, 'The browser.execute() method was called for an "execute" action.');
+
+	t.end();
+
+});
+
+/**
+ * Tests for an executeAndStore action.
+ */
+
+test('Execute an executeAndStore action', function(t) {
+
+	var result;
+	var evalAndStoreAction;
+	var executeAndStoreAction;
+
+	evalAndStoreAction = {
+		execute: {
+			action: 'evalAndStore',
+			script: 'return 2 + 2;',
+			resultKey: 'evalKey'
+		}
+	};
+
+	executeAndStoreAction = {
+		execute: {
+			action: 'executeAndStore',
+			script: 'return 2 + 2;',
+			resultKey: 'executeKey'
+		}
+	};
+
+	result = drive.execute(evalAndStoreAction);
+
+	t.equal(result.method, 'executeAndStore', 'The browser method is executeAndStore()');
+	t.equal(result.args[0], 'return 2 + 2;', 'The test gets a script argument.');
+	t.equal(result.args[1], 'evalKey', 'The test gets a resultKey argument.');
+	t.equal(result.description, 'executing javascript and storing the result in local storage.', 'The test description is correct.');
+	t.equal(methodsCalled.executeAndStore, 1, 'The browser.executeAndStore() method was called.');
+
+	drive.execute(executeAndStoreAction);
+
+	t.equal(methodsCalled.executeAndStore, 2, 'The browser.executeAndStore() method was called with an "executeAndStore" action.');
+
+	t.end();
+
+});
+
+/**
+ * Tests for a keys or sendKeystroke action.
+ */
+
+test('Execute a keys or sendKeystroke action', function(t) {
+
+	var result;
+	var keysAction;
+	var sendKeystrokeAction;
+
+	sendKeystrokeAction = {
+		execute: {
+			action: 'sendKeystroke',
+			keystrokes: 'Equals'
+		}
+	};
+
+	keysAction = {
+		execute: {
+			action: 'keys',
+			keystrokes: 'Semicolon'
+		}
+	};
+
+	result = drive.execute(sendKeystrokeAction);
+
+	t.equals(result.method, 'keys', 'The browser method is keys()');
+	t.equals(result.args[0], 'Equals', 'The test gets the keystrokes argument.');
+	t.equals(result.description, 'sending keystroke(s) Equals');
+	t.equals(methodsCalled.keys, 1, 'The browser.keys() method was called.');
+
+	drive.execute(keysAction);
+
+	t.equals(methodsCalled.keys, 2, 'The browser.keys() method was called for the "keys" action.');
 
 	t.end();
 
