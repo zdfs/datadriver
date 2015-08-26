@@ -31,7 +31,12 @@ methodsCalled = {
 	setViewportSize: 0,
 	execute: 0,
 	executeAndStore: 0,
-	keys: 0
+	keys: 0,
+	buttonDown: 0,
+	buttonUp: 0,
+	moveTo: 0,
+	setCookie: 0,
+	deleteCookie: 0
 };
 
 
@@ -77,6 +82,21 @@ drive.__set__({
 		},
 		keys: function() {
 			methodsCalled.keys++;
+		},
+		buttonDown: function() {
+			methodsCalled.buttonDown++;
+		},
+		buttonUp: function() {
+			methodsCalled.buttonUp++;
+		},
+		moveTo: function() {
+			methodsCalled.moveTo++;
+		},
+		setCookie: function() {
+			methodsCalled.setCookie++;
+		},
+		deleteCookie: function() {
+			methodsCalled.deleteCookie++;
 		}
 	},
 	it: function(title, fn) {
@@ -459,6 +479,160 @@ test('Execute a keys or sendKeystroke action', function(t) {
 	drive.execute(keysAction);
 
 	t.equals(methodsCalled.keys, 2, 'The browser.keys() method was called for the "keys" action.');
+
+	t.end();
+
+});
+
+/**
+ * Tests for the buttonDown action.
+ */
+
+test('Execute a buttonDown action', function(t) {
+
+	var result;
+	var buttonDownAction;
+
+	buttonDownAction = {
+		execute: {
+			action: 'buttonDown',
+			button: 0
+		}
+	};
+
+	result = drive.execute(buttonDownAction);
+
+	t.equals(result.method, 'buttonDown', 'The browser method is buttonDown()');
+	t.equals(result.args[0], 0, 'The test is passed the left button.');
+	t.equals(result.description, 'pushing the left click down', 'The test description is correct.');
+	t.equals(methodsCalled.buttonDown, 1, 'The browser.buttonDown() method was called.');
+
+	t.end();
+
+});
+
+/**
+ * Tests for the buttonUp action.
+ */
+
+test('Execute a buttonUp action', function(t) {
+
+	var result;
+	var buttonUpAction;
+
+	buttonUpAction = {
+		execute: {
+			action: 'buttonUp',
+			button: 2
+		}
+	};
+
+	result = drive.execute(buttonUpAction);
+
+	t.equals(result.method, 'buttonUp', 'The browser method is buttonUp()');
+	t.equals(result.args[0], 2, 'The test is passed the right button.');
+	t.equals(result.description, 'releasing the right click', 'The test description is correct.');
+	t.equals(methodsCalled.buttonUp, 1, 'The browser.buttonUp() method was called.');
+
+	t.end();
+
+});
+
+/**
+ * Tests for the moveTo action.
+ */
+
+test('Execute a moveTo action', function(t) {
+
+	var result;
+	var moveToAction;
+
+	moveToAction = {
+		selector: '.so-what',
+		execute: {
+			action: 'moveTo',
+			x: 10,
+			y: 15
+		}
+	};
+
+	result = drive.execute(moveToAction);
+
+	t.equals(result.method, 'moveTo', 'The browser method is moveTo()');
+	t.equals(result.args[0], null, 'The first argument is set to null');
+	t.equals(result.args[1], 10, 'The second argument is x set to 10');
+	t.equals(result.args[2], 15, 'The third argument is y set to 15');
+	t.equals(result.description, 'moving the .so-what element to new coordinates.', 'The test description is correct');
+	t.equals(methodsCalled.moveTo, 1, 'The browser.moveTo() method was called.');
+
+	t.end();
+
+});
+
+/**
+ * Tests for the setCookie action.
+ */
+
+test('Execute a setCookie action', function(t) {
+
+	var result;
+	var setCookieAction;
+
+	setCookieAction = {
+		execute: {
+			action: 'setCookie',
+			name: 'cookieMonster',
+			value: 'COOKIES!'
+		}
+	};
+
+	result = drive.execute(setCookieAction);
+
+	t.equals(result.method, 'setCookie', 'The browser method is setCookie()');
+	t.equals(result.args[0].name, 'cookieMonster', 'The test method has an args object with a name key of "cookieMonster".');
+	t.equals(result.args[0].value, 'COOKIES!', 'The test method has an args object with a value key of "COOKIES!"');
+	t.equals(result.description, 'setting a cookie with name: "cookieMonster" and value: "COOKIES!"', 'The test description is correct.');
+	t.equals(methodsCalled.setCookie, 1, 'The browser.setCookie() method was called.');
+
+	t.end();
+
+});
+
+/**
+ * Tests the deleteCookie action.
+ */
+
+test('Execute a deleteCookie action', function(t) {
+
+	var result;
+	var deleteSingleCookieAction;
+	var deleteAllCookiesAction;
+
+	deleteSingleCookieAction = {
+		execute: {
+			action: 'deleteCookie',
+			name: 'cookieMonster'
+		}
+	};
+
+	deleteAllCookiesAction = {
+		execute: {
+			action: 'deleteCookie'
+		}
+	};
+
+	result = drive.execute(deleteSingleCookieAction);
+
+	t.equals(result.method, 'deleteCookie', 'The browser method is deleteCookie()');
+	t.equals(result.args[0], 'cookieMonster', 'The test method is passed a name argument of "cookieMonster".');
+	t.equals(result.description, 'deleting a cookie with name: "cookieMonster"', 'The test description is correct.');
+	t.equals(methodsCalled.deleteCookie, 1, 'The browser.deleteCookie() method was called.');
+
+	result = drive.execute(deleteAllCookiesAction);
+
+	t.equals(result.args.length, 0, 'The test method doesn\'t have any arguments');
+	t.equals(result.description, 'deleting all the cookies', 'The test description is correct.');
+	t.equals(methodsCalled.deleteCookie, 2, 'The browser.deleteCooke() method was called again.');
 
 	t.end();
 
