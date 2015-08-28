@@ -1,0 +1,10 @@
+box: node
+build:
+  steps:
+    - npm-install
+    - script:
+        name: Run Unit Tests
+        code: ./node_modules/.bin/tape tests/unit/*.js | ./node_modules/.bin/tap-spec
+    - script:
+        name: Run Integration Tests
+        code: webdriver --url=http://datadriver.io
