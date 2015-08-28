@@ -3,9 +3,6 @@ build:
   steps:
     - npm-install
     - script:
-      name: Install grunt
-      code: npm install grunt
-    - script:
       name: Run Unit Tests
       code: ./node_modules/.bin/tape tests/unit/*.js | ./node_modules/.bin/tap-spec
     - grunt:
