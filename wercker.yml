@@ -1,4 +1,4 @@
-box: node
+box: yanchek99/datadriver
 build:
   steps:
     - npm-install
