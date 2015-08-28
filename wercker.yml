@@ -1,7 +1,5 @@
 box: node
 build:
-  services:
-    - java
   steps:
     - npm-install
     - script:
