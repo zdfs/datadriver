@@ -44,7 +44,8 @@ drive.verify({
 				}
 			],
 			"execute": [
-				{ "action": "click" }
+				{ "action": "click" },
+        { "action": "pause", "time": "3000"}
 			]
 		},
 
