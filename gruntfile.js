@@ -1,5 +1,5 @@
 var gruntConfig = {
-  webdriver: {
+  datadriver: {
     options: {
       desiredCapabilities: {
         browserName: 'chrome',
@@ -30,5 +30,5 @@ var gruntConfig = {
 
 module.exports = function(grunt) {
   grunt.initConfig(gruntConfig);
-  grunt.loadNpmTasks('grunt-webdriver');
+  grunt.loadNpmTasks('grunt-datadriver');
 };
