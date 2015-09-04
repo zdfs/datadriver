@@ -32,7 +32,7 @@ drive.execute({
 
 drive.execute({
   "execute": {
-    "action": "switchTab",
+    "action": "closeTab",
     "focusIndex": 0
   }
 });

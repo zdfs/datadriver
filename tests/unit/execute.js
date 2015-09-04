@@ -41,7 +41,6 @@ methodsCalled = {
 	switchTab: 0,
 	closeTab: 0,
 	getTabIds: 0,
-	log: 0,
 	close: 0
 };
 
@@ -61,51 +60,67 @@ drive.__set__({
 		},
 		url: function() {
 			methodsCalled.url++;
+			return Promise.resolve();
 		},
 		setValue: function() {
 			methodsCalled.setValue++;
+			return Promise.resolve();
 		},
 		refresh: function() {
 			methodsCalled.refresh++;
+			return Promise.resolve();
 		},
 		pause: function() {
 			methodsCalled.pause++;
+			return Promise.resolve();
 		},
 		moveToObject: function() {
 			methodsCalled.moveToObject++;
+			return Promise.resolve();
 		},
 		click: function() {
 			methodsCalled.click++;
+			return Promise.resolve();
 		},
 		setViewportSize: function() {
 			methodsCalled.setViewportSize++;
+			return Promise.resolve();
 		},
 		execute: function() {
 			methodsCalled.execute++;
+			return Promise.resolve();
 		},
 		executeAndStore: function() {
 			methodsCalled.executeAndStore++;
+			return Promise.resolve();
 		},
 		keys: function() {
 			methodsCalled.keys++;
+			return Promise.resolve();
 		},
 		buttonDown: function() {
 			methodsCalled.buttonDown++;
+			return Promise.resolve();
 		},
 		buttonUp: function() {
 			methodsCalled.buttonUp++;
+			return Promise.resolve();
 		},
 		moveTo: function() {
 			methodsCalled.moveTo++;
+			return Promise.resolve();
 		},
 		setCookie: function() {
 			methodsCalled.setCookie++;
+			return Promise.resolve();
 		},
 		deleteCookie: function() {
 			methodsCalled.deleteCookie++;
+			return Promise.resolve();
 		},
 		newWindow: function() {
 			methodsCalled.newWindow++;
+			return Promise.resolve();
 		},
 		switchTab: function(tab) {
 			methodsCalled.switchTab++;
@@ -113,6 +128,7 @@ drive.__set__({
 		},
 		closeTab: function() {
 			methodsCalled.closeTab++;
+			return Promise.resolve();
 		},
 		getTabIds: function() {
 			methodsCalled.getTabIds++;
@@ -121,9 +137,6 @@ drive.__set__({
 		close: function() {
 			methodsCalled.close++;
 			return Promise.resolve();
-		},
-		log: function() {
-			methodsCalled.log++;
 		}
 	},
 	it: function(title, fn) {
@@ -708,16 +721,12 @@ test('Execute a switchTab action', function(t) {
 		}
 	};
 
-	result = drive.execute(switchTabAction);
+	drive.execute(switchTabAction);
 
 	setTimeout(function() {
 
-		t.equals(result.method, 'log', 'The browser method ends with log()');
-		t.equals(result.args[0], 'browser', 'We\'re returning the browser logs.');
-		t.equals(result.description, 'current tab has been switched to tab index "2"', 'The test description is correct.');
 		t.equals(methodsCalled.getTabIds, 1, 'The browser.getTabIds() method was called.');
 		t.equals(methodsCalled.switchTab, 1, 'The browser.switchTab() method was called.');
-		t.equals(methodsCalled.log, 1, 'The browser.log() method has been called.');
 
 		t.end();
 
@@ -741,16 +750,12 @@ test('Execute a closeTab action', function(t) {
 		}
 	};
 
-	result = drive.execute(closeTabAction);
+	drive.execute(closeTabAction);
 
 	setTimeout(function() {
 
-		t.equals(result.method, 'log', 'The browser method ends with log()');
-		t.equals(result.args[0], 'browser', 'We\'re returning the browser logs.');
-		t.equals(result.description, 'Tab index "2" has been closed.', 'The test description is correct.');
 		t.equals(methodsCalled.getTabIds, 2, 'The browser.getTabIds() method was called.');
 		t.equals(methodsCalled.close, 1, 'The browser.close() method was called.');
-		t.equals(methodsCalled.log, 2, 'The browser.log() method has been called.');
 
 		t.end();
 

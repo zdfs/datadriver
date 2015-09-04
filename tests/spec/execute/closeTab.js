@@ -36,3 +36,10 @@ drive.execute({
     "focusIndex": 0
   }
 });
+
+drive.execute({
+  "execute": {
+    "action": "pause",
+    "time": 5000
+  }
+});
