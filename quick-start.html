@@ -29,7 +29,7 @@
         <h2>Quick Start</h2>
         <p>
           Datadriver works in conjunction with the <a href="http://webdriver.io">WebdriverIO</a> API and the
-          <a href="https://github.com/webdriverio/grunt-webdriver">grunt-webdriver</a> plugin. We'll take you
+          <a href="https://github.com/zdfs/grunt-datadriver">grunt-datadriver</a> plugin. We'll take you
           through setting up a project step-by-step, or you can just
           <a href="https://github.com/zdfs/datadriver/archive/quick-start.zip">download the code</a>.
         </p>
@@ -44,15 +44,15 @@
     "node": ">= 0.12.0"
   },
   "devDependencies": {
-    "datadriver": "0.1.4",
+    "datadriver": "0.2.0",
     "grunt": "0.4.5",
-    "grunt-webdriver": "0.5.2"
+    "grunt-datadriver": "0.6.0"
   }
 }</code></pre>
               </li>
               <li>Create a <code>gruntfile.js</code> file with the following contents.
                 <pre class="language-javascript line-numbers"><code>var gruntConfig = {
-  webdriver: {
+  datadriver: {
     options: {
       desiredCapabilities: {
         browserName: 'chrome',
@@ -81,7 +81,7 @@
 <br>
 module.exports = function(grunt) {
   grunt.initConfig(gruntConfig);
-  grunt.loadNpmTasks('grunt-webdriver');
+  grunt.loadNpmTasks('grunt-datadriver');
 };</code></pre>
               </li>
               <li>In your root directory, create another directory called <code>tests</code>.
@@ -133,11 +133,11 @@ drive.go({
               <li>From your command line program, navigate to your root directory and run the test.
                 <pre class="language-bash line-numbers"><code>cd &lt;your root directory path&gt;
 npm install
-grunt webdriver --url=https://duckduckgo.com</code></pre>
+grunt datadriver --url=https://duckduckgo.com</code></pre>
               </li>
               <li>Your output should look something like this:
-                <pre class="language-bash line-numbers"><code>$ grunt webdriver:home --url=http://duckduckgo.com
-Running "webdriver:home" (webdriver) task
+                <pre class="language-bash line-numbers"><code>$ grunt datadriver:home --url=http://duckduckgo.com
+Running "datadriver:home" (datadriver) task
 Duck Duck Go Test
   Rendered in a small viewport
     Search for DataDriver.io

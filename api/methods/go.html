@@ -172,8 +172,8 @@ drive.go({
             method handles all of this for you, but in short, the BDD interface allows for the output you've been seeing in
             our examples.
           </p>
-          <pre class="language-bash line-numbers"><code>$ grunt webdriver:home --url=http://duckduckgo.com
-Running "webdriver:home" (webdriver) task
+          <pre class="language-bash line-numbers"><code>$ grunt datadriver:home --url=http://duckduckgo.com
+Running "datadriver:home" (datadriver) task
 Duck Duck Go Test
   Rendered in a small viewport
     Search for DataDriver.io
@@ -283,8 +283,8 @@ drive.go({
   }
 <br>
 });</code></pre>This should give us the following output:
-                  <pre class="language-bash line-numbers"><code>$ grunt webdriver:duckduckgo --url=http://duckduckgo.com
-Running "webdriver:duckduckgo" (webdriver) task
+                  <pre class="language-bash line-numbers"><code>$ grunt datadriver:duckduckgo --url=http://duckduckgo.com
+Running "datadriver:duckduckgo" (datadriver) task
 Duck Duck Go Tests
   Rendered in a small viewport
     Do the search and verify the logo
@@ -308,8 +308,8 @@ Duck Duck Go Tests
   "medium": true
 }</code></pre>then <code>go()</code> will run all the tests for both the small and medium viewports, doubling your test
                   count. You can see the output below:
-                  <pre class="language-bash line-numbers"><code>$ grunt webdriver:duckduckgo --url=https://duckduckgo.com
-Running "webdriver:duckduckgo" (webdriver) task
+                  <pre class="language-bash line-numbers"><code>$ grunt datadriver:duckduckgo --url=https://duckduckgo.com
+Running "datadriver:duckduckgo" (datadriver) task
 Duck Duck Go Tests
   Rendered in a small viewport
     Verify the logo

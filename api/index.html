@@ -107,6 +107,17 @@
           </div>
           <hr>
           <h3 class="flex-title">Test output</h3>
+          <div class="flash-error">
+            <p>
+              This configuration is only needed if you're using grunt-webdriver and datadriver <code>0.1.4</code>. If you're
+              using datadriver <code>0.2.0</code> and above, the following configuration is done for you in the
+              grunt-datadriver plugin.
+            </p>
+            <p>
+              <b>Please note:</b> some of the API calls documented have changed since <code>0.1.4</code>. We encourage you
+              to use the latest version possible so that the documentation works as expected.
+            </p>
+          </div>
           <p>
             Please note that the default output of Mocha's test runner treats everything like a test. If you click a button,
             type some text in to a field (basically any executable action), they will be treated like "tests" and increase
@@ -162,8 +173,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-webdriver');
 };</code></pre>
           <p>Your test output should look something like the following (all API examples will use this format):</p>
-          <pre class="language-bash line-numbers"><code>$ grunt webdriver:home --url=http://duckduckgo.com
-Running "webdriver:home" (webdriver) task
+          <pre class="language-bash line-numbers"><code>$ grunt datadriver:home --url=http://duckduckgo.com
+Running "datadriver:home" (datadriver) task
 Duck Duck Go Test
   Rendered in a small viewport
     Search for DataDriver.io

@@ -94,7 +94,7 @@
         <div class="flex-box">
           <h2 class="flex-title">getBaseUrl()</h2>
           <p>When you run a test from the command line, like this for example:</p>
-          <pre class="language-bash line-numbers"><code>grunt webdriver --url=http://duckduckgo.com</code></pre>
+          <pre class="language-bash line-numbers"><code>grunt datadriver --url=http://duckduckgo.com</code></pre>
           <p>
             You're passing the url you want your tests to begin from to the <code>getBaseUrl()</code> function, which is
             exposed to you for use within your tests. Let's look at our DuckDuckGo example again, but this time, we're going
@@ -136,10 +136,10 @@ drive.go({
 <br>
 });</code></pre>
           <p>When I run the script from the command line:</p>
-          <pre class="language-bash line-numbers"><code>grunt webdriver --url=https://duckduckgo.com</code></pre>
+          <pre class="language-bash line-numbers"><code>grunt datadriver --url=https://duckduckgo.com</code></pre>
           <p>I get the following output.</p>
-          <pre class="language-bash line-numbers"><code>$ grunt webdriver:duckduckgo --url=https://duckduckgo.com
-Running "webdriver:duckduckgo" (webdriver) task
+          <pre class="language-bash line-numbers"><code>$ grunt datadriver:duckduckgo --url=https://duckduckgo.com
+Running "datadriver:duckduckgo" (datadriver) task
 Duck Duck Go Test
   Rendered in a large viewport
     Verify DuckDuckGo logo
