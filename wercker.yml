@@ -19,4 +19,4 @@ build:
       name: Run Unit Tests
       code: ./node_modules/.bin/tape tests/unit/*.js | ./node_modules/.bin/tap-spec
     - grunt:
-      tasks: webdriver --url=http://datadriver.io
+      tasks: datadriver --url=http://datadriver.io

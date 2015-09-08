@@ -1,5 +1,5 @@
 var gruntConfig = {
-  webdriver: {
+  datadriver: {
     options: {
       desiredCapabilities: {
         browserName: 'chrome',
@@ -18,9 +18,7 @@ var gruntConfig = {
             height: 1000
           }
         }
-      },
-      reporter: require('./lib/support/reporter'),
-      ui: 'ddui'
+      }
     },
     spec: {
       tests: ['tests/spec/**/*.js']
@@ -30,5 +28,5 @@ var gruntConfig = {
 
 module.exports = function(grunt) {
   grunt.initConfig(gruntConfig);
-  grunt.loadNpmTasks('grunt-webdriver');
+  grunt.loadNpmTasks('grunt-datadriver');
 };
