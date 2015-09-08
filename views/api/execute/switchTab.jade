@@ -22,24 +22,23 @@ block main
 			| drive.execute({
 			|   "execute": {
 			|     "action": "newWindow",
-			|     "text": "http://google.com"
+			|     "text": "http://google.com" // new window introduces a new tab index of 1
 			|   }
 			| });
 			| <br>
 			| drive.execute({
 			|   "execute": {
 			|     "action": "switchTab",
-			|     "index": 1
+			|     "focusIndex": 0 // switching back to our original window
 			|   }
 			| });
 	p And this is our expected output:
 	pre.language-bash.line-numbers
 		code
-			| $ grunt webdriver:execute --url=http://datadriver.io
-			| Running "webdriver:execute" (webdriver) task
+			| $ grunt datadriver:execute --url=http://datadriver.io
+			| Running "datadriver:execute" (datadriver) task
 			| <br>
 			| ⚙ redirecting to "http://datadriver.io/api/execute/switchTab.html"
 			| ⚙ opening a new tab to the url: "http://google.com"
-			| ⚙ retrieving tab list
-			| ⚙ current tab has been switched to selected index
+			| ⚙ closing the current tab and focusing on tab index: 0
 			| 0 passing

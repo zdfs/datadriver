@@ -34,7 +34,7 @@
     "grunt-express-server": "0.5.1",
     "grunt-grunticon": "2.2.1",
     "grunt-sass": "1.0.0",
-    "grunt-webdriver": "0.5.2",
+    "grunt-datadriver": "0.6.0",
     "jade": "1.11.0",
     "jquery": "2.1.4"
   },

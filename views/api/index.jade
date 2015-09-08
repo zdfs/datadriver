@@ -12,6 +12,14 @@ block main
 			| issue or a request, you can <a href="https://github.com/zdfs/datadriver/issues">file it here</a>.
 	hr
 	h3.flex-title Test output
+	.flash-error
+		p
+			| This configuration is only needed if you're using grunt-webdriver and datadriver <code>0.1.4</code>. If you're
+			| using datadriver <code>0.2.0</code> and above, the following configuration is done for you in the
+			| grunt-datadriver plugin.
+		p
+			| <b>Please note:</b> some of the API calls documented have changed since <code>0.1.4</code>. We encourage you
+			| to use the latest version possible so that the documentation works as expected.
 	p
 		| Please note that the default output of Mocha's test runner treats everything like a test. If you click a button,
 		| type some text in to a field (basically any executable action), they will be treated like "tests" and increase

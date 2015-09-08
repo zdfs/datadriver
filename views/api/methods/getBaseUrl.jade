@@ -5,7 +5,7 @@ block main
 		| When you run a test from the command line, like this for example:
 	pre.language-bash.line-numbers
 		code
-			| grunt webdriver --url=http://duckduckgo.com
+			| grunt datadriver --url=http://duckduckgo.com
 	p
 		| You're passing the url you want your tests to begin from to the <code>getBaseUrl()</code> function, which is
 		| exposed to you for use within your tests. Let's look at our DuckDuckGo example again, but this time, we're going
@@ -50,13 +50,13 @@ block main
 	p When I run the script from the command line:
 	pre.language-bash.line-numbers
 		code
-			| grunt webdriver --url=https://duckduckgo.com
+			| grunt datadriver --url=https://duckduckgo.com
 	p
 		| I get the following output.
 	pre.language-bash.line-numbers
 		code
-			| $ grunt webdriver:duckduckgo --url=https://duckduckgo.com
-			| Running "webdriver:duckduckgo" (webdriver) task
+			| $ grunt datadriver:duckduckgo --url=https://duckduckgo.com
+			| Running "datadriver:duckduckgo" (datadriver) task
 			| Duck Duck Go Test
 			|   Rendered in a large viewport
 			|     Verify DuckDuckGo logo

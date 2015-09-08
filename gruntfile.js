@@ -187,7 +187,7 @@ var gruntConfig = {
 
 	},
 
-	webdriver: {
+	datadriver: {
 
 		options: {
 
@@ -222,9 +222,7 @@ var gruntConfig = {
 				}
 			},
 
-			slow: 800,
-			reporter: require('datadriver/lib/support/reporter'),
-			ui: 'ddui'
+			slow: 800
 
 		},
 
@@ -318,7 +316,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-express-server');
 	grunt.loadNpmTasks('grunt-grunticon');
 	grunt.loadNpmTasks('grunt-sass');
-	grunt.loadNpmTasks('grunt-webdriver');
+	grunt.loadNpmTasks('grunt-datadriver');
 
 	grunt.registerTask('build', [
 		'clean:dev',

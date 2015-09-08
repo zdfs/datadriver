@@ -19,13 +19,6 @@ drive.execute({
 drive.execute({
   "execute": {
     "action": "switchTab",
-    "index": 1
-  }
-});
-
-drive.execute({
-  "execute": {
-    "action": "switchTab",
-    "index": 0
+    "focusIndex": 0
   }
 });
