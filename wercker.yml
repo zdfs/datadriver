@@ -1,0 +1,22 @@
+box: yanchek99/datadriver
+build:
+  steps:
+    - npm-install
+    - script:
+      name: Enable virtual display
+      code: |-
+        # Start xvfb which gives the context an virtual display
+        # which is required for tests that require an GUI
+        export DISPLAY=:99.0
+        start-stop-daemon --start --quiet --pidfile /tmp/xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 1280x900x24 -ac +extension GLX +render -noreset
+        # Give xvfb time to start. 3 seconds is the default for all xvfb-run commands.
+        sleep 3
+    - script:
+        name: Start Selenium Server
+        code: |-
+          nohup java -jar /opt/selenium/selenium-server-standalone.jar &>/dev/null &
+    - script:
+      name: Run Unit Tests
+      code: ./node_modules/.bin/tape tests/unit/*.js | ./node_modules/.bin/tap-spec
+    - grunt:
+      tasks: datadriver --url=http://datadriver.io
