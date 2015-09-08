@@ -18,9 +18,7 @@ var gruntConfig = {
             height: 1000
           }
         }
-      },
-      reporter: require('./lib/support/reporter'),
-      ui: 'ddui'
+      }
     },
     spec: {
       tests: ['tests/spec/**/*.js']
