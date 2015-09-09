@@ -16,3 +16,8 @@ You can run the unit tests by navigating to the root directory and executing thi
 
 You can run the integration tests by going to the root directory and executing this command:
 `grunt datadriver --url=http://datadriver.io`
+
+## Support
+
+Thank you to [Browserstack](http://browserstack.com) and [SauceLabs](http://saucelabs.com) for helping make
+datadriver possible. 
